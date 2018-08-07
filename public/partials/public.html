@@ -1,0 +1,98 @@
+<div ng-include="'partials/components/navbar.html'"></div>
+<div class="media">
+  <div id="carousel" class="carousel owl-carousel owl-theme"></div>
+</div>
+<div class="controls">
+ <!--  <h1>Inicio de Inscripciones, Lunes 14 de Septiembre </h1> -->
+  <button class="next"> <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span> </button>
+  <button class="stop"> <span class="glyphicon glyphicon-pause" aria-hidden="true"></span> </button>
+  <button class="start hide"> <span class="glyphicon glyphicon-play" aria-hidden="true"></span> </button>
+  <button class="prev"> <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span> </button>
+  <div class="clear"></div>
+</div>
+<div class="content">
+    <script>
+        window.fbAsyncInit = function() {
+            FB.init({
+                appId      : '852680301555041',
+                cookie     : true,
+                xfbml      : true,
+                version    : 'v2.8'
+            });
+            FB.AppEvents.logPageView();
+        };
+
+        (function(d, s, id){
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) {return;}
+            js = d.createElement(s); js.id = id;
+            js.src = "//connect.facebook.net/en_US/sdk.js";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+    </script>
+    <div id="fb-root"></div>
+    <script>(function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.10&appId=852680301555041";
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));</script>
+
+    <div class="row">
+        <div class="col-md-8 text-center">
+            <iframe  class="component-center" width="640" height="360" src="https://www.youtube.com/embed/vTIIPftBlvQ" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+            <!-- Your embedded comments code -->
+            <div class="fb-comments" data-href="https://www.facebook.com/InstitutoCealm" data-numposts="5"></div>
+        </div>
+        <div class="col-md-4 text-center">
+            <div class="fb-page" data-href="https://www.facebook.com/InstitutoCealm" data-tabs="timeline" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"><blockquote cite="https://www.facebook.com/InstitutoCealm" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/InstitutoCealm">Instituto Técnico &quot;Cealm&quot; SRL.</a></blockquote></div>
+        </div>
+    </div>
+
+</div>
+<script>
+  $(document).ready(function() {
+ 
+  $("#carousel").owlCarousel({
+    jsonPath : 'api/v1/auth/cover_images',
+    jsonSuccess : customDataSuccess,
+    navigation : false, // Show next and prev buttons
+    pagination: false,
+    slideSpeed : 300,
+    paginationSpeed : 400,
+    singleItem:true,
+    autoPlay: true
+  });
+ 
+ 
+  function customDataSuccess(data){
+    var content = "";
+    for(var i in data){
+       
+       var img = data[i].url;
+       var description = data[i].description;
+ 
+       content += "<a title=\""+description+"\"><img src=\"" +img+ "\" alt=\"" +description+ "\"></a>";
+    }
+    $("#carousel").html(content);
+  }
+
+  $(".prev").click(function() {
+    $("#carousel").trigger('owl.prev');
+  });
+  $(".next").click(function() {
+    $("#carousel").trigger('owl.next');
+  });
+  $(".stop").click(function() {
+    $(this).addClass("hide");
+    $(".start").removeClass("hide");
+    $("#carousel").trigger('owl.stop');
+  });
+  $(".start").click(function() {
+    $(this).addClass("hide");
+    $(".stop").removeClass("hide");
+    $("#carousel").trigger('owl.play', 5000);
+  });
+});
+</script>

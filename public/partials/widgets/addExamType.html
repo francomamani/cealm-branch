@@ -1,0 +1,23 @@
+<div class="modal-body">
+	<form ng-submit="save(exam_type)" role="form">
+		<legend>{{ title }}</legend>
+		<div class="text-right">
+			<span class="label label-info" ng-show="counter + exam_type.percentage <=100">Porcentaje actual: {{counter + exam_type.percentage }}</span>
+			<span class="label label-danger" ng-show="counter + exam_type.percentage >100">Porcentaje actual: {{counter + exam_type.percentage }}</span>
+
+		</div>
+		<div class="form-group">
+			<label for="">Descripción</label>
+			<select class="form-control" ng-model='exam_type.description' required>
+				<option value={{exam}} ng-repeat="exam in exams">{{ exam }}</option>
+			</select>
+		</div>
+		<div class="form-group">
+			<label for="">Porcentaje</label>
+			<input type="number" class="form-control" ng-model="exam_type.percentage" required>
+		</div>
+		<div class="text-right">
+			<button type="submit" class="btn btn-primary">Guardar</button>
+		</div>
+	</form>	
+</div>

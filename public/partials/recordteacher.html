@@ -1,0 +1,136 @@
+<div ng-include="'partials/components/navbar.html'"></div>
+<div class="content">	
+	<div class="row">
+		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+		<form ng-submit="register(user)" role="form">
+			<fieldset>
+				<legend>Registrar Docente</legend>
+				<div class="row">
+					<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+						<div class="form-group">
+							<label for="username">Cuenta de Usuario</label>
+							<input class="form-control" ng-model="user.username" placeholder="Nombre de Cuenta" required autofocus>
+						</div>
+						<div class="form-group">
+							<label for="firstname">Nombres</label>
+							<input class="form-control" type="text" name="firstname" ng-model="user.firstname" placeholder="Nombres" required>
+						</div>
+						<div class="form-group">
+							<label for="lastname">Apellidos</label>
+							<input class="form-control" type="text" name="lastname" ng-model="user.lastname" placeholder="Apellidos" required>
+						</div>
+						<div class="form-group">
+							<label for="email">Correo Electrónico</label>
+							<input class="form-control" type="email" name="email" ng-model="user.email" placeholder="Correo Electrónico">
+						</div>
+						<div class="form-group">
+							<label for="">Fecha de Nacimiento</label>
+							<div class="row">
+								<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+									<select ng-model="day" class="form-control">
+										<option value={{d.day}} ng-repeat='d in calendar.days'>{{ d.day }}</option>
+									</select>
+								</div>
+								<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+									<select ng-model="month" class="form-control">
+										<option value={{m.month}} ng-repeat='m in calendar.months'>{{ m.month | month }}</option>
+									</select>
+								</div>
+								<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+									<select ng-model="year" class="form-control">
+										<option value={{y.year}} ng-repeat='y in calendar.years'>{{ y.year }}</option>
+									</select>
+								</div>
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="">Sexo: </label>
+							<select ng-model="user.gender" class="form-control">
+								<option value="varon">Varon</option>
+								<option value="mujer">Mujer</option>
+							</select>
+						</div>
+						<div class="form-group">
+							<label for="">Telefono: </label>
+							<input type="text" class="form-control" placeholder="Ej. 52-87661" ng-model="user.phone">
+						</div>
+						<div class="form-group">
+							<label for="">Grado Académico: </label>
+							<select class="form-control" ng-model="user.type">
+								<option value="capacitacion">Capacitación</option>
+								<option value="tecnico_medio">Técnico Medio</option>
+								<option value="tecnico_superior">Técnico Superior</option>
+								<option value="licenciatura">Licenciatura</option>
+								<option value="diplomado">Diplomado</option>
+								<option value="especialidad">Especialidad</option>
+								<option value="maestria">Maestria</option>
+								<option value="doctorado">Doctorado</option>
+							</select>
+						</div>
+
+					</div>
+					<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">		
+						<div class="form-group">
+							<label for="">Celular: </label>
+							<input type="text" class="form-control" placeholder="Ej. 76655789" ng-model="user.cellphone">
+						</div>
+						<div class="form-group">
+							<label for="">Direccion: </label>
+							<input type="text" class="form-control" placeholder="Pagador N.650 Cochabamba" ng-model="user.address">
+						</div>
+						<div class="form-group">
+							<div class="row">
+								<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+									<label for="identity_card">Carnet de Identidad</label>
+									<input class="form-control" type="text" ng-model="user.identity_card_number" placeholder="" required>
+								</div>
+
+								<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+									<label for="">Expedido en:</label>
+									<angucomplete-alt id="search1"
+										placeholder="Expedicion"
+										pause="100"
+										selected-object="expedition"
+										local-data="cities"
+										search-fields="city"
+										title-field="city"
+										minlength="1"
+										text-no-results="No encontrado"
+										text-searching="Buscando..."
+										input-class="form-control form-control-small"/>
+								</div>
+							</div>
+
+						</div>
+
+						<div class="form-group">
+							<label for="">Ocupacion: </label>
+							<input type="text" class="form-control" ng-model="user.occupation">
+						</div>
+						<div class="form-group">
+							<label for="">Persona de Contacto: </label>
+							<input type="text" class="form-control" ng-model="user.contact_person">
+						</div>
+						<div class="form-group">
+							<label for="">Telefono de Persona de Contacto: </label>
+							<input type="text" class="form-control" ng-model="user.contact_person_phone">
+						</div>
+						<div class="form-group">
+							<label for="">Celular de Persona de Contacto: </label>
+							<input type="text" class="form-control" ng-model="user.contact_person_cellphone">
+						</div>
+						<div class="form-group">
+							<label for="">Campo de Estudio: </label>
+							<input type="text" class="form-control" ng-model="user.field_of_study" required>
+						</div>
+					</div>
+				</div>			
+				<!-- end row -->
+				<div class="text-right">
+					<button type="submit" class="btn btn-primary">Registrar</button>
+				</div>
+			</fieldset>
+		</form>
+		</div>
+	</div>
+</div>

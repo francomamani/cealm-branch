@@ -1,0 +1,72 @@
+<div ng-include="'partials/components/navbar.html'"></div>
+<div class="content">
+	<div class="row">
+		<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+			<form ng-submit="renderStructure()" role="form">
+				<legend>Creación de Estructura de Pensums</legend>
+				<div class="form-group">
+					<label class="" for="">Pensum</label>
+					<select class="form-control" name="" id="" ng-model="structure.pensum_id" ng-change="getPensum(structure.pensum_id)">
+						<option value="{{ p.id }}" ng-repeat="p in pensums">{{ p.name }}</option>
+					</select>
+				</div>			
+				<div class="form-group">
+					<label class="" for="">Bimestre</label>
+					<input type="text" class="form-control" id="" placeholder="Ej. 1" ng-model="structure.bimester">
+				</div>
+				<div class="form-group">
+					<label class="" for="">Nivel</label>
+					<input type="text" class="form-control" id="" placeholder="Ej. A" ng-model="structure.level">
+				</div>
+				<div class="form-group">
+					<label class="" for="">Mes</label>
+					<input type="text" class="form-control" id="" placeholder="1" ng-model="structure.month">
+				</div>
+				<div class="form-group">
+					<label class="" for="">Número de Bimestres</label>
+					<input type="number" class="form-control" id="" placeholder="Ej. 15 de Bimestres" ng-model="structure.bimester_quantity" min="5" max="18">
+				</div>
+				<div class="form-group text-right">
+					<button type="submit" class="btn btn-primary">Generar Estructura</button>
+				</div>
+			</form>
+		</div>
+
+		<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 text-center">
+			<div class="alert alert-success">
+				<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+				<strong>CÓDIGO: 
+				{{ structure.code }}
+				</strong> 			
+			</div>
+			<input type="text" name="" class="form-control" value="" required="required" title="¿Qué asignatura desea encontrar?" placeholder="Escribe lo que estas buscando..." ng-model="search">
+
+			<div class="table-responsive text-left">
+				<table class="table table-hover">
+					<thead>
+						<tr>
+							<th>N. Bimestre</th>
+							<th>Código</th>
+							<th>Identificación de Asignatura</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="s in subjects | filter: search">
+							<td>{{ s.subject.bimester }}</td>
+							<td>{{ s.subject.subject_code }}</td>
+							<td>
+								<ul>
+									<li ng-repeat="l in s.levels" class="sub-items">
+										<span>{{ l.level_code }}</span>  
+										<span>{{ l.level_name }}</span>
+									</li>
+								</ul>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+
+</div>

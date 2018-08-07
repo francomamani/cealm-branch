@@ -1,0 +1,131 @@
+<div ng-include="'partials/components/navbar.html'"></div>
+<div class="content">
+	<div class="row">
+		<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+			<form ng-submit="searchAttendances(attendance)"  name="searchForm" role="form">
+				<legend>Consulta de Asistencia</legend>
+			
+				<div class="form-group">
+					<label for="">Profesor/Administrador/Administrativo</label>
+					<input type="search" class="form-control" value="" required="required" ng-model="value" ng-enter="search(value)">
+					<ul class="list" ng-show="showSearch">
+						<li ng-repeat="u in users" ng-click="selectObject(u)">{{ u.lastname }} {{ u.firstname }}</li>
+					</ul>
+					<ul class="list" ng-show="empty">
+						<li>No se encontraron coincidencias</li>
+					</ul>
+				</div>
+				<div class="form-group">
+					<div class="row">
+						<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+		                	<label for="">Desde:</label>
+			                <div class='input-group date'>
+								<input type='text' class="form-control" name="from" id="from" ng-model="attendance.from" ng-pattern="/^\d{4}\-\d{2}\-\d{2}$/" maxlength="10" ng-style="searchForm.from.$error.pattern && {'border': '2px solid red'}"/>
+			                    <span class="input-group-addon">
+			                        <span class="glyphicon glyphicon-calendar"></span>
+			                    </span>
+			                </div>
+						</div>
+						<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+		                	<label for="">Hasta:</label>
+			                <div class='input-group date'>
+								<input type='text' class="form-control" name="to" id="to" ng-model="attendance.to" ng-pattern="/^\d{4}\-\d{2}\-\d{2}$/" maxlength="10" ng-style="searchForm.to.$error.pattern && {'border': '2px solid red'}"/>
+			                    <span class="input-group-addon">
+			                        <span class="glyphicon glyphicon-calendar"></span>
+			                    </span>
+			                </div>
+						</div>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="">Entrada ó Salida</label>
+					<select ng-model="attendance.type" class="form-control">
+						<option name="type" value="entrada">Entrada</option>
+						<option name="type" value="salida">Salida</option>
+					</select>
+				</div>
+				<div class="text-right">
+					<button type="submit" class="btn btn-primary">Buscar
+						<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+					</button>
+				</div>			
+			</form>
+		</div>
+		<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+			<div class="row">
+				<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+					<h1>Consulta de Asistencia</h1>
+				</div>
+				<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 text-right">
+					<button class="btn btn-primary btn-sm" ng-click="print()">
+						<span class="glyphicon glyphicon-print" aria-hidden="true"></span>
+					</button>
+				</div>
+			</div>
+			<div class="table-responsive" id="searchTable">
+				<style>
+					@page{
+						size: portrait;
+					}
+					@media print{
+						table > thead > tr {
+							background-size: #CFD9ED;
+						}
+						table > thead > tr , table > tbody > tr  {
+							border-collapse: collapse;
+							border: 2px solid black;
+						}
+						table > tbody > tr:nth-child(even)  {
+							background-color: #E0E0E0;
+						}
+
+						table > tbody > td{
+							width: 250px;
+							border: 2px solid black;
+							font-size: .9em;
+						}
+					}
+				</style>
+				<table class="table table-hover">
+					<thead>
+						<tr>
+							<th>N. </th>
+							<th>NOMBRE COMPLETO</th>
+							<th>CARNET DE IDENTIDAD</th>
+							<th>FECHA</th>
+							<th>HORA</th>
+							<th>TIPO</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="l in list">
+							<td>{{ $index + 1 }}</td>
+							<td>{{ l.lastname | uppercase }} {{ l.firstname | uppercase}}</td>
+							<td>{{ l.identity_card }}</td>
+							<td>{{ l.record_date }}</td>
+							<td>{{ l.record_time }}</td>
+							<td ng-style="l.record_type == 'entrada' && { 'color': 'blue' } ||  { 'color': 'red' }">{{ l.record_type | uppercase }}</td>
+						</tr>
+						<tr>
+							<td>TOTAL:</td>
+							<td>{{ list.length }} asistencias.</td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>			
+		</div>
+	</div>
+
+</div>
+
+<script>
+	$(document).ready(function () {
+		$('#from, #to').datepicker({
+			format:"yyyy-mm-dd"
+		});
+	});
+</script>

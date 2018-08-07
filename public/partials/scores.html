@@ -1,0 +1,118 @@
+<div ng-include="'partials/components/navbar.html'"></div>
+<div class="content" ng-hide="sw">
+	<div class="row">
+		<div class="col-xs-12 col-sm-10 col-md-10 col-lg-10">
+			<br>
+			<a href="" ng-click="addScore()">Añadir nuevo casillero</a>			
+		</div>
+		<div class="col-xs-12 col-sm-2 col-md-2 col-lg-2 text-right">
+			<select ng-model="group" class="form-control" ng-change="showScores()">
+				<option value={{g}} ng-repeat="g in groups"> {{ g.name }}</option>
+			</select>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+			<div class="table-responsive">
+				<table class="table table-hover">
+					<thead>
+						<tr>
+							<th>Titulo</th>
+							<th>Descripcion</th>
+							<th>Examen</th>
+							<th>%</th>
+							<th>Categoria</th>
+							<th>%</th>
+							<th>Fecha</th>
+							<th>Min.</th>
+							<th>Prom.</th>
+							<th>Max.</th>
+							<th>Acciones</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-init="i.update = false" ng-repeat="i in informationMarks">
+							<td>
+								<span ng-hide="i.update">{{ i.title }}</span>
+								<span ng-show="i.update">
+									<input type="text" ng-model="i.title">	
+								</span>
+							</td>
+							<td>
+								<span ng-hide="i.update">{{ i.description }}</span>
+								<span ng-show="i.update">
+									<input type="text" ng-model="i.description">	
+								</span>
+							</td>
+
+							<td>{{ i.exam_type.description }}</td>
+							<td>{{ i.exam_type.percentage }}</td>
+							<td>{{ i.category_mark.description }}</td>
+							<td>{{ i.category_mark.percentage }}</td>
+							<td>
+								<span ng-hide="i.update"> {{ i.end_date | date:'mediumDate' }} </span>
+								<span ng-show="i.update"> <input type='date' ng-model="i.end_date" required/></span>
+							</td>
+							<td>{{ i.min | number:2 }}</td>
+							<td>{{ i.avg | number:2 }}</td>
+							<td>{{ i.max | number:2 }}</td>
+							<td> 
+								<button type="button" class="btn btn-success btn-sm" ng-click="studentScores(i)" ng-hide="i.update" title="Añadir notas de estudiantes">
+									<span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+								</button> 
+								<button class="btn btn-primary btn-sm" ng-hide="i.update" ng-click="i.update = true">
+									<span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+								</button>
+								<button class="btn btn-danger btn-sm" ng-hide="i.update" ng-click="deleteInformationMark(i, $index)">
+									<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+								</button>								
+								<button type="button" class="btn btn-primary btn-sm" title="Guardar" ng-click="updateInformationMark(i)" ng-show="i.update">
+									<span class="glyphicon glyphicon-save" aria-hidden="true"></span>
+								</button>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="content" ng-show="sw">
+	<div class="row">
+		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+			<legend>
+				{{ informationMark.exam_type.description | uppercase }} ( {{ informationMark.exam_type.percentage }} % ) > {{ informationMark.category_mark.description | uppercase }} ( {{ informationMark.category_mark.percentage }} %) 
+			</legend>
+		</div>
+		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+			<div class="table-responsive">
+				<table class="table table-hover">
+					<thead>
+						<tr>
+							<th>N. </th>
+							<th>NOMBRE COMPLETO</th>
+							<th>PUNTAJE</th>
+							<th>OBSERVACIONES</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="s in students">
+							<td>{{ s.number }}</td>
+							<td> {{ s.info.lastname | uppercase}} {{ s.info.firstname | uppercase }}</td>
+							<td> <input type="text" ng-class="s.item_mark.score < 68? 'red' : ( s.item_mark.score < 70 ? 'yellow' : 'green')" ng-model="s.item_mark.score" > </td>
+							<td> <input type="text" ng-model="s.item_mark.observation"> </td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-right">
+			<button class="btn btn-primary" ng-click="saveScores()">Guardar</button>
+		</div>
+		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
+			<a href="" ng-click="back()"><span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span> Volver</a>
+		</div>
+	</div>
+</div>

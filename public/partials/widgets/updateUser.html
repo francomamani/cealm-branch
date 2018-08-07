@@ -1,0 +1,99 @@
+<div class="modal-body">
+	<form ng-submit="update()" role="form">
+		<fieldset>
+			<legend>Actualizar Información</legend>
+			<div class="row">
+				<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">					
+					 <div class="form-group">
+						<label for="firstname">Nombres</label>
+						<input class="form-control" type="text" name="firstname" ng-model="user.firstname" placeholder="Nombres" required>
+					</div>
+					<div class="form-group">
+						<label for="lastname">Apellidos</label>
+						<input class="form-control" type="text" name="lastname" ng-model="user.lastname" placeholder="Apellidos" required>
+					</div>
+					<div class="form-group">
+						<label for="email">Correo Electrónico</label>
+						<input class="form-control" type="email" name="email" ng-model="user.email" placeholder="Correo Electrónico">
+					</div>
+					<div class="form-group">
+						<label for="">Fecha de Nacimiento</label>
+						<input type="text" ng-model="user.birthday" required>
+					</div>
+					<div class="form-group">
+						<label for="">Sexo </label>
+						<select ng-model="user.gender" class="form-control">
+							<option value="varon">Varon</option>
+							<option value="mujer">Mujer</option>
+						</select>
+					</div>
+					<div class="form-group">
+						<label for="">Telefono </label>
+						<input type="text" class="form-control" placeholder="Ej. 52-87661" ng-model="user.phone">
+					</div>
+
+				</div>
+				<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">		
+					<div class="form-group">
+						<label for="">Celular </label>
+						<input type="text" class="form-control" placeholder="Ej. 76655789" ng-model="user.cellphone">
+					</div>
+					<div class="form-group">
+						<label for="">Dirección </label>
+						<input type="text" class="form-control" placeholder="Pagador N.650 Cochabamba" ng-model="user.address">
+					</div>
+					<div class="form-group">
+						<label for="">Carnet de Identidad</label>
+						<input type="text" ng-model="user.identity_card" required>
+					</div>
+<!-- 					<div class="form-group">
+	<div class="row">
+		<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+			<label for="identitycard">Carnet de Identidad</label>
+			<input class="form-control" type="text" ng-model="user.identity_card_number" placeholder="" required>
+		</div>
+		<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+			<label for="">Expedido en:</label>
+			<select ng-model="identity_card_exp" class="form-control"> 
+				<option value="OR">ORURO</option>
+				<option value="LPZ">LA PAZ</option>
+				<option value="PT">POTOSI</option>
+				<option value="SC">SUCRE</option>
+				<option value="CBBA">COCHABAMBA</option>
+				<option value="BN">BENI</option>
+				<option value="PD">PANDO</option>
+				<option value="SCZ">SANTA CRUZ</option>
+				<option value="TJ">TARIJA</option>
+			</select>				
+		</div>
+	</div>
+</div> -->
+
+					<div class="form-group">
+						<label for="">Ocupación </label>
+						<input type="text" class="form-control" ng-model="user.occupation">
+					</div>
+					<div class="form-group">
+						<label for="">Persona de Contacto </label>
+						<input type="text" class="form-control" ng-model="user.contact_person">
+					</div>
+					<div class="form-group">
+						<label for="">Teléfono de Persona de Contacto </label>
+						<input type="text" class="form-control" ng-model="user.contact_person_phone">
+					</div>
+					<div class="form-group">
+						<label for="">Celular de Persona de Contacto </label>
+						<input type="text" class="form-control" ng-model="user.contact_person_cellphone">
+					</div>
+				</div>
+			</div>			
+			<!-- end row -->
+			<div class="text-right">
+				<button type="submit" class="btn btn-primary">
+					<span class="glyphicon glyphicon-save" aria-hidden="true"></span>
+					Actualizar	
+				</button>
+			</div>
+		</fieldset>
+	</form>
+</div>

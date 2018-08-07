@@ -1,0 +1,85 @@
+[
+	{
+		"title":  "Estudiantes",
+		"items": [{
+			"title":  "Asignacion de Curso y Paralelo", 
+			"link":  "/admin"
+		},{
+			"title":  "Historial Academico", 
+			"link":  "/admin"
+		},{
+			"title":  "Seguimiento Academico", 
+			"link":  "/admin"
+		},{
+			"title":  "Pagos", 
+			"link":  "/admin"
+		}]
+	},  
+	{
+		"title":  "Profesores",
+		"items": [{
+			"title":  "Busquedas", 
+			"link":  "/admin"
+		},{
+			"title":  "Notas", 
+			"link":  "/admin"
+		},{
+			"title":  "Recepcion de Planes Bimestrales", 
+			"link":  "/admin"
+		}]
+	}, 
+	{
+		"title":  "Administracion Academica",
+		"items": [{
+			"title":  "Creacion de Pensum", 
+			"link":  "/admin/pensum"
+		},{
+			"title":  "Creacion de Estructura de Pensum", 
+			"link":  "/admin/estructura-pensum"
+		},{
+			"title":  "Registrar Aula", 
+			"link":  "/admin/registrar-aula"
+		},{
+			"title":  "Registrar Bimestre", 
+			"link":  "/admin/registrar-bimestre"
+		},{
+			"title":  "Habilitar Paralelos", 
+			"link":  "/admin/habilitar-paralelos"
+		},{
+			"title":  "Asignar Horarios", 
+			"link":  "/admin/asignar-horarios"
+		},{
+			"title":  "Listar Pensums", 
+			"link":  "/admin/listar-pensums"
+		},{
+			"title":  "Mostrar Horarios", 
+			"link":  "/admin/pensum "
+		}]
+	}, 
+	{
+		"title":  "Cuentas",
+		"items": [{
+			"title":  "Registro de Cuentas", 
+			"link":  "/admin/signup "
+		}, {
+			"title":  "Asignacion de Roles", 
+			"link":  "/admin/asignar_roles"
+		}, {
+			"title":  "Gestion de Usuarios", 
+			"link":  "/usuarios "
+		}]
+	}, 
+	{
+		"title":  "Mi Cuenta",
+		"items": [{
+			"title":  "Perfil", 
+			"link":  "/admin/perfil"
+		}, {
+			"title":  "Cambiar Contrasenia", 
+			"link":  "/admin/password"
+		}, {
+			"title":  "Cerrar Sesion", 
+			"link":  "/logout "
+		}]
+	}
+]

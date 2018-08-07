@@ -1,0 +1,131 @@
+<div ng-include="'partials/components/navbar.html'"></div>
+<div class="content">
+	<div class="row">
+		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+			<div class="bimester">Bimestre: {{ bimester.name }}</div>
+		</div>
+		<div class="col-xs-12 col-sm-12 col-md-offset-3 col-md-6 col-lg-offset-3 col-lg-6">
+			<form ng-submit="assignSchedule(schedule)" role="form">
+				<legend>Asignacion de Horarios</legend>		
+				<div class="row">
+					<div class='col-sm-6'>
+			            <div class="form-group">
+			            	<label for="">Desde: </label>
+			                <div class='input-group date datetimepicker' >
+								<select class="form-control" ng-model="schedule.from">
+									<option value="{{h.hour}}" ng-repeat="h in hours">{{ h.hour }}</option>
+								</select>
+			                    <span class="input-group-addon">
+			                        <span class="glyphicon glyphicon-time"></span>
+			                    </span>
+			                </div>
+			            </div>
+			        </div>
+					<div class='col-sm-6'>
+			            <div class="form-group">
+			            	<label for="">Hasta: </label>
+			                <div class='input-group date datetimepicker' >
+								<select class="form-control" ng-model="schedule.to">
+									<option value="{{h.hour}}" ng-repeat="h in hours">{{ h.hour }}</option>
+								</select>			                   
+								<span class="input-group-addon">
+			                        <span class="glyphicon glyphicon-time"></span>
+			                    </span>
+			                </div>
+			            </div>
+			        </div>
+
+<!-- 					<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+	<div class="form-group">
+		<label for="">Hasta: </label>
+		<select class="form-control" ng-model="schedule.to">
+			<option value="{{h.hour}}" ng-repeat="h in hours">{{ h.hour }}</option>
+		</select>
+	</div>						
+	
+</div> -->
+				</div>
+				
+				<div class="text-right">
+					<button type="submit" class="btn btn-primary">Asignar Horario</button>	
+				</div>
+			</form>
+		</div>
+	</div>
+<!-- 	<h1 class="title">Horario del Bimestre</h1> -->
+	<legend>Horario del Bimestre</legend>
+	<div class="row">
+		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+			<div class="table-responsive">
+				<table class="table table-hover">
+					<thead>
+						<tr>
+							<th>Horas\Dias</th>
+							<th>Lunes</th>
+							<th>Martes</th>
+							<th>Miercoles</th>
+							<th>Jueves</th>
+							<th>Viernes</th>
+							<th>Sabado</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="c in complete_schedule">
+							<td>{{ c.from }} - {{ c.to }}</td>
+							<td> 
+								<button class="btn btn-warning btn-xs topright" ng-click="recordSchedule(c.schedule_id, 'Lunes')">
+								<span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
+								<ul>
+									<li ng-repeat="mon in c.monday">{{ mon.group }} <strong>(  {{ mon.room }} )</strong></li>
+								</ul>
+							</td>
+							<td> 
+								<button class="btn btn-warning btn-xs topright" ng-click="recordSchedule(c.schedule_id, 'Martes')">
+								<span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
+								<ul>
+									<li ng-repeat="tue in c.tuesday">{{ tue.group }} <strong> ( {{ tue.room }} ) </strong></li>
+								</ul>
+							</td>
+							<td> 
+								<button class="btn btn-warning btn-xs topright" ng-click="recordSchedule(c.schedule_id, 'Miércoles')">
+								<span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
+								<ul>
+									<li ng-repeat="wed in c.wednesday">
+										{{ wed.group }} <strong> ( {{ wed.room }} ) </strong>
+									</li>
+								</ul>
+							</td>
+							<td> 
+								<button class="btn btn-warning btn-xs topright" ng-click="recordSchedule(c.schedule_id, 'Jueves')">
+								<span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
+								<ul>
+									<li ng-repeat="thu in c.thursday">
+										{{ thu.group }} <strong> ( {{ thu.room }} ) </strong>
+									</li>
+								</ul>
+							</td>\
+							<td> 
+								<button class="btn btn-warning btn-xs topright" ng-click="recordSchedule(c.schedule_id, 'Viernes')">
+								<span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
+								<ul>
+									<li ng-repeat="fri in c.friday">
+										{{ fri.group }} <strong> ( {{ fri.room }} ) </strong>
+									</li>
+								</ul>
+							</td>
+							<td> 
+								<button class="btn btn-warning btn-xs topright" ng-click="recordSchedule(c.schedule_id, 'Sábado')">
+								<span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
+								<ul>
+									<li ng-repeat="sat in c.saturday">
+										{{ sat.group }} <strong> ( {{ sat.room }} ) </strong>
+									</li>
+								</ul>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>

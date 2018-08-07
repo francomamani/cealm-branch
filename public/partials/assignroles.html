@@ -1,0 +1,109 @@
+<div ng-include="'partials/components/navbar.html'"></div>
+<div class="content">
+	<div class="row">
+		<div class="col-xs-12 col-sm-12 col-md-offset-2 col-md-8 col-lg-offset-2 col-lg-8">
+			<form ng-submit="search()" role="form">
+				<legend>Buscar Usuario</legend>
+				<div class="row">
+					<div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
+						<div class="form-group">
+							<input type="text" class="form-control" ng-model="value" placeholder="Buscar Usuario">
+						</div>									
+					</div>
+					<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+						<div class="form-group">
+							<button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>			
+						</div>
+					</div>			
+				</div>			
+			</form>
+		</div>
+	</div>
+	<div class="row" ng-show="showInfo">
+		<div class="col-xs-12 col-sm-12 col-md-offset-2 col-md-8 col-lg-offset-2 col-lg-8">
+			<div class="table-responsive">
+				<table class="table table-hover">
+					<thead>
+						<tr>
+							<th>Cuenta</th>
+							<th>Nombres</th>
+							<th>Apellidos</th>
+							<th>Carnet de Identidad</th>
+							<th>Elegir</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="u in users">
+							<td>{{ u.username }}</td>
+							<td>{{ u.firstname }}</td>
+							<td>{{ u.lastname }}</td>
+							<td>{{ u.identity_card }}</td>
+							<td>
+								<button class="btn btn-success btn-sm" ng-click="select(u)">
+									<span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+								</button>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+	<div class="row" ng-show="showInfo">
+		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
+			<strong>Roles de {{ user.firstname }} {{ user.lastname }}: </strong>| <span ng-repeat="r in roles.data">{{ r.role }} | </span>
+		</div>
+	</div>
+	<div class="row" ng-show="showInfo">
+		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
+			<form ng-submit="assignRole()" class="form-inline" role="form">
+				<legend>Asignar Nuevo Rol</legend>			
+				<div class="form-group">
+					<label class="sr-only" for="">Nombres</label>
+					<input type="text" class="form-control" ng-model="user.firstname" required>
+				</div>			
+				<div class="form-group">
+					<label class="sr-only" for="">Apellidos</label>
+					<input type="text" class="form-control" ng-model="user.lastname" required>
+				</div>				
+				<div class="form-group">
+					<label class="sr-only" for="">Elegir Rol</label>
+					<select ng-model="role.role_id" class="form-control">
+						<option value=4 >Estudiante</option>
+						<option value=3 >Profesor</option>
+						<option value=2 >Administrativo</option>
+						<option value=1 >Administrador</option>
+						<option value=0 >Control</option>
+					</select>
+				</div>
+				<div class="form-group" ng-show="role.role_id == 4">
+					<label class="sr-only" for="">Tipo de Estudiante</label>
+					<select ng-model="role.type" class="form-control">
+						<option value='becario' >Becario</option>
+						<option value='regular' >Regular</option>
+						<option value='intensivo' >Intensivo</option>
+					</select>
+				</div>
+				<div class="form-group" ng-show="role.role_id == 4">
+					<label class="sr-only" for="">Grado Académico</label>
+					<select ng-model="role.level" class="form-control">
+						<option value='tecnico_medio'>Técnico Medio</option>
+						<option value='tecnico_superior'>Técnico Superior</option>
+						<option value='capacitacion'>Capacitación</option>
+					</select>
+				</div>
+				<div class="form-group" ng-show="role.role_id == 3">
+					<label class="sr-only" for="">Tipo de Profesor</label>
+					<select ng-model="role.type" class="form-control">
+						<option value='capacitacion'>Capacitación</option>
+						<option value='tecnico'>Técnico</option>
+						<option value='licenciatura'>Licenciatura</option>
+						<option value='maestría'>Maestría</option>
+					</select>
+				</div>
+
+				<button type="submit" class="btn btn-primary">Asignar</button>
+			</form>
+		</div>	
+	</div>
+</div>

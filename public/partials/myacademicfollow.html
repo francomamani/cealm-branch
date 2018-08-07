@@ -1,0 +1,28 @@
+<div ng-include="'partials/components/navbar.html'"></div>
+<div class="content">
+	<div class="row">
+		<div class="col-xs-12 col-sm-offset-3 col-sm-6 col-md-offset-3 col-md-6 col-lg-offset-3 col-lg-6">
+			<legend>Seguimiento Academico</legend>
+			<div class="table-responsive">
+				<table class="table table-hover">
+					<thead>
+						<tr>
+							<th>BIMESTRE</th>
+							<th>ASIGNATURA</th>
+							<th>NOTA</th>
+							<th>OBSERVACIONES</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="score in scores">
+							<td>{{ score.bimester }}</td>
+							<td>{{ score.group }}</td>
+							<td>{{ score.final_score }}</td>
+							<td>{{ score.obs }}</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>

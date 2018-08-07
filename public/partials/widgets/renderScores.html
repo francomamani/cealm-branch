@@ -1,0 +1,30 @@
+<div class="modal-body">
+	<form ng-submit="send()" role="form">
+		<legend>Generar Planilla de Notas</legend>
+
+		<div class="form-group">
+			<label for="">Elija bimestre</label>
+				<angucomplete-alt id="search1"
+					placeholder="Elija su bimestre"
+					pause="100"
+					selected-object="bimester"
+					local-data="bimesters"
+					search-fields="name"
+					title-field="name"
+					minlength="1"
+					text-no-results="No encontrado"
+					text-searching="Buscando..."
+					input-class="form-control form-control-small"/>
+		</div>
+		<div class="form-group">
+			<label for="">Grupo</label>
+			<select  class="form-control" ng-model="group_id">
+				<option value="{{group.id}}" ng-repeat="group  in groups">{{ group.name | uppercase }}</option>
+			</select>
+		</div>
+
+		<div class="form-group text-center">
+			<button type="submit" class="btn btn-primary">Generar</button>
+		</div>
+	</form>
+</div>

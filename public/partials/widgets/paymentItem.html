@@ -1,0 +1,32 @@
+<div class="modal-body">
+	<form ng-submit="save(paymentItem)" role="form">
+			<legend>Detalles de Pago</legend>
+			<div class="form-group">
+				<label>Monto</label>
+				<input type="text" ng-model="paymentItem.amount" required autofocus>
+			</div>
+			<div class="form-group">
+				<label>Tipo de Pago</label>
+				<select class="form-control" ng-model="paymentItem.payment_type_id" required>
+					<option value="{{ p.id }}" ng-repeat="p in payment_types">{{ p.description }}</option>
+				</select>
+			</div>
+			<div class="form-group">
+				<label>Mes</label>
+				<select class="form-control" ng-model="paymentItem.month" required>
+					<option value="{{ m.month }}" ng-repeat="m in months">{{ m.month | month }}</option>
+				</select>
+			</div>
+			<div class="form-group">
+				<label>Año</label>
+				<select class="form-control" ng-model="paymentItem.year" required>
+					<option value="{{ y.year }}" ng-repeat="y in years">{{ y.year}}</option>
+				</select>
+			</div>
+			<div class="form-group">
+				<label>Información adicional</label>
+				<textarea class="form-control" cols="30" rows="4" ng-model="paymentItem.additional_information"></textarea>
+			</div>
+			<button type="submit" class="btn btn-primary">Registrar detalle de pago</button>
+		</form>	
+</div>

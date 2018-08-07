@@ -1,0 +1,25 @@
+<div id="wrapper">
+	<div id="sidebar-wrapper">
+		<ul class="sidebar-nav">
+			<li class="sidebar-title"><a href="">DOCENTE</a></li>
+			<li><a href="profesor/mis-cursos">Mis Cursos</a></li>
+			<li><a href="">Calificaciones</a></li>
+			<li><a href="">Notas</a></li>
+			<li><a href=""> <span class="people"></span>Lista</a></li>
+		</ul>
+	</div>
+	<button id="toggle-button">
+		<span class="glyphicon glyphicon-th-large" aria-hidden="true"></span>
+	</button> 
+	<header class="cealm">
+		<div class="logo2" id="toggle"></div>
+		<h1>Centro de Enseñanza-Aprendizaje de Lenguas Modernas</h1>
+	</header>	
+</div>
+<script>
+	$('#toggle, #toggle-button').click(function (e) {
+		e.preventDefault();
+		$("#wrapper").toggleClass("toggled");
+		$(".content").toggleClass("content-sidebar");
+	});
+</script>

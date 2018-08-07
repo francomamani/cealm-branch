@@ -1,0 +1,319 @@
+<div ng-include="'partials/components/navbar.html'"></div>
+<div class="content">
+	<div class="row" ng-hide="showDetails">
+		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+			<button class="btn btn-primary" ng-click="createDeposit()">Registrar Ingreso</button>	
+		</div>
+	</div>
+	<div class="row" ng-hide="showDetails">
+		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+
+			<div class="table-responsive">
+				<table class="table table-hover">
+					<thead>
+						<tr>
+							<th>N.</th>
+							<th>Monto</th>
+							<th>Fecha de Ingreso</th>
+							<th>Cliente</th>
+							<th>Carnet de Identidad</th>
+							<th>Acciones</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="deposit in deposits.data">
+							<td>{{ deposits.from + $index}}</td>
+							<td>{{ deposit.amount }}</td>
+							<td>{{ deposit.deposit_date }}</td>
+							<td>{{ deposit.client }}</td>
+							<td>{{ deposit.client_identity_card }}</td>
+							<td>
+								<button class="btn btn-primary btn-sm" ng-click="moreDetails(deposit)">
+									Más detalles
+								</button>
+								<button class="btn btn-info btn-sm" ng-click="print(deposit)">
+									<span class="glyphicon glyphicon-print" aria-hidden="true"></span>
+								</button>
+
+								<button class="btn btn-danger btn-sm" ng-click="deleteDeposit(deposit, $index)">
+									<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+								</button>
+
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
+		    <pagination total-items="bigTotalItems" ng-model="bigCurrentPage" max-size="maxSize" class="pagination-sm" ng-change="changePage(bigCurrentPage)" items-per-page="bigPerPage" boundary-links="true"></pagination>
+		</div>
+	</div>
+	<div class="row" ng-show="showDetails">
+		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+			<button class="btn btn-primary" ng-click="createDepositItem()">Registrar Detalle</button>
+		</div>
+	</div>
+	<div class="row" ng-show="showDetails">
+		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+			<div class="table-responsive">
+				<table class="table table-hover">
+					<thead>
+						<tr>
+							<th>N. </th>
+							<th>Monto</th>
+							<th>Periodo de Ingreso</th>
+							<th>Tipo de Ingreso</th>
+							<th>Información Adicional</th>
+							<th>Acciones</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-init="depositItem.update = false" ng-repeat="depositItem in depositItems">
+							<td>{{ $index + 1 }}</td>
+							<td>
+								<span ng-hide="depositItem.update">{{ depositItem.amount }}</span>
+								<span ng-show="depositItem.update">
+									<input type="text" class="form-control" ng-model="depositItem.amount">
+								</span>
+							</td>
+							<td>
+								<span ng-hide="depositItem.update">
+								{{ depositItem.month }} / {{ depositItem.year }}	
+								</span>
+								<span ng-show="depositItem.update">
+									<div class="form-group">
+										<div class="row">
+											<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+												<input type="number" class="form-control" ng-model="depositItem.month">
+											</div>
+											<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+												<input type="number" class="form-control" ng-model="depositItem.year">
+											</div>
+										</div>
+									</div>
+								</span>
+							</td>
+							<td>
+								<span ng-hide="depositItem.update">{{ depositItem.description }}</span>
+								<span ng-show="depositItem.update">
+									<select class="form-control" ng-model="depositItem.deposit_type_id">
+										<option value="{{depositType.id}}" ng-repeat="depositType in depositTypes">
+											{{ depositType.description | uppercase }}
+										</option>
+									</select>
+								</span>
+							</td>
+							<td>
+								<span ng-hide="depositItem.update">{{ depositItem.additional_information }}</span>
+								<span ng-show="depositItem.update">
+									<input type="text" ng-model="depositItem.additional_information" class="form-control">
+								</span>
+							</td>
+							<td>
+								<button ng-hide="depositItem.update" class="btn btn-primary btn-sm" ng-click="editDepositItem(depositItem)">
+									<span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+								</button>
+								<button class="btn btn-primary btn-sm" ng-show="depositItem.update" ng-click="updateDepositItem(depositItem)">
+									<span class="glyphicon glyphicon-save" aria-hidden="true"></span>
+								</button>
+								<button ng-hide="depositItem.update" class="btn btn-danger btn-sm" ng-click="deleteDepositItem(depositItem, $index)">
+									<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+								</button>
+							</td>
+						</tr>
+						<tr>
+							<td>Total: </td>
+							<td> {{ deposit.subtotal }}/ {{ deposit.amount }}</td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
+			<a href="" ng-click="showDetails = false">
+				<span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>
+				Volver</a>
+		</div>
+	</div>
+</div>
+
+
+<div id="print-deposit">
+	<style>
+		*{
+			font-family: arial;
+			line-height: .5em;
+		}
+		@page{
+			size: portrait;
+		}
+		.container-print{
+			width: 90%;
+			padding: 1em;
+			margin: 0 auto; 
+			-webkit-box-sizing: border-box;
+			-moz-box-sizing: border-box;
+			-ms-box-sizing: border-box;
+			-o-box-sizing: border-box;
+			box-sizing: border-box;
+			-webkit-border-radius: 5px;
+			-moz-border-radius: 5px;
+			-ms-border-radius: 5px;
+			-o-border-radius: 5px;
+			border-radius: 5px;
+			border: 2px solid gray;
+		}
+		.header-print{
+			text-align: left;
+			font-size: 10px;
+			font-weight: bold;
+			width: 70%;
+			float: left;
+		}
+		.date-print{
+			width: 30%;
+			float: right;
+			text-align: right;			
+		}
+		.date-print > table{
+			border: 2px solid gray;
+			font-size: 10px;
+		}
+		.date-print > table > thead > tr > th, 
+		.date-print > table > tbody > tr > td{
+			text-align: center;
+			padding: .5em .2em;
+			border-collapse: collapse;
+			border: 1px solid gray;
+		}
+
+		.clear{
+			clear: both;
+		}
+		.content-print{
+			float: left;
+			text-align: left;
+			font-size: 12px;
+			font-weight: normal;
+			width: 70%;
+		}
+		.amount-print{
+			float: right;
+			text-align: left;
+			font-size: 24px;
+			font-weight: bold;
+			width: 30%;
+	
+		}
+		.amount-print > span{
+			display: block;
+			margin: 0 auto;
+			width: 140px;
+			padding: .5em .2em;
+			-webkit-box-sizing: border-box;
+			-moz-box-sizing: border-box;
+			-ms-box-sizing: border-box;
+			-o-box-sizing: border-box;
+			box-sizing: border-box;
+			-webkit-border-radius: 5px;
+			-moz-border-radius: 5px;
+			-ms-border-radius: 5px;
+			-o-border-radius: 5px;
+			border-radius: 5px;
+			border-bottom: 2px solid gray; 
+		}
+		.hidden{
+			display: block;
+			position: absolute;
+			right: 10px;
+			bottom: 10px;
+			padding: .5em 1em;
+		}
+		.vertical-space{
+			margin-top: 50px;
+		}
+		.left, .right{
+			width: 50%;
+			font-size: 10px;
+			line-height: .5em;
+			text-align: center;
+		}
+		.left{
+			float: left;
+		}
+		.right{
+			float: right;
+		}
+		.print-list > li{
+			margin-bottom: 1em;
+		}
+		#section-to-print h6{
+			font-weight: bold;
+		}
+		@media print{
+			.hidden{
+				visibility: hidden;
+			}	
+		}
+
+	</style>
+	<div class="container-print">
+		<header class="header-print">
+			<h2>CEALM S.R.L. - <b>RECIBO</b></h2>
+			<h5>CENTRO DE ENSEÑANZA - APRENDIZAJE DE LENGUAS MODERNAS S.R.L.</h5>
+			<p>Dir.: Pagador, Caro y Cochabamba N. 5635</p>
+			<p>Zona:Central Telefono: 52-87676</p>		
+		</header>
+		<div class="date-print">
+			<table>
+				<thead>			
+					<tr>
+						<th>LUGAR</th>
+						<th>DIA</th>
+						<th>MES</th>
+						<th>AÑO</th>
+					</tr>
+				</thead>
+				<tbody>			
+					<tr>
+						<td>Oruro</td>
+						<td>{{ date.day }}</td>
+						<td>{{ date.month }}</td>
+						<td>{{ date.year }}</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<div class="clear"></div>
+		<div class="content-print">	
+			<p><b>Recibi del Sr(a):</b> {{ deposit.client | uppercase }}</p>
+			<p><b>Carnet/NIT:</b> {{ deposit.client_identity_card }}</p>
+			<p><b>La suma de:</b> {{ deposit.literal_amount | uppercase }} {{ deposit.decimal_amount }}/100 Bs. </p>
+ 			<p><b>Participante:</b> {{ depositItems[0].lastname | uppercase }} {{ depositItems[0].firstname | uppercase }}</p>
+			<p><b>Por concepto de:</b> 
+				<ul class="print-list">
+					<li ng-repeat="depositItem in depositItems">{{ depositItem.description | uppercase }}  {{ depositItem.month | month | uppercase }} / {{ depositItem.year }}  Bs. {{ depositItem.amount }}</li>
+				</ul>
+			</p>
+		</div>
+		<div class="amount-print">
+			<span>Bs. {{ deposit.amount }}</span>
+		</div>
+		<div class="clear"></div>
+		<div class="vertical-space"></div>
+		<div class="left">
+			<p>{{ deposit.client | uppercase }}</p>
+			<p><b>PAGUE CONFORME</b></p>
+		</div>
+		<div class="right">
+			<p>{{ user.firstname | uppercase }} {{ user.lastname | uppercase }}</p>
+			<p><b>RECIBI CONFORME</b></p>
+		</div>			
+		<div class="clear"></div>
+	</div>
+</div>

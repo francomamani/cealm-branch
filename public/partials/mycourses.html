@@ -1,0 +1,66 @@
+<div ng-include="'partials/components/navbar.html'"></div>
+<div class="content">
+	<div class="row" ng-show="showList == false" ng-class="groups.length==0 ? 'hide' : 'show'">
+		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+			<legend>LISTA DE CURSOS</legend>
+			<div class="table-responsive">
+				<table class="table table-hover">
+					<thead>
+						<tr>
+							<th>Curso</th>
+							<th>Asignaturas</th>
+							<th>Acciones</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="group in groups">
+							<td>{{group.name}}</td>
+							<td>
+								<div ng-repeat="level in group.levels">
+									{{ level.level_name }}
+								</div>
+							</td>
+							<td>
+								<button type="button" class="btn btn-primary btn-sm" ng-click="getStudents(group)">
+									<span class="glyphicon glyphicon-log-in" aria-hidden="true"></span>
+								</button>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>		
+		</div>
+	</div>
+	<div class="row" ng-show="showList == true" ng-class="groups.length==0 ? 'hide' : 'show'">
+		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+			<legend>LISTA DE ESTUDIANTES {{ group.name }}</legend>
+			<a href="" ng-click="printList()"><span class="glyphicon glyphicon-download" aria-hidden="true"></span> Descargar Lista</a>
+			<div class="table-responsive">
+				<table class="table table-hover">
+					<thead>
+						<tr>
+							<th>NOMBRE COMPLETO</th>
+							<th>CARNET DE IDENTIDAD</th>
+							<th>CELULAR</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="student in students">
+							<td>{{ student.info.lastname }} {{ student.info.firstname }}</td>
+							<td>{{ student.info.identity_card }}</td>
+							<td>{{ student.info.cellphone }}</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>	
+		</div>
+		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
+			<a href="" ng-click="showList = false"><span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span> Volver</a>
+		</div>
+	</div>
+	<div class="row" ng-class="groups.length == 0 ? 'show' : 'hide'">
+		<div class ="text-center">
+			<h1>No tiene ningun curso este semestre</h1>
+		</div>
+	</div>
+</div>

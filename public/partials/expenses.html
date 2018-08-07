@@ -1,0 +1,112 @@
+<div ng-include="'partials/components/navbar.html'"></div>
+<div class="content">
+	<div class="row">
+		<div class="col-xs-12 col-sm-3 col-md-3 col-lg-3">
+			<form name="searchForm" ng-submit="queries()" role="form">
+				<legend>Consulta de Egresos</legend>
+				<div class="form-group">
+					<label>Tipo de Egreso</label>
+					<input type="search" class="form-control" name="value" required="required" ng-model="value" ng-enter="search(value)" placeholder="Tipo de egreso" autocomplete="off">
+					<ul class="list" ng-show="showSearch" placeholder="Tipo de egreso">
+						<li ng-repeat="e in expense_types" ng-click="selectObject(e)">{{ e.description }}</li>
+					</ul>
+					<ul class="list" ng-show="empty">
+						<li>No se encontraron coincidencias</li>
+					</ul>
+				</div>
+				<div class="form-group">
+					<label>Acreedor</label>
+					<input type="text" class="form-control" ng-model="data" placeholder="Información estudiantil">
+				</div>		
+				<div class="form-group">
+					<label>Mes</label>
+					<span class="label label-danger" ng-show="searchForm.month.$error.pattern">Los meses estan en el rango de [1-12]</span>
+					<input type="text" name="month" class="form-control" ng-model="month", placeholder="Mes"
+							ng-pattern="/^[1-9]{1}[0-2]?$/" maxlength="2">
+				</div>
+				<div class="form-group">
+				<label>Año</label>
+					<span class="label label-danger" ng-show="searchForm.year.$error.pattern">La selección de años esta entre 2000 y 2099</span>
+					<input type="text" name="year" class="form-control" ng-model="year", placeholder="Anio"
+							ng-pattern="/^[2]{1}[0]{1}\d{2}$/" maxlength="4">
+				</div>
+				<div class="form-group text-right">				
+					<button type="submit" class="btn btn-primary" ng-disabled="searchForm.value.$pristine && searchForm.value.$invalid">
+						Buscar 
+						<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+					</button>
+				</div>
+			</form>			
+		</div>
+
+<!-- 	<div class="row"> -->
+		<div class="col-xs-12 col-sm-9 col-md-9 col-lg-9">
+			<div class="row">		
+				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-right">				
+					<button class="btn btn-primary btn-sm" ng-click="print()">
+						<span class="glyphicon glyphicon-print" aria-hidden="true"></span>
+					</button>
+				</div>
+			</div>
+			<div class="table-responsive" id="searchTable">
+				<style>
+					@page{
+						size: landscape;
+					}
+					@media print{
+						table > thead > tr {
+							background-size: #CFD9ED;
+						}
+						table > thead > tr , table > tbody > tr  {
+							border-collapse: collapse;
+							border: 2px solid black;
+						}
+						table > tbody > tr:nth-child(even)  {
+							background-color: #E0E0E0;
+						}
+
+						table > tbody > td{
+							font-size: .9em;
+						}
+					}
+				</style>
+				<table class="table table-hover">
+					<thead>
+						<tr>
+							<th>N. </th>
+							<th>Monto</th>
+							<th>Periodo</th>
+							<th>Tipo de Egreso</th>
+							<th>Acreedor</th>
+							<th>Carnet de Acreedor</th>
+
+							<th>Depositante</th>
+							<th>Persona de Contacto</th>
+							<th>Teléfono</th>
+							<th>Celular</th>
+							<th>Obs</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="l in list">
+							<td>{{ $index + 1 }}</td>
+							<td>{{ l.amount }}</td>
+							<td>{{ l.month | month | uppercase }} / {{ l.year }}</td>
+							<td>{{ l.payment_type_description | uppercase }}</td>
+							<td>{{ l.creditor | uppercase }}</td>
+							<td>{{ l.creditor_ci | uppercase }}</td>
+
+							<td>{{ l.lastname | uppercase }} {{ l.firstname | uppercase }}</td>
+							<td>{{ l.contact_person | uppercase }}</td>
+							<td>{{ l.contact_person_phone }}</td>
+							<td>{{ l.contact_person_cellphone | uppercase }}</td>
+							<td>{{ l.additional_information | uppercase }}</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			Total: {{ total }} Bs.
+		</div>
+	</div>
+<!-- 	</div> -->
+</div>

@@ -1,0 +1,78 @@
+<div ng-include="'partials/components/navbar.html'"></div>
+<div class="content">
+	<div class="row">
+		<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8" id="control" ng-style="record_type && { 'background-color': '#BCBFF8' } ||  { 'background-color': '#FCA6A6' }">
+			<div class="control">{{ record_type | control}}</div>
+			<div class="text-right">
+				<button ng-click="record_type = true" class="btn btn-primary btn-sm">Entrada</button>
+				<button ng-click="record_type = false" class="btn btn-danger btn-sm">Salida</button>
+			</div>
+			<br>
+			<div class="text-center clock-container">
+				<div id="digital-clock"></div>
+			</div>
+			<div class="row">
+				<div class="col-xs-12 col-sm-12 col-md-offset-3 col-md-6 col-lg-offset-3 col-lg-6">
+					<form ng-submit="saveAttendance(attendance)" role="form">
+						<div class="form-group">
+							<input type="text" class="form-control input-lg center-input" id="username" placeholder="Cuenta" ng-model="attendance.username" required autocomplete='off' autofocus/>
+						</div>
+						<div class="form-group">
+							<input type="password" class="form-control input-lg center-input" id="code" placeholder="Ingrese su codigo" ng-model="attendance.code" required/>
+						</div>
+						<div class="text-center">
+							<button type="submit" class="btn btn-lg btn-primary">Registrar</button>
+							<button class="btn btn-lg btn-danger" ng-click="clean()">Limpiar</button>
+						</div>
+					</form>			
+				</div>
+			</div>
+		</div>
+		<div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+			<div class="table-responsive">
+				<table class="table table-hover">
+					<thead>
+						<tr>
+							<th>Carnet de Identidad</th>
+							<th>Tipo</th>
+							<th>Fecha</th>
+							<th>Hora</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="attendance in attendances" ng-style="attendance.record_type == 'entrada' && { 'background-color': '#BCBFF8' } ||  { 'background-color': '#FCA6A6' }">
+							<td>{{ attendance.user.identity_card }}</td>
+							<td>{{ attendance.record_type | uppercase }}</td>
+							<td>{{ attendance.record_date }}</td>
+							<td>{{ attendance.record_time }}</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+	<script>
+		$('#digital-clock').timeTo({
+			fontSize: 120, 
+			theme: "black"
+		});
+	</script>
+</div>
+
+<!-- <a class="btn btn-primary" data-toggle="modal" href='#modal-id'>Trigger modal</a> -->
+<div class="modal fade" id="attendanceModal">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title">Registro de control exitoso</h4>
+			</div>
+			<div class="modal-body">
+				<h1>{{ user.lastname | uppercase }} {{ user.firstname | uppercase}} SE REGISTRO CORRECTAMENTE</h1>	
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-primary" data-dismiss="modal">Esta bién</button>
+			</div>
+		</div>
+	</div>
+</div>

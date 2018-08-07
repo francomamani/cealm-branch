@@ -1,0 +1,294 @@
+<div ng-include="'partials/components/navbar.html'"></div>
+<div class="content">
+	<div class="row" ng-show="showLevel == 1">
+		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+			<legend>CURSOS</legend>
+			<div class="table-responsive">
+				<table class="table table-hover">
+					<thead>
+						<tr>
+							<th>SIGLA</th>
+							<th>ASIGNATURAS</th>
+							<th>HORARIO</th>
+							<th>AULA</th>
+							<th>Acciones</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="group in groups">
+							<td>{{ group.name }}</td>
+							<td>
+								<div ng-repeat="level in group.levels">
+									{{ level.level_name }}
+								</div>
+							</td>
+							<td>10:00 - 12:00</td>
+							<td>AULA 2</td>
+							<td>
+								<button class="btn btn-info btn-sm" title="Añadir tipos de examenes" ng-click="selectExamType(group)">
+									<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+								</button>
+								<button class="btn btn-primary btn-sm" title="Calificaciones" ng-click="showScores(group)">
+									<span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>
+								</button>
+								<button class="btn btn-success btn-sm" title="Lista de Estudiantes" ng-click="getStudents(group)">
+									<span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+								</button>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+	<div class="row" ng-show="showLevel == 2">
+		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+			<legend>TIPOS DE EXAMENES DE {{group.name}}</legend>
+			<div class="row">
+				<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+					<button type="button" class="btn btn-primary btn-sm" ng-click="addExamType()">Añadir tipo de examen</button>
+				</div>
+				<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 text-right">
+					<span class="label label-info" ng-show="counter + exam_type.percentage <=100">Porcentaje actual: {{counter + exam_type.percentage}}</span>
+					<span class="label label-danger" ng-show="counter + exam_type.percentage > 100">Porcentaje actual: {{counter + exam_type.percentage}}</span>
+				</div>
+			</div>
+
+			<div class="table-responsive">
+				<table class="table table-hover">
+					<thead>
+						<tr>
+							<th>Descripcion</th>
+							<th>Porcentaje</th>
+							<th>Acciones</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-init = "exam_type.update = false" ng-repeat="exam_type in exam_types">
+							<td>{{ exam_type.description }}</td>
+							<td>
+								<span ng-hide="exam_type.update">
+									{{ exam_type.percentage }}
+								</span>
+								<span ng-show="exam_type.update">
+									<input type="text" class="form-group" ng-model="exam_type.percentage">
+								</span>
+							</td>
+							<td>
+								<button class="btn btn-info btn-sm" title="Añadir categorias" ng-hide="exam_type.update" ng-click="addCategories(exam_type)">
+									<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+								</button>
+								<button class="btn btn-primary btn-sm" title="Cambiar" ng-hide="exam_type.update" ng-click="exam_type.update = true">
+									<span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+								</button>
+								<button class="btn btn-danger btn-sm" title="Eliminar" ng-click="deleteExamType(exam_type, $index)" ng-hide="exam_type.update">
+									<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+								</button>
+
+								<button class="btn btn-primary btn-sm" ng-show="exam_type.update" ng-click="updateExamType(exam_type)" title="Actualizar">
+									<span class="glyphicon glyphicon-save" aria-hidden="true"></span>
+								</button>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
+			<a href="" ng-click="showLevel = 1"><span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span> Volver</a>
+		</div>
+	</div>
+	<div class="row" ng-show="showLevel == 3">
+		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+			<legend>TIPOS DE CATEGORIAS DE {{ exam_type.description }}</legend>
+			<div class="row">
+				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+					<button type="button" class="btn btn-primary btn-sm" ng-click='addCategoryMark()'>Añadir categoria de examen</button>
+				</div>
+			</div>
+			<div class="table-responsive">
+				<table class="table table-hover">
+					<thead>
+						<tr>
+							<th>Descripcion</th>
+							<th>Porcentaje</th>
+							<th>Acciones</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-init="category_mark.update = false" ng-repeat='category_mark in category_marks'>
+							<td>{{ category_mark.description }}</td>
+							<td>
+								<span ng-hide="category_mark.update">
+									{{ category_mark.percentage }}
+								</span>
+								<span ng-show="category_mark.update">
+									<input type="text" ng-model="category_mark.percentage">
+								</span>
+							</td>
+							<td>
+								<button type="button" class="btn btn-primary btn-sm" ng-hide="category_mark.update" ng-click="category_mark.update = true">
+									<span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+								</button>
+								<button type="button" class="btn btn-danger btn-sm" ng-click="deleteCategoryMark(category_mark, $index)" ng-hide="category_mark.update">
+									<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+								</button>
+								<button type="button" class="btn btn-primary btn-sm" title="Guardar" ng-show="category_mark.update" ng-click="updateCategoryMark(category_mark)">
+									<span class="glyphicon glyphicon-save" aria-hidden="true"></span>
+								</button>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
+			<a href="" ng-click="showLevel = 2"><span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span> Volver</a>
+		</div>		
+	</div>
+	<div class="row" ng-show="showLevel == 4">
+		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+			<legend>LISTA DE ESTUDIANTES {{ group.name }}</legend>
+			<div class="row">
+				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+					<button type="button" class="btn btn-primary btn-sm" ng-click="printList()">
+						<span class="glyphicon glyphicon-download" aria-hidden="true"></span> Descargar Lista
+					</button>
+				</div>
+			</div>
+			<div class="table-responsive">
+				<table class="table table-hover">
+					<thead>
+						<tr>
+							<th>N.</th>
+							<th>NOMBRE COMPLETO</th>
+							<th>CARNET DE IDENTIDAD</th>
+							<th>CELULAR</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="student in students">
+							<td>{{ $index+1 }}</td>
+							<td>{{ student.info.lastname }} {{ student.info.firstname }}</td>
+							<td>{{ student.info.identity_card }}</td>
+							<td>{{ student.info.cellphone }}</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>						
+		</div>		
+		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
+			<a href="" ng-click="showLevel = 1"><span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span> Volver</a>
+		</div>
+	</div>
+	<div class="row" ng-show="showLevel == 5">
+		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+			<legend>CALIFICACIONES DE {{ group.name }}</legend>
+			<div class="row">
+				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+					<button class="btn btn-primary btn-sm" ng-click="addScore()">Añadir nuevo casillero</button>
+				</div>
+			</div>
+			<div class="table-responsive">
+				<table class="table table-hover">
+					<thead>
+						<tr>
+							<th>Fecha</th>
+							<th>Titulo</th>
+							<th>Descripcion</th>
+							<th>Examen</th>
+							<th>%</th>
+							<th>Categoria</th>
+							<th>%</th>
+							<th>Min.</th>
+							<th>Prom.</th>
+							<th>Max.</th>
+							<th>Acciones</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-init="i.update = false" ng-repeat="i in informationMarks">
+							<td>
+								<span ng-hide="i.update"> {{ i.end_date | date:'mediumDate' | uppercase }} </span>
+								<span ng-show="i.update"> <input type='date' ng-model="i.end_date" required/></span>
+							</td>
+							<td>
+								<span ng-hide="i.update">{{ i.title | uppercase }}</span>
+								<span ng-show="i.update">
+									<input type="text" ng-model="i.title">	
+								</span>
+							</td>
+							<td>
+								<span ng-hide="i.update">{{ i.description | uppercase }}</span>
+								<span ng-show="i.update">
+									<input type="text" ng-model="i.description">	
+								</span>
+							</td>
+
+							<td>{{ i.exam_type.description | uppercase }}</td>
+							<td>{{ i.exam_type.percentage }}</td>
+							<td>{{ i.category_mark.description | uppercase }}</td>
+							<td>{{ i.category_mark.percentage }}</td>
+							<td>{{ i.min | number:2 }}</td>
+							<td>{{ i.avg | number:2 }}</td>
+							<td>{{ i.max | number:2 }}</td>
+							<td> 
+								<button type="button" class="btn btn-success btn-sm" ng-click="studentScores(i)" ng-hide="i.update" title="Añadir notas de estudiantes">
+									<span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+								</button> 
+								<button class="btn btn-primary btn-sm" ng-hide="i.update" ng-click="i.update = true">
+									<span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+								</button>
+								<button class="btn btn-danger btn-sm" ng-hide="i.update" ng-click="deleteInformationMark(i, $index)">
+									<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+								</button>								
+								<button type="button" class="btn btn-primary btn-sm" title="Guardar" ng-click="updateInformationMark(i)" ng-show="i.update">
+									<span class="glyphicon glyphicon-save" aria-hidden="true"></span>
+								</button>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
+			<a href="" ng-click="showLevel = 1"><span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span> Volver</a>
+		</div>
+	</div>
+	<div class="row" ng-show="showLevel == 6">
+		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+			<legend>
+				{{ informationMark.exam_type.description | uppercase }} ( {{ informationMark.exam_type.percentage }} % ) > {{ informationMark.category_mark.description | uppercase }} ( {{ informationMark.category_mark.percentage }} %) 
+			</legend>
+		</div>
+		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+			<div class="table-responsive">
+				<table class="table table-hover">
+					<thead>
+						<tr>
+							<th>N. </th>
+							<th>NOMBRE COMPLETO</th>
+							<th>NOTA</th>
+							<th>OBSERVACIONES</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="s in students">
+							<td>{{ s.number }}</td>
+							<td> {{ s.info.lastname | uppercase}} {{ s.info.firstname | uppercase }}</td>
+							<td> <input type="text" ng-class="s.item_mark.score < 68? 'red' : ( s.item_mark.score < 70 ? 'yellow' : 'green')" ng-model="s.item_mark.score" > </td>
+							<td> <input type="text" ng-model="s.item_mark.observation"> </td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-right">
+			<button class="btn btn-primary" ng-click="saveScores()">Guardar</button>
+		</div>
+		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
+			<a href="" ng-click="back()"><span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span> Volver</a>
+		</div>
+	</div>	
+</div>
+	

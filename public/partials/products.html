@@ -1,0 +1,24 @@
+<div ng-include="'partials/components/navbar.html'"></div>
+<div class="content-fluid">
+	
+<div class="text-center">
+	<h1>PRODUCTOS</h1>
+</div>
+<div class="row">	
+	 <div class="col-xs-12 col-sm-12 col-md-offset-1 col-md-10 col-lg-offset-1 col-lg-10">
+		<div class="row items" ng-repeat="product in products.data">
+			<div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 item">
+				<img src="{{ product.image }}" alt="">	
+			</div>
+			<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8">
+				<h3><a href="" class="item-title">{{ product.name }}</a></h3>
+				<p>{{ product.description}}</p>
+				<div class="text-right">
+					<a href="" ng-click="more('md', product)" class="btn btn-primary btn-sm">Leer mas...</a>
+				</div>
+			</div>
+		</div>
+		<mypagination results="products" select="changePage(new_page)"></mypagination>
+	</div>
+</div>
+</div>

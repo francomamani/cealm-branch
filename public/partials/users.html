@@ -1,0 +1,63 @@
+<div ng-include="'partials/components/navbar.html'"></div>
+<div class="content">
+
+<div class="row">
+	<div class="col-xs-12 col-sm-3 col-md-3 col-lg-3">
+		<form role="form">
+			<legend>Buscar Usuario</legend>
+			<div class="form-group">
+				<label for="">Rol</label>
+				<select class="form-control" ng-model="role_id">
+					<option value=4 >Estudiantes</option>
+					<option value=3 >Docentes</option>
+					<option value=2 >Administrativos</option>
+					<option value=1 >Administradores</option>
+				</select>
+			</div>
+			<div class="form-group">
+				<label for="">Filtro</label>
+				<input type="text" class="form-control" placeholder="Filtra tus resultados" ng-model="search">
+			</div>
+		</form>
+	</div>
+	<div class="col-xs-12 col-sm-9 col-md-9 col-lg-9">
+		<table class="table table-hover">
+			<thead>
+				<tr>
+					<th>Nombres</th>
+					<th>Apellidos</th>					
+					<th>Cuenta</th>
+					<th>Correo</th>
+					<th>Carnet</th>
+					<th>Celular</th>
+					<th>Acciones</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="u in users | filter: search">
+					<td>{{ u.data.firstname }}</td>
+					<td>{{ u.data.lastname }}</td>
+					<td>{{ u.data.username }}</td>
+					<td>{{ u.data.email }}</td>
+					<td>{{ u.data.identity_card }}</td>
+					<td>{{ u.data.cellphone }}</td>
+					<td>
+						<button class="btn btn-info btn-sm" ng-click="resetPassword(u)" title="Restaurar Contraseña">
+							<span class="glyphicon glyphicon-lock" aria-hidden="true"></span>
+						</button>
+						<button class="btn btn-primary btn-sm" ng-click="updateUser(u)" title="Actualizar Usuario">
+							<span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+						</button>
+						<button class="btn btn-danger btn-sm" ng-click="open('md', u)" title="Eliminar Usuario">
+							<span class="glyphicon glyphicon-trash"></span>
+						</button>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>
+<mypagination results="users" select="changePage(new_page)"></mypagination>
+<!--
+-->
+</div>

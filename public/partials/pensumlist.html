@@ -1,0 +1,47 @@
+<div ng-include="'partials/components/navbar.html'"></div>
+<div class="content">
+	<div class="row">
+		<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+			<form>
+				<legend>Lista de Pensum Académicos</legend>	
+					<div class="form-group">
+						<select name="" id="input" class="form-control" required="required" ng-model="pensum.id">
+							<option value="{{ p.id }}" ng-repeat="p in pensums">{{ p.name }}</option>
+						</select>
+					</div>
+					<div class="form-group">
+						<input type="text" class="form-control" ng-model="search"/> <br>
+					</div>
+			</form>	
+		</div>
+		<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+			<div class="table-responsive text-left">
+				<table class="table table-hover">
+					<thead>
+						<tr>
+							<th>N. Bimestre</th>
+							<th>Código</th>
+							<th>Identificación de Asignatura</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="s in subjects | filter: search">
+							<td>{{ s.subject.bimester }}</td>
+							<td>{{ s.subject.subject_code }}</td>
+							<td>
+								<ul>
+									<li ng-repeat="l in s.levels" class="sub-items">
+										<span>{{ l.level_code }}</span>  
+										<span>{{ l.level_name }}</span>
+									</li>
+								</ul>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+
+		</div>
+	</div>
+
+</div>

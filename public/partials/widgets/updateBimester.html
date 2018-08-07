@@ -1,0 +1,57 @@
+<div class="modal-body">
+	<form ng-submit="update(bimester)" role="form">
+			<legend>{{ title }}</legend>
+			<div class="row">
+				<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+					<div class="form-group">
+						<label for="">Número de bimestre</label>
+						<input type="text" class="form-control" id="" placeholder="" ng-model="bimester.num_bimester" disabled>
+					</div>					
+				</div>
+				<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+					<div class="form-group">
+						<label for="">Gestión</label>
+						<input type="text" class="form-control" id="" placeholder="" ng-model="year" disabled>
+					</div>					
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+					<div class="form-group">
+						<label for="">Inicio del bimestre</label>
+		                <div class='input-group date' >
+							<input type='text' class="form-control" id="from" ng-model="bimester.from"/>
+		                    <span class="input-group-addon">
+		                        <span class="glyphicon glyphicon-calendar"></span>
+		                    </span>
+		                </div>
+					</div>					
+				</div>
+				<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+					<div class="form-group">
+						<label for="">Fin del bimestre</label>
+		                <div class='input-group date' >
+							<input type='text' class="form-control" id="to" ng-model="bimester.to"/>
+		                    <span class="input-group-addon">
+		                        <span class="glyphicon glyphicon-calendar"></span>
+		                    </span>
+		                </div>
+					</div>					
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+					<div class="text-right">
+						<button type="submit" class="btn btn-primary">Actualizar</button>
+					</div>					
+				</div>
+			</div>
+		</form>	
+</div>
+ <script>
+	$(document).ready(function () {
+		$('#from, #to').datepicker({
+			format:"yyyy-mm-dd"
+		});
+	});
+</script>

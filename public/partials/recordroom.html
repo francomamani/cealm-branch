@@ -1,0 +1,71 @@
+<div ng-include="'partials/components/navbar.html'"></div>
+<div class="content">
+	<div class="row">
+		<div class="col-xs-12 col-sm-12 col-md-offset-2 col-md-8 col-lg-offset-2 col-lg-8">
+			<form ng-submit="store(room)" role="form">
+				<legend>Registrar Aula</legend>
+				<div class="row">
+					<div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
+						<div class="form-group">
+							<label for="">Nombre de Aula</label>
+							<input type="text" class="form-control" id="" placeholder="Nombre de Aula" ng-model="room.name" required>
+						</div>						
+					</div>
+					<div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
+						<div class="form-group">
+							<label for="">Capacidad</label>
+							<input type="number" class="form-control" placeholder="Capacidad" ng-model="room.capacity" required>
+						</div>
+					</div>
+					<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+						<button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-save" aria-hidden="true"></span></button>		
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+	<div class="row">		
+		<div class="col-xs-12 col-sm-12 col-md-offset-3 col-md-6 col-lg-offset-3  col-lg-6 text-right">
+			<div class="row">
+				<div class="col-xs-12 col-sm-12 col-md-offset-3 col-md-9 col-lg-offset-3 col-lg-9">					
+					<div class="form-group">
+						<label class="sr-only" for="">label</label>
+						<input type="search" name="" id="input" class="form-control" value="" required="required" placeholder="Buscar Aula" ng-model="search" title="">
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="row">		
+		<div class="col-xs-12 col-sm-12 col-md-offset-3 col-md-6 col-lg-offset-3  col-lg-6">
+			<div class="table-responsive">
+				<table class="table table-hover">
+					<thead>
+						<tr>
+							<th>Nombre de Aula</th>
+							<th>Capacidad</th>
+							<th>Acciones</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="r in rooms | filter:search">
+							<td>{{ r.name }}</td>
+							<td>{{ r.capacity }}</td>
+							<td>
+								<button class="btn btn-success btn-sm" ng-click="update(r)">
+									<span class="glyphicon glyphicon-edit" title="Actualizar Aula" aria-hidden="true"></span>
+								</button>
+								<button class="btn btn-danger btn-sm" ng-click="delete(r)">
+									<span class="glyphicon glyphicon-trash" title="Eliminar Curso" aria-hidden="true"></span>
+								</button>
+
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			
+		</div>
+	</div>
+</div>

@@ -1,0 +1,142 @@
+<div ng-include="'partials/components/navbar.html'"></div>
+<div class="content">
+	<div class="row">
+		<div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+			<form ng-submit="search(parameters)"  role="form">
+				<legend>Estadisticas</legend>
+				<div class="form-group">
+					<label for="">Tipo de Estudiante</label>
+					<select class="form-control" ng-model="parameters.type">
+						<option value="regular">Regular</option>
+						<option value="intensivo">Intensivo</option>
+						<option value="becario">Becario</option>
+					</select>
+				</div>
+				<div class="form-group">
+					<label for="">Grado Académico</label>
+					<select class="form-control" ng-model="parameters.level">
+						<option value="tecnico_medio">Técnico Medio</option>
+						<option value="tecnico_superior">Técnico Superior</option>
+						<option value="capacitacion">Capacitación</option>
+					</select>
+				</div>
+				<div class="form-group">
+					<label for="">Bimestre</label>
+					<angucomplete-alt id="bimesters"
+						placeholder="Bimestre"
+						pause="100"
+						selected-object="bimester"
+						local-data="bimesters"
+						search-fields="name"
+						title-field="name"
+						minlength="1"
+						text-no-results="No encontrado"
+						text-searching="Buscando..."
+						input-class="form-control form-control-small"/>
+
+<!-- 					<select class="form-control">
+	<option value="{{b.id}}" ng-repeat="b in bimesters">{{ b.name }}</option>						
+</select> -->
+				</div>
+
+				<!-- 	            <div class="form-group">
+					<label for="">Fecha de Inicio: </label>
+				    <div class='input-group date' >
+										<input type='text' class="form-control" id="from"/>
+				        <span class="input-group-addon">
+				            <span class="glyphicon glyphicon-calendar"></span>
+				        </span>
+				    </div>
+				</div>
+				<div class="form-group">
+					<label for="">Fecha de Fin: </label>
+				    <div class='input-group date' >
+										<input type='text' class="form-control" id="to"/>
+				        <span class="input-group-addon">
+				            <span class="glyphicon glyphicon-calendar"></span>
+				        </span>
+				    </div>
+				</div> -->
+				<div class="text-right">
+					<button type="submit" class="btn btn-primary">
+						<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+						Buscar 
+					</button>
+				</div>
+			</form>
+		</div>
+		<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+			<table class="table table-striped table-hover">
+				<thead>
+					<tr>
+						<th>APELLIDOS</th>
+						<th>NOMBRES</th>
+						<th>FECHA DE NACIMIENTO</th>
+						<th>GENERO</th>
+						<th>CARNET</th>
+						<th>PROGRAMA</th>
+						<th>GRADO ACADEMICO</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="student in students.students">
+						<td>{{ student.lastname }}</td>
+						<td>{{ student.firstname }}</td>
+						<td>{{ student.birthday }}</td>
+						<td>{{ student.gender }}</td>
+						<td>{{ student.identity_card }}</td>
+						<td>{{ student.type }}</td>
+						<td>{{ student.level | program }}</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-xs-12 col-sm-offset-8 col-sm-4 col-md-offset-8 col-md-4 col-lg-offset-8 col-lg-4">
+			<table class="table table-striped table-hover">
+				<thead>
+					<tr>
+						<th>Descripción</th>
+						<th>Cantidad</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>Abandonos</td>
+						<td>{{ students.drop }}</td>
+					</tr>
+					<tr>
+						<td>Aprobados</td>
+						<td>{{ students.pass }}</td>
+					</tr>					
+					<tr>
+						<td>Reprobados</td>
+						<td>{{ students.fail }}</td>
+					</tr>
+					<tr>
+						<td>Mujeres</td>
+						<td>{{ students.women }}</td>
+					</tr>
+					<tr>
+						<td>Varones</td>
+						<td>{{ students.men }}</td>
+					</tr>
+					<tr>
+						<td>Total</td>
+						<td>{{ students.total }}</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+<!--
+<script>
+	$(document).ready(function () {
+		$('#from, #to').datepicker({
+			format:"yyyy-mm-dd"
+		});
+	});
+</script>
+-->

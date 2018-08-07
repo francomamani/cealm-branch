@@ -1,0 +1,341 @@
+<div ng-include="'partials/components/navbar.html'"></div>
+<div class="content">
+	<div class="row text-center" ng-show="showLevel == 1">
+		<legend>Pago de Estudiantes</legend>
+		<div class="paying">
+			<a href="" title="Matriculas" ng-click="tuitionPensums()">
+				<img src="./images/icons/tuition.png">
+			</a>
+		</div>
+<!-- 		<div class="paying">
+	<a href="" title="Pensiones">
+		<img src="./images/icons/allowance.png">
+	</a>
+</div>
+<div class="paying">
+	<a href="" title="Pagos extra">
+		<img src="./images/icons/extra.png">
+	</a>
+</div> -->
+	</div>
+	<div class="row" ng-show="showLevel == 2">
+		<div class="col-xs-12 col-sm-offset-3 col-sm-6 col-md-offset-3 col-md-6 col-lg-offset-3 col-lg-6">
+			<legend>Matriculas > Pensums Académicos</legend>
+			<div class="table-responsive">
+				<table class="table table-hover">
+					<thead>
+						<tr>
+							<th>Pensum Académico</th>
+							<th>Acciones</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="pensum in pensums">
+							<td> {{ pensum.name }}</td>
+							<td>
+								<button class="btn btn-primary btn-sm" ng-click="tuitionGroups(pensum)">
+									<span class="glyphicon glyphicon-check" aria-hidden="true"></span>
+								</button>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<div class="col-xs-12 col-sm-offset-3 col-sm-6 col-md-offset-3 col-md-6 col-lg-offset-3 col-lg-6 text-center">
+			<a href="" ng-click="showLevel = 1"><span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span> Volver</a>
+		</div>
+	</div>
+	<div class="row" ng-show="showLevel == 2.1">
+		<div class="col-xs-12 col-sm-offset-3 col-sm-6 col-md-offset-3 col-md-6 col-lg-offset-3 col-lg-6">
+			<legend>Matriculas > Pensums Academicos > Cursos</legend>
+			<div class="table-responsive">
+				<table class="table table-hover">
+					<thead>
+						<tr>
+							<th>Curso</th>
+							<th>Paralelo</th>
+							<th>Acciones</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="group in groups">
+							<td> {{ group.name }}</td>
+							<td> {{ group.parallel }}</td>
+							<td>
+								<a href="" class="btn btn-success btn-sm" ng-click="tuitionStudentsAtTime(group)">
+									<span class="glyphicon glyphicon-check" aria-hidden="true"></span>
+									Al dia
+								</a>
+								<a href="" class="btn btn-danger btn-sm" ng-click="tuitionStudentsOutTime(group)">
+									<span class="glyphicon glyphicon-floppy-remove" aria-hidden="true"></span>
+									Deudores
+								</a>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<div class="col-xs-12 col-sm-offset-3 col-sm-6 col-md-offset-3 col-md-6 col-lg-offset-3 col-lg-6 text-center">
+			<a href="" ng-click="showLevel = 2"><span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span> Volver</a>
+		</div>		
+	</div>
+	<div class="row" ng-show="showLevel == 2.2">
+		<div class="col-xs-12 col-sm-offset-3 col-sm-6 col-md-offset-3 col-md-6 col-lg-offset-3 col-lg-6">
+			<legend>Matriculas > Pensums Academicos > Cursos > Estudiantes al dia</legend>
+			<div class="table-responsive">
+				<table class="table table-hover">
+					<thead>
+						<tr>
+							<th>Apellidos Nombres</th>
+							<th>Monto Pagado</th>
+							<th>Acciones</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-init="student.update = false" ng-repeat="student in students">
+							<td>{{ student.lastname | uppercase }} {{ student.firstname | uppercase }}</td>
+							<td>
+								<span ng-hide="student.update">{{ student.price }}</span>
+								<span ng-show="student.update">
+									<input type="text" class="form-control" ng-model="student.price">
+								</span>
+							</td>
+							<td>
+								<a href="" class="btn btn-success btn-sm" ng-click="student.update = true" ng-hide="student.update">
+									<span class="glyphicon glyphicon-check" aria-hidden="true"></span>
+									Actualizar Pago
+								</a>
+								<button class="btn btn-primary btn-sm" ng-hide="student.update" ng-click="printTuition(student)">
+									<span class="glyphicon glyphicon-print" aria-hidden="true"></span>
+								</button>
+								<button class="btn btn-primary btn-sm" ng-click="updateTuition(student)" ng-show="student.update">
+									<span class="glyphicon glyphicon-save" aria-hidden="true"></span>
+								</button>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<div class="col-xs-12 col-sm-offset-3 col-sm-6 col-md-offset-3 col-md-6 col-lg-offset-3 col-lg-6 text-center">
+			<a href="" ng-click="showLevel = 2.1"><span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span> Volver</a>
+		</div>		
+	</div>
+	<div class="row" ng-show="showLevel == 2.3">
+		<div class="col-xs-12 col-sm-offset-2 col-sm-8 col-md-offset-2 col-md-8 col-lg-offset-2 col-lg-8">
+			<legend>Matriculas > Pensums Academicos > Cursos > Estudiantes Deudores</legend>
+			<div class="table-responsive">
+				<table class="table table-hover">
+					<thead>
+						<tr>
+							<th>Apellidos Nombres</th>
+							<th>Celular</th>
+							<th>Telefono</th>
+							<th>Persona de Contacto</th>
+							<th>Celular</th>
+							<th>Pago de Matricula</th>
+							<th>Acciones</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="student in students">
+							<td>{{ student.lastname | uppercase }} {{ student.firstname | uppercase }}</td>
+							<td>{{ student.cellphone }}</td>
+							<td>{{ student.phone }}</td>
+							<td>{{ student.contact_person | uppercase }}</td>
+							<td>{{ student.contact_person_cellphone }}</td>
+							<td>{{ student.tuition.price }}</td>
+							<td>
+								<button class="btn btn-primary btn-sm" ng-click="payTuition(student, $index)">
+									<span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+									Pagar
+								</button>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<div class="col-xs-12 col-sm-offset-3 col-sm-6 col-md-offset-3 col-md-6 col-lg-offset-3 col-lg-6 text-center">
+			<a href="" ng-click="showLevel = 2.1"><span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span> Volver</a>
+		</div>		
+	</div>	
+</div>
+
+
+<div id="section-to-print">
+	<style>
+		*{
+			font-family: arial;
+			line-height: .5em;
+		}
+		.container-print{
+			width: 90%;
+			padding: 1em;
+			margin: 0 auto; 
+			-webkit-box-sizing: border-box;
+			-moz-box-sizing: border-box;
+			-ms-box-sizing: border-box;
+			-o-box-sizing: border-box;
+			box-sizing: border-box;
+			-webkit-border-radius: 5px;
+			-moz-border-radius: 5px;
+			-ms-border-radius: 5px;
+			-o-border-radius: 5px;
+			border-radius: 5px;
+			border: 2px solid gray;
+		}
+		.header-print{
+			text-align: left;
+			font-size: 10px;
+			font-weight: bold;
+			width: 70%;
+			float: left;
+		}
+		.date-print{
+			width: 30%;
+			float: right;
+			text-align: right;			
+		}
+		.date-print > table{
+			border: 2px solid gray;
+			font-size: 10px;
+		}
+		.date-print > table > thead > tr > th, 
+		.date-print > table > tbody > tr > td{
+			text-align: center;
+			padding: .5em .2em;
+			border-collapse: collapse;
+			border: 1px solid gray;
+		}
+
+		.clear{
+			clear: both;
+		}
+		.content-print{
+			float: left;
+			text-align: left;
+			font-size: 12px;
+			font-weight: normal;
+			width: 70%;
+		}
+		.amount-print{
+			float: right;
+			text-align: left;
+			font-size: 24px;
+			font-weight: bold;
+			width: 30%;
+	
+		}
+		.amount-print > span{
+			display: block;
+			margin: 0 auto;
+			width: 140px;
+			padding: .5em .2em;
+			-webkit-box-sizing: border-box;
+			-moz-box-sizing: border-box;
+			-ms-box-sizing: border-box;
+			-o-box-sizing: border-box;
+			box-sizing: border-box;
+			-webkit-border-radius: 5px;
+			-moz-border-radius: 5px;
+			-ms-border-radius: 5px;
+			-o-border-radius: 5px;
+			border-radius: 5px;
+			border-bottom: 2px solid gray; 
+		}
+		.hidden{
+			display: block;
+			position: absolute;
+			right: 10px;
+			bottom: 10px;
+			padding: .5em 1em;
+		}
+		.vertical-space{
+			margin-top: 100px;
+		}
+		.left, .right{
+			width: 50%;
+			font-size: 10px;
+			line-height: .5em;
+			text-align: center;
+		}
+		.left{
+			float: left;
+		}
+		.right{
+			float: right;
+		}
+		#section-to-print h6{
+			font-weight: bold;
+		}
+		@media print{
+			.hidden{
+				visibility: hidden;
+			}	
+		}
+
+	</style>
+	<div class="container-print">
+		<header class="header-print">
+			<h1>CEALM S.R.L. - <b>RECIBO</b></h1>
+			<h5>CENTRO DE ENSEÑANZA - APRENDIZAJE DE LENGUAS MODERNAS S.R.L.</h5>
+			<p>Dir.: Pagador, Caro y Cochabamba N. 5635</p>
+			<p>Zona:Central Telefono: 52-87676</p>		
+		</header>
+		<div class="date-print">
+			<table>
+				<thead>			
+					<tr>
+						<th>LUGAR</th>
+						<th>DIA</th>
+						<th>MES</th>
+						<th>AÑO</th>
+					</tr>
+				</thead>
+				<tbody>			
+					<tr>
+						<td>Oruro</td>
+						<td>{{ tuition_day }}</td>
+						<td>{{ tuition_month }}</td>
+						<td>{{ tuition_year }}</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<div class="clear"></div>
+		<div class="content-print">	
+			<p><b>Recibi del Sr(a):</b> {{ student.contact_person | uppercase }}</p>
+			<p><b>La suma de:</b> {{ student.literal_price }} {{ student.decimal_price }}/100 Bs. </p>
+			<p><b>Por concepto:</b> PAGO DE MATRICULA</p>
+			<p><b>Participante:</b> {{ student.firstname | uppercase }} {{ student.lastname | uppercase }} </p>
+			<p><b>Programa:</b> PENSUM ACADEMICO INGLES</p>
+		</div>
+		<div class="amount-print">
+			<span>Bs. {{ student.price | number: 2}}</span>
+		</div>
+		<div class="clear"></div>
+		<div class="vertical-space"></div>
+		<div class="left">
+			<p>{{ student.contact_person | uppercase }}</p>
+			<p><b>PAGUE CONFORME</b></p>
+		</div>
+		<div class="right">
+			<p>{{ user.firstname | uppercase }} {{ user.lastname | uppercase }}</p>
+			<p><b>RECIBI CONFORME</b></p>
+		</div>			
+		<div class="clear"></div>
+
+		<button class="hidden" onclick="print()">Imprimir</button>		
+	</div>
+
+
+</div>
+<script>
+	function print() {
+		window.print();
+		window.close();
+	}
+</script>

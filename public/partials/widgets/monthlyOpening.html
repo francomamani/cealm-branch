@@ -1,0 +1,26 @@
+<div class="modal-body">
+	<form ng-submit="store(balance)" method="POST" role="form">
+		<legend>Apertura mensual</legend>
+	
+		<div class="form-group">
+			<label for="opening_balance">Saldo a favor</label>
+			<input type="text" class="form-control" id="opening_balance" ng-model="balance.opening_balance" placeholder="0.00" required autofocus>
+		</div>
+		<div class="form-group">
+			<div class="row">
+				<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+					<label for="month">Mes</label>
+					<input type="text" class="form-control" id="month" ng-model="balance.month" required>					
+				</div>
+				<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+					<label for="year">Gestion</label>
+					<input type="text" class="form-control" id="year" ng-model="balance.year" required>										
+				</div>
+			</div>
+		</div>
+		<div class="form-group text-right">
+			<button type="submit" class="btn btn-primary">Registrar apertura</button>
+			<button type="button" class="btn btn-default" ng-click="cancel()">Cancelar</button>
+		</div>
+	</form>	
+</div>

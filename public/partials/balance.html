@@ -1,0 +1,1141 @@
+<div ng-include="'partials/components/navbar.html'"></div>
+<div class="content">
+	<div class="row">
+		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+			<button type="button" class="btn btn-success btn-sm" ng-click="monthlyOpening()">Apertura mensual</button>
+			<!--<button type="button" class="btn btn-danger btn-sm" ng-click="monthlyOpening()">Cierre mensual</button> -->		
+		</div>
+		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-right">
+			<span class="label label-info">Apertura: {{ current_balance.month | month }} - {{ current_balance.year }}</span>
+			<span class="label label-danger">Saldo mes anterior: Bs. {{ current_balance.opening_balance }}</span>
+		</div>
+	</div>
+	<div role="tabpanel">
+		<!-- Nav tabs -->
+		<ul class="nav nav-tabs" role="tablist">
+			<li ng-class="tab == 'ingresos' ? 'active' : '' ">
+				<a href="" ng-click="tab = 'ingresos'">Ingresos</a>
+			</li>
+			<li ng-class="tab == 'egresos' ? 'active' : '' ">
+				<a href="" ng-click="tab = 'egresos'">Egresos</a>
+			</li>
+			<li ng-class="tab == 'consulta_ingresos' ? 'active' : '' ">
+				<a href="" ng-click="tab = 'consulta_ingresos'">Consulta de Ingresos</a>
+			</li>
+			<li ng-class="tab == 'consulta_egresos' ? 'active' : '' ">
+				<a href="" ng-click="tab = 'consulta_egresos'">Consulta de Egresos</a>
+			</li>
+			<li ng-class="tab == 'balance' ?' active' : '' ">
+				<a href="" ng-click="tab = 'balance'">Balance</a>
+			</li>
+		</ul>
+	
+		<!-- Tab panes -->
+	<div class="tab-content row">
+			<div role="tabpanel" class="tab-pane active col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-show="tab == 'ingresos'">
+				<div class="row" id="deposits" ng-show="show_deposit_items == 0">
+					<div class="col-xs-12 col-sm-3 col-md-3 col-lg-3">
+						<form ng-submit="saveDeposit(deposit)" role="form">
+							<legend>Ingreso</legend>
+						
+							<div class="form-group">
+								<label for="amount">Monto</label>
+								<input type="text" class="form-control" id="amount" ng-model="deposit.amount" placeholder="00.00" required>
+							</div>
+							<div class="form-group">
+								<label for="">Estudiante</label>
+									<input type="search" class="form-control" value="" required="required" ng-model="value" ng-enter="search(value)" placeholder="Buscar y presionar <enter>" required>
+									<ul class="list" ng-show="showSearch">
+										<li ng-repeat="s in students" ng-click="selectObject(s)">{{ s.lastname }} {{ s.firstname }}</li>
+									</ul>
+									<ul class="list" ng-show="empty">
+										<li>No se encontraron coincidencias</li>
+									</ul>
+							</div>
+							<div class="form-group">
+								<label for="client">Nombre del cliente</label>
+								<input type="text" class="form-control" id="client" ng-model="deposit.client" required>
+							</div>
+							<div class="form-group">
+								<label for="client_identity_card">Carnet del cliente</label>
+								<input type="text" class="form-control" id="client_identity_card" ng-model="deposit.client_identity_card"  required>
+							</div>						
+						<button type="submit" class="btn btn-primary">Registrar Deposito</button>
+						</form>
+					</div>
+					<div class="col-xs-12 col-sm-9 col-md-9 col-lg-9">
+						<div class="table-responsive">
+							<table class="table table-hover">
+								<thead>
+									<tr>
+										<th>N.</th>
+										<th>Monto</th>
+										<th>Estudiante</th>
+										<th>Fecha de Ingreso</th>
+										<th>Cliente</th>
+										<th>Carnet de Identidad</th>
+										<th>Recibido por</th>
+										<th>Acciones</th>
+									</tr>
+								</thead>								
+								<tbody>
+									<tr ng-repeat="deposit in deposits.data">
+										<td>{{ deposits.from + $index }}</td>
+										<td>{{ deposit.amount }}</td>
+										<td>{{ deposit.student.user.lastname | uppercase }} {{ deposit.student.user.firstname | uppercase }}</td>
+										<td>{{ deposit.deposit_date | date: 'mediumDate' }}</td>
+										<td>{{ deposit.client | uppercase }}</td>
+										<td>{{ deposit.client_identity_card }}</td>
+										<td>{{ deposit.user.lastname | uppercase }} {{ deposit.user.firstname | uppercase }}</td>
+										<td>
+											<button type="button" class="btn btn-primary btn-sm" ng-click="showDepositItems(deposit)"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
+											<button class="btn btn-info btn-sm" ng-click="printDeposit(deposit)">
+												<span class="glyphicon glyphicon-print" aria-hidden="true"></span>
+											</button>
+											<button class="btn btn-danger btn-sm" ng-click="deleteDeposit(deposit, $index)">
+												<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+											</button>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+					<mypagination results="deposits" select="changeDepositPage(new_page)"></mypagination>
+				</div>
+				<div class="row" id="deposit_items" ng-show="show_deposit_items == 1">
+					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+						<!-- start deposit items -->
+						<div class="row">
+							<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+								<button class="btn btn-primary btn-sm" ng-click="show_deposit_items = 0"><span class="glyphicon glyphicon-home" aria-hidden="true"></span></button>		
+							</div>
+							<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 text-center">
+								<span class="title">Ingreso de Bs. {{ selectedDeposit.amount }}</span>	
+							</div>
+							<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 text-right">
+								<button class="btn btn-primary btn-sm" ng-click="createDepositItem()">Registrar Detalle</button>		
+							</div>
+						</div>
+						<div class="table-responsive">
+							<table class="table table-hover">
+								<thead>
+									<tr>
+										<th>N. </th>
+										<th>Monto</th>
+										<th>Periodo de Ingreso</th>
+										<th>Tipo de Ingreso</th>
+										<th>Información Adicional</th>
+										<th>Acciones</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr ng-init="depositItem.update = false" ng-repeat="depositItem in depositItems">
+										<td>{{ $index + 1 }}</td>
+										<td>
+											<span ng-hide="depositItem.update">{{ depositItem.amount }}</span>
+											<span ng-show="depositItem.update">
+												<input type="text" class="form-control" ng-model="depositItem.amount">
+											</span>
+										</td>
+										<td>
+											<span ng-hide="depositItem.update">
+											{{ depositItem.month }} / {{ depositItem.year }}	
+											</span>
+											<span ng-show="depositItem.update">
+												<div class="form-group">
+													<div class="row">
+														<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+															<input type="number" class="form-control" ng-model="depositItem.month">
+														</div>
+														<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+															<input type="number" class="form-control" ng-model="depositItem.year">
+														</div>
+													</div>
+												</div>
+											</span>
+										</td>
+										<td>
+											<span ng-hide="depositItem.update">{{ depositItem.description }}</span>
+											<span ng-show="depositItem.update">
+												<select class="form-control" ng-model="depositItem.deposit_type_id">
+													<option value="{{depositType.id}}" ng-repeat="depositType in depositTypes">
+														{{ depositType.description | uppercase }}
+													</option>
+												</select>
+											</span>
+										</td>
+										<td>
+											<span ng-hide="depositItem.update">{{ depositItem.additional_information }}</span>
+											<span ng-show="depositItem.update">
+												<input type="text" ng-model="depositItem.additional_information" class="form-control">
+											</span>
+										</td>
+										<td>
+											<button ng-hide="depositItem.update" class="btn btn-primary btn-sm" ng-click="editDepositItem(depositItem)">
+												<span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+											</button>
+											<button class="btn btn-primary btn-sm" ng-show="depositItem.update" ng-click="updateDepositItem(depositItem)">
+												<span class="glyphicon glyphicon-save" aria-hidden="true"></span>
+											</button>
+											<button ng-hide="depositItem.update" class="btn btn-danger btn-sm" ng-click="deleteDepositItem(depositItem, $index)">
+												<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+											</button>
+										</td>
+									</tr>
+									<tr>
+										<td>Total: </td>
+										<td> {{ selectedDeposit.subtotal }}/ {{ selectedDeposit.amount }}</td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+					<!-- end deposit items -->
+				</div>
+			</div>
+			<div role="tabpanel" class="tab-pane active col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-show="tab == 'egresos'">
+				<div class="row" ng-show="show_payment_items == 0">
+					<div class="col-xs-12 col-sm-3 col-md-3 col-lg-3">
+						<form ng-submit="savePayment(payment)" method="POST" role="form">
+							<legend>Egreso</legend>
+						
+							<div class="form-group">
+								<label for="amount">Monto</label>
+								<input type="text" class="form-control" id="amount" ng-model="payment.amount" required>
+							</div>
+							<!--
+								agregar buscqueda automatica
+							-->
+							<div class="form-group">
+								<label for="creditor">Acreedor</label>
+								<input type="text" class="form-control" id="creditor" ng-model="payment.creditor" required>
+							</div>
+							<div class="form-group">
+								<label for="creditor_ci">C.I. / NIT Acreedor</label>
+								<input type="text" class="form-control" id="creditor_ci" ng-model="payment.creditor_ci" required>
+							</div>
+						
+							<button type="submit" class="btn btn-primary">Registrar Egreso</button>
+						</form>
+					</div>
+					<div class="col-xs-12 col-sm-9 col-md-9 col-lg-9">
+						<div class="table-responsive">
+							<table class="table table-hover">
+								<thead>
+									<tr>
+										<th>N.</th>
+										<th>Fecha de Egreso</th>
+										<th>Monto</th>
+										<th>Acreedor</th>
+										<th>C.I./NIT Acreedor</th>
+										<th>Depositante</th>
+										<th>C.I. Depositante</th>
+										<th>Acciones</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr ng-repeat="payment in payments.data">
+										<td>{{ payments.from + $index }}</td>
+										<td>{{ payment.payment_date | date: 'fullDate' }}</td>
+										<td>{{ payment.amount }}</td>
+										<td>{{ payment.creditor }}</td>
+										<td>{{ payment.creditor_ci }}</td>
+										<td>{{ payment.user.lastname | uppercase }} {{ payment.user.firstname | uppercase }}</td>
+										<td>{{ payment.user.identity_card }}</td>
+										<td>
+											<button type="button" class="btn btn-primary btn-sm" ng-click="showPaymentItems(payment)"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
+											<button class="btn btn-info btn-sm" ng-click="printPayment(payment)">
+												<span class="glyphicon glyphicon-print" aria-hidden="true"></span>
+											</button>
+											<button class="btn btn-danger btn-sm" ng-click="deletePayment(payment, $index)">
+												<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+											</button>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+					<mypagination results="payments" select="changePaymentPage(new_page)"></mypagination>
+				</div>
+				<div class="row" ng-show="show_payment_items == 1">
+					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+						<div class="row">
+							<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+								<button type="button" class="btn btn-primary btn-sm" ng-click="show_payment_items = 0">
+									<span class="glyphicon glyphicon-home" aria-hidden="true"></span>
+								</button>
+							</div>
+							<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 text-center">
+								<span class="title">Egreso de Bs. {{ selectedPayment.amount }}</span>	
+							</div>
+							<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 text-right">
+								<button class="btn btn-primary btn-sm" ng-click="createPaymentItem()">Registrar Detalle</button>		
+							</div>			
+						</div>								
+					</div>
+					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+						<div class="table-responsive">
+							<table class="table table-hover">
+								<thead>
+									<tr>
+										<th>N.</th>
+										<th>Monto</th>
+										<th>Mes</th>
+										<th>Año</th>
+										<th>Información Adicional</th>
+										<th>Tipo de Egreso</th>
+										<th>Acciones</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr ng-init="paymentItem.update = false" ng-repeat="paymentItem in paymentItems">
+										<td>{{ $index + 1 }}</td> 
+										<td>
+											<span ng-hide="paymentItem.update">
+												{{ paymentItem.amount }}
+											</span>
+											<span ng-show="paymentItem.update">
+												<input type="text" class="form-control" ng-model="paymentItem.amount">
+											</span>
+										</td>
+										<td>
+											<span ng-hide="paymentItem.update">
+												{{ paymentItem.month | month }}
+											</span>
+											<span ng-show="paymentItem.update">
+												<select ng-model="paymentItem.month" class="form-control">
+													<option value="{{ m.month }}" ng-repeat="m in months">{{ m.month | month }}</option>
+												</select>
+											</span>
+										</td>
+										<td>
+											<span ng-hide="paymentItem.update">
+												{{ paymentItem.year }}
+											</span>
+											<span ng-show="paymentItem.update">
+												<select ng-model="paymentItem.year" class="form-control">
+													<option value="{{ y.year }}" ng-repeat="y in years">{{ y.year }}</option>
+												</select>
+											</span>
+										</td>
+										<td>
+											<span ng-hide="paymentItem.update">
+												{{ paymentItem.additional_information }}
+											</span>
+											<span ng-show="paymentItem.update">
+												<input type="text" ng-model="paymentItem.additional_information" class="form-control">
+											</span>
+										</td>
+										<td>
+											<span ng-hide="paymentItem.update">
+												{{ paymentItem.description }}
+											</span>
+											<span ng-show="paymentItem.update">
+												<select ng-model="paymentItem.payment_type_id" class="form-control">
+													<option value="{{ payment_type.id }}" ng-repeat="payment_type in payment_types"> {{ payment_type.description }}</option>
+												</select>
+											</span>
+										</td>
+										<td>
+											<button class="btn btn-success btn-sm" ng-show="paymentItem.update" ng-click="updatePaymentItem(paymentItem)">
+												<span class="glyphicon glyphicon-save" aria-hidden="true"></span>
+											</button>
+											<button class="btn btn-primary btn-sm" ng-click="enablePaymentItem(paymentItem)" ng-hide="paymentItem.update">
+												<span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+											</button>
+											<button class="btn btn-danger btn-sm" ng-click="deletePaymentItem(paymentItem, $index)" ng-hide="paymentItem.update">
+												<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+											</button>
+										</td>
+									</tr>
+									<tr>
+										<td>Total</td>
+										<td>{{ payment.subtotal }} / {{ payment.amount }} </td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div role="tabpanel" class="tab-pane active col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-show="tab == 'consulta_ingresos'">
+				<div class="row">
+					<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+						<form role="form" ng-submit="consultarIngreso()">
+							<legend>Consulta de Ingresos</legend>
+							<div class="form-group">
+									<label>Nombre de Estudiante</label>
+									<input type="text" class="form-control" ng-model="estudiante.nombre">
+							</div>
+							<div class="form-group">
+									<label>Apellido de Estudiante</label>
+									<input type="text" class="form-control" ng-model="estudiante.apellido">
+							</div>
+							<!--
+							<div class="form-group">
+								<div class="row">
+									<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+										<label for="">Bimestre</label>
+										<input type="text" class="form-control">
+									</div>
+									<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+										<label for="">Grupo</label>
+										<select name="" id="" class="form-control">
+											<option value=""></option>
+										</select>										
+									</div>
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="">Tipo de Ingreso</label>
+								<input type="text" class="form-control" id="">
+							</div>
+							<div class="form-group">
+								<label for="">Estudiante</label>
+								<input type="search" class="form-control" value="" required="required" ng-model="value" ng-enter="search(value)" placeholder="Buscar y presionar <enter>" required>
+								<ul class="list" ng-show="showSearch">
+									<li ng-repeat="s in students" ng-click="selectObject(s)">{{ s.lastname }} {{ s.firstname }}</li>
+								</ul>
+								<ul class="list" ng-show="empty">
+									<li>No se encontraron coincidencias</li>
+								</ul>
+							</div>
+							<div class="form-group">
+								<div class="row">
+									<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+										<label for="">Mes</label>
+										<input type="text" class="form-control" id="">										
+									</div>
+									<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+										<label for="">Año</label>
+										<input type="text" class="form-control" id="">										
+									</div>
+								</div>
+							</div>-->
+							<button type="submit" class="btn btn-primary">Buscar <span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+						</form>
+					</div>
+					<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+						<div class="table-responsive">
+							<table class="table table-hover">
+								<thead>
+									<tr>
+										<th>N.</th>
+										<th>Fecha de Ingreso</th>
+										<th>Monto</th>
+										<th>Participante</th>
+										<th>Tipo de Participante</th>
+										<th>Celular Participante</th>
+										<th>Depositante</th>
+										<th>Documento de Depositante</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr ng-repeat="ingreso in ingresos" ng-if="encontrarEstudiante(ingreso, estudiante)">
+										<td>{{ $index + 1 }}</td>
+										<td>{{ ingreso.deposit_date }}</td>
+										<td>{{ ingreso.amount }}</td>
+										<td>{{ ingreso.user.lastname }} {{ ingreso.user.firstname}}</td>
+										<td>{{ ingreso.estudiante.level }}</td>
+										<td>{{ ingreso.user.cellphone }}</td>
+										<td>{{ ingreso.client }}</td>
+										<td>{{ ingreso.client_identity_card}}</td>
+								</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div role="tabpanel" class="tab-pane active col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-show="tab == 'consulta_egresos'">
+				<div class="row">
+					<div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+						<form ng-submit="consultarEgreso(consulta_egreso)" role="form">
+							<legend>Consulta de Egresos</legend>
+						
+							<div class="form-group">
+								<label for="">Tipo de Egreso</label>
+								<select class="form-control" ng-model="consulta_egreso.payment_type_id">
+									<option value="{{tipo_pago.id}}" ng-repeat="tipo_pago in tipo_pagos">
+										{{ tipo_pago.description | uppercase }}
+									</option>
+								</select>
+							</div>
+							<div class="form-group">
+								<div class="row">
+									<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+										<label for="">Desde</label>
+										<input type="date" class="form-control" ng-model="consulta_egreso.desde">
+									</div>
+									<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+										<label for="">Hasta</label>
+										<input type="date" class="form-control" ng-model="consulta_egreso.hasta">
+									</div>
+								</div>
+							</div>
+<!--
+							<div class="form-group">
+								<label for="">Acreedor</label>
+								<input type="date" class="form-control" ng-model="consulta_egreso.desde">
+							</div>
+-->
+
+<!--							<div class="form-group">
+								<div class="row">
+									<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+										<label for="">Mes</label>
+										<input type="text" class="form-control" id="" >
+									</div>
+									<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+										<label for="">Año</label>
+										<input type="text" class="form-control" id="" >
+									</div>									
+								</div>
+							</div>-->
+
+							<button type="submit" class="btn btn-primary">Buscar <span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+						</form>
+					</div>
+					<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8">
+						<div class="table-responsive">
+							<table class="table table-hover">
+								<thead>
+								<tr>
+									<th>N.</th>
+									<th>Descripcion</th>
+									<th>Precio</th>
+									<th>Mes</th>
+									<th>Año</th>
+									<th>Fecha de Registro</th>
+								</tr>
+								</thead>
+								<tbody>
+								<tr ng-repeat="egreso in egresos">
+									<td>{{ $index + 1 }}</td>
+									<td>{{ egreso.additional_information }}</td>
+									<td>{{ egreso.amount }}</td>
+									<td>{{ egreso.month }}</td>
+									<td>{{ egreso.year }}</td>
+									<td>{{ egreso.created_at }}</td>
+								</tr>
+								</tbody>
+							</table>
+<!--							<table class="table table-hover">
+								<thead>
+									<tr>
+										<th>N.</th>
+										<th>Monto</th>
+										<th>Periodo</th>
+										<th>Tipo de Egreso</th>
+										<th>Acreedor</th>
+										<th>Carnet Acreedor</th>
+										<th>Depositante</th>
+										<th>Persona de Contacto</th>
+										<th>Telefono</th>
+										<th>Celular</th>
+										<th>Obs</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+									</tr>
+								</tbody>
+							</table>-->
+						</div>
+					</div>
+				</div>
+			</div>
+			<div role="tabpanel" class="tab-pane active col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-show="tab == 'balance'">
+				<div class="row">
+					<div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+						<form role="form">
+							<legend>Balance</legend>
+							<div class="form-group">
+								<label for="">Balance del periodo</label>
+								<select class="form-control" ng-model="balance_id">
+									<option value="{{b.id}}" ng-repeat="b in balances">{{ b.month }} / {{ b.year }} : {{ b.opening_balance }} Bs.</option>
+								</select>
+							</div>
+							<button class="btn btn-sm btn-info" ng-click="detalleIngreso(balance_id)">Detalle Ingresos</button>
+							<button class="btn btn-sm btn-success" ng-click="detalleEgreso(balance_id)">Detalle Egresos</button>
+							<button class="btn btn-sm btn-primary" ng-click="consultaSaldo(balance_id)">Consultar Saldo</button>
+						</form>
+					</div>
+					<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8">
+						<div class="table-responsive">
+							<table class="table table-hover" ng-if="tipoDetalle === 'ingresos'">
+								<thead>
+									<tr>
+										<th>N. </th>
+										<th>Ingreso de estudiante</th>
+										<th>Monto</th>
+										<th>Celular</th>
+										<th>Fecha de ingreso</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr ng-repeat="detalleIngreso in detalleIngresos">
+										<td>{{ $index + 1 }}</td>
+										<td>{{ detalleIngreso.student.user.lastname | uppercase }} {{ detalleIngreso.student.user.firstname | uppercase }}</td>
+										<td>{{ detalleIngreso.amount }}</td>
+										<td>{{ detalleIngreso.student.user.cellphone }}</td>
+										<td>{{ detalleIngreso.created_at }}</td>
+									</tr>
+									<tr>
+										<td>Total</td>
+										<td>{{ totalIngresos }} Bs.</td>
+										<td></td>
+										<td></td>
+										<td></td>
+									</tr>
+								</tbody>
+							</table>
+							<table class="table table-hover" ng-if="tipoDetalle === 'egresos'">
+								<thead>
+								<tr>
+									<th>N. </th>
+									<th>Acreedor</th>
+									<th>Monto</th>
+									<th>Carnet</th>
+									<th>Fecha de egreso</th>
+								</tr>
+								</thead>
+								<tbody>
+								<tr ng-repeat="detalleEgreso in detalleEgresos">
+									<td>{{ $index + 1 }}</td>
+									<td>{{ detalleEgreso.creditor | uppercase }}</td>
+									<td>{{ detalleEgreso.amount }}</td>
+									<td>{{ detalleEgreso.creditor_ci }}</td>
+									<td>{{ detalleEgreso.created_at }}</td>
+								</tr>
+								<tr>
+									<td>Total</td>
+									<td>{{ totalEgresos }} Bs.</td>
+									<td></td>
+									<td></td>
+									<td></td>
+								</tr>
+								</tbody>
+							</table>
+							<div ng-if="tipoDetalle === 'saldo'">
+								El saldo a favor es: {{ saldo }} Bs.
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div id="print-deposit">
+	<style>
+		*{
+			font-family: arial;
+			line-height: .5em;
+		}
+		@page{
+			size: portrait;
+		}
+		.container-print{
+			width: 90%;
+			padding: 1em;
+			margin: 0 auto; 
+			-webkit-box-sizing: border-box;
+			-moz-box-sizing: border-box;
+			-ms-box-sizing: border-box;
+			-o-box-sizing: border-box;
+			box-sizing: border-box;
+			-webkit-border-radius: 5px;
+			-moz-border-radius: 5px;
+			-ms-border-radius: 5px;
+			-o-border-radius: 5px;
+			border-radius: 5px;
+			border: 2px solid gray;
+		}
+		.header-print{
+			text-align: left;
+			font-size: 10px;
+			font-weight: bold;
+			width: 70%;
+			float: left;
+		}
+		.date-print{
+			width: 30%;
+			float: right;
+			text-align: right;			
+		}
+		.date-print > table{
+			border: 2px solid gray;
+			font-size: 10px;
+		}
+		.date-print > table > thead > tr > th, 
+		.date-print > table > tbody > tr > td{
+			text-align: center;
+			padding: .5em .2em;
+			border-collapse: collapse;
+			border: 1px solid gray;
+		}
+
+		.clear{
+			clear: both;
+		}
+		.content-print{
+			float: left;
+			text-align: left;
+			font-size: 12px;
+			font-weight: normal;
+			width: 70%;
+		}
+		.amount-print{
+			float: right;
+			text-align: left;
+			font-size: 24px;
+			font-weight: bold;
+			width: 30%;
+	
+		}
+		.amount-print > span{
+			display: block;
+			margin: 0 auto;
+			width: 140px;
+			padding: .5em .2em;
+			-webkit-box-sizing: border-box;
+			-moz-box-sizing: border-box;
+			-ms-box-sizing: border-box;
+			-o-box-sizing: border-box;
+			box-sizing: border-box;
+			-webkit-border-radius: 5px;
+			-moz-border-radius: 5px;
+			-ms-border-radius: 5px;
+			-o-border-radius: 5px;
+			border-radius: 5px;
+			border-bottom: 2px solid gray; 
+		}
+		.hidden{
+			display: block;
+			position: absolute;
+			right: 10px;
+			bottom: 10px;
+			padding: .5em 1em;
+		}
+		.vertical-space{
+			margin-top: 50px;
+		}
+		.left, .right{
+			width: 50%;
+			font-size: 10px;
+			line-height: .5em;
+			text-align: center;
+		}
+		.left{
+			float: left;
+		}
+		.right{
+			float: right;
+		}
+		.print-list > li{
+			margin-bottom: 1em;
+		}
+		#section-to-print h6{
+			font-weight: bold;
+		}
+		@media print{
+			.hidden{
+				visibility: hidden;
+			}	
+		}
+
+	</style>
+	<div class="container-print">
+		<header class="header-print">
+			<h2>CEALM S.R.L. - <b>RECIBO</b></h2>
+			<h5>CENTRO DE ENSEÑANZA - APRENDIZAJE DE LENGUAS MODERNAS S.R.L.</h5>
+			<p>Dir.: Pagador, Caro y Cochabamba N. 5635</p>
+			<p>Zona:Central Telefono: 52-87676</p>		
+		</header>
+		<div class="date-print">
+			<table>
+				<thead>			
+					<tr>
+						<th>LUGAR</th>
+						<th>DIA</th>
+						<th>MES</th>
+						<th>AÑO</th>
+					</tr>
+				</thead>
+				<tbody>			
+					<tr>
+						<td>Oruro</td>
+						<td>{{ date.day }}</td>
+						<td>{{ date.month }}</td>
+						<td>{{ date.year }}</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<div class="clear"></div>
+		<div class="content-print">	
+			<p><b>Recibi del Sr(a):</b> {{ selectedDeposit.client | uppercase }}</p>
+			<p><b>Carnet/NIT:</b> {{ selectedDeposit.client_identity_card }}</p>
+			<p><b>La suma de:</b> {{ selectedDeposit.literal_amount | uppercase }} {{ selectedDeposit.decimal_amount }}/100 Bs. </p>
+ 			<p><b>Participante:</b> {{ depositItems[0].lastname | uppercase }} {{ depositItems[0].firstname | uppercase }}</p>
+			<p><b>Por concepto de:</b> 
+				<ul class="print-list">
+					<li ng-repeat="depositItem in depositItems">{{ depositItem.description | uppercase }}  {{ depositItem.month | month | uppercase }} / {{ depositItem.year }}  Bs. {{ depositItem.amount }}</li>
+				</ul>
+			</p>
+		</div>
+		<div class="amount-print">
+			<span>Bs. {{ selectedDeposit.amount }}</span>
+		</div>
+		<div class="clear"></div>
+		<div class="vertical-space"></div>
+		<div class="left">
+			<p>{{ selectedDeposit.client | uppercase }}</p>
+			<p><b>PAGUE CONFORME</b></p>
+		</div>
+		<div class="right">
+			<p>{{ user.firstname | uppercase }} {{ user.lastname | uppercase }}</p>
+			<p><b>RECIBI CONFORME</b></p>
+		</div>			
+		<div class="clear"></div>
+	</div>
+</div>
+<div id="print-payment">
+	<style>
+		*{
+			font-family: arial;
+			line-height: .5em;
+		}
+		@page{
+			size: portrait;
+		}
+		.container-print{
+			width: 90%;
+			padding: 1em;
+			margin: 0 auto; 
+			-webkit-box-sizing: border-box;
+			-moz-box-sizing: border-box;
+			-ms-box-sizing: border-box;
+			-o-box-sizing: border-box;
+			box-sizing: border-box;
+			-webkit-border-radius: 5px;
+			-moz-border-radius: 5px;
+			-ms-border-radius: 5px;
+			-o-border-radius: 5px;
+			border-radius: 5px;
+			border: 2px solid gray;
+		}
+		.header-print{
+			text-align: left;
+			font-size: 10px;
+			font-weight: bold;
+			width: 70%;
+			float: left;
+		}
+		.date-print{
+			width: 30%;
+			float: right;
+			text-align: right;			
+		}
+		.date-print > table{
+			border: 2px solid gray;
+			font-size: 10px;
+		}
+		.date-print > table > thead > tr > th, 
+		.date-print > table > tbody > tr > td{
+			text-align: center;
+			padding: .5em .2em;
+			border-collapse: collapse;
+			border: 1px solid gray;
+		}
+
+		.clear{
+			clear: both;
+		}
+		.content-print{
+			float: left;
+			text-align: left;
+			font-size: 12px;
+			font-weight: normal;
+			width: 70%;
+		}
+		.amount-print{
+			float: right;
+			text-align: left;
+			font-size: 24px;
+			font-weight: bold;
+			width: 30%;
+	
+		}
+		.amount-print > span{
+			display: block;
+			margin: 0 auto;
+			width: 140px;
+			padding: .5em .2em;
+			-webkit-box-sizing: border-box;
+			-moz-box-sizing: border-box;
+			-ms-box-sizing: border-box;
+			-o-box-sizing: border-box;
+			box-sizing: border-box;
+			-webkit-border-radius: 5px;
+			-moz-border-radius: 5px;
+			-ms-border-radius: 5px;
+			-o-border-radius: 5px;
+			border-radius: 5px;
+			border-bottom: 2px solid gray; 
+		}
+		.hidden{
+			display: block;
+			position: absolute;
+			right: 10px;
+			bottom: 10px;
+			padding: .5em 1em;
+		}
+		.vertical-space{
+			margin-top: 50px;
+		}
+		.left, .right{
+			width: 50%;
+			font-size: 10px;
+			line-height: .5em;
+			text-align: center;
+		}
+		.left{
+			float: left;
+		}
+		.right{
+			float: right;
+		}
+		.print-list > li{
+			margin-bottom: 1em;
+		}
+		#section-to-print h6{
+			font-weight: bold;
+		}
+		@media print{
+			.hidden{
+				visibility: hidden;
+			}	
+		}
+
+	</style>
+	<div class="container-print">
+		<header class="header-print">
+			<h2>CEALM S.R.L. - <b>DETALLE DE PAGO</b></h2>
+			<h5>CENTRO DE ENSEÑANZA - APRENDIZAJE DE LENGUAS MODERNAS S.R.L.</h5>
+			<p>Dir.: Pagador, Caro y Cochabamba N. 5635</p>
+			<p>Zona: Central Telefono: 52-87676</p>		
+		</header>
+		<div class="date-print">
+			<table>
+				<thead>			
+					<tr>
+						<th>LUGAR</th>
+						<th>DIA</th>
+						<th>MES</th>
+						<th>AÑO</th>
+					</tr>
+				</thead>
+				<tbody>			
+					<tr>
+						<td>Oruro</td>
+						<td>{{ date.day }}</td>
+						<td>{{ date.month }}</td>
+						<td>{{ date.year }}</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<div class="clear"></div>
+		<div class="content-print">	
+			<p><b>Se pago a:</b> {{ selectedPayment.creditor | uppercase }}</p>
+			<p><b>Carnet/NIT:</b> {{ selectedPayment.creditor_ci }}</p>
+			<p><b>La suma de:</b> {{ selectedPayment.literal_amount | uppercase }} {{ selectedPayment.decimal_amount }}/100 Bs. </p>
+			<p><b>Por concepto de:</b> 
+				<ul class="print-list">
+					<li ng-repeat="paymentItem in paymentItems">{{ paymentItem.description | uppercase }} {{ paymentItem.month | month | uppercase }} / {{ paymentItem.year }} Bs. {{ paymentItem.amount }}</li>
+				</ul>
+			</p>
+		</div>
+		<div class="amount-print">
+			<span>Bs. {{ selectedPayment.amount }}</span>
+		</div>
+		<div class="clear"></div>
+		<div class="vertical-space"></div>
+		<div class="left">
+			<p>{{ selectedPayment.creditor | uppercase }}</p>
+			<p><b>PAGUE CONFORME</b></p>
+		</div>
+		<div class="right">
+			<p>{{ user.firstname | uppercase }} {{ user.lastname | uppercase }}</p>
+			<p><b>RECIBI CONFORME</b></p>
+		</div>			
+		<div class="clear"></div>
+	</div>
+</div>
+
+<!-- <div class="content">
+	<div class="row">
+		<div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+			<form name="balanceForm" method="POST" role="form">
+				<legend>Consulta de Saldo</legend>
+			
+				<div class="form-group">
+					<label for="">Mes</label>
+					<span class="label label-danger" ng-show="balanceForm.month.$error.pattern">Los meses deben estar en el rango de [1-12]</span>
+
+					<input type="text" class="form-control" name="month" ng-model="balance.month"
+					 ng-pattern="/^[1-9]{1}[0-2]?$/" maxlength="2"
+					 required>
+				</div>
+				<div class="form-group">
+					<label for="">Año</label>
+					<span class="label label-danger" ng-show="balanceForm.year.$error.pattern">La selección de años debe estar entre 2000 y 2099</span>
+
+					<input type="text" class="form-control" name="year" ng-model="balance.year" 
+					ng-pattern="/^[2]{1}[0]{1}\d{2}$/" maxlength="4"
+					required>
+				</div>
+				<button class="btn btn-sm btn-info" ng-click="income(balance)">Detalle Ingresos</button>
+				<button class="btn btn-sm btn-success" ng-click="expenditure(balance)">Detalle Egresos</button>
+				<button class="btn btn-sm btn-primary"  ng-click="query(balance)">Consultar Saldo</button>
+			</form>
+		</div>
+		<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8" ng-show="status == 'balance'">
+			<div class="heading">Saldo - Periodo {{ balance.month | month }} / {{ balance.year }}</div>
+			<div class="table-responsive">
+				<table class="table table-hover">
+					<thead>
+						<tr>
+							<th>Saldo Mensual Anterior (SMA)</th>
+							<th>Ingreso Mensual (IM)</th>
+							<th>Ingreso Total (SMA + IM)</th>
+							<th>Egreso</th>
+							<th>Saldo</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td></td>
+							<td></td>
+							<td>{{ results.income }}</td>
+							<td>{{ results.expenditure }}</td>
+							<td>{{ results.positive_balance }}</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+
+		<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8" ng-show="status == 'income'">
+			<div class="heading">Ingresos - Periodo {{ balance.month | month }} / {{ balance.year }}</div>
+			<div class="table-responsive">
+				<table class="table table-hover">
+					<thead>
+						<tr>
+							<th>N.</th>
+							<th>Fecha</th>
+							<th>Recepción</th>
+							<th>Cliente</th>
+							<th>Carnet</th>
+							<th>Estudiante</th>
+							<th>Concepto</th>
+							<th>Info. Adicional</th>
+							<th>Cantidad</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="income in income_results.income">
+							<td>{{ $index+1 }}</td>
+							<td>{{ income.deposit_date | date: 'fullDate' }}</td>
+							<td></td>
+							<td>{{ income.client | uppercase }}</td>
+							<td>{{ income.client_identity_card | uppercase }}</td>
+							<td>{{ income.lastname | uppercase}} {{ income.firstname | uppercase }}</td>
+							<td>{{ income.description | uppercase }}</td>
+							<td>{{ income.additional_information | uppercase }}</td>
+							<td>{{ income.amount }}</td>
+						</tr>
+						<tr>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td>Bs. {{ income_results.total }}</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+
+		<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8" ng-show="status == 'expenditure'">
+			<div class="heading">Egresos - Periodo {{ balance.month | month }} / {{ balance.year }}</div>
+			<div class="table-responsive">
+				<table class="table table-hover">
+					<thead>
+						<tr>
+							<th>N.</th>
+							<th>Fecha</th>
+							<th>Registrador</th>
+							<th>Concepto</th>
+							<th>Info. Adicional</th>
+							<th>Acreedor</th>
+							<th>C.I./ NIT</th>
+							<th>Cantidad</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="expenditure  in expenditure_results.expenditure">
+							<td>{{ $index+1 }}</td>
+							<td>{{ expenditure.payment_date | date: 'fullDate' }}</td>
+							<td></td>
+							<td>{{ expenditure.description | uppercase }}</td>
+							<td>{{ expenditure.additional_information | uppercase }}</td>
+							<td>{{ expenditure.creditor | uppercase }}</td>
+							<td>{{ expenditure.creditor_ci | uppercase }}</td>
+							<td>{{ expenditure.amount }}</td>
+						</tr>
+						<tr>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td>Bs. {{ expenditure_results.total }}</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+
+	</div>
+</div> -->

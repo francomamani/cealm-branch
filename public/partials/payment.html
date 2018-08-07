@@ -1,0 +1,322 @@
+<div ng-include="'partials/components/navbar.html'"></div>
+<div class="content">
+	<div class="row" ng-hide="statusDetails">
+		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+			<button class="btn btn-primary" ng-click="recordPayment()">Registro de Egresos</button>
+		</div>
+	</div>
+	<div class="row" ng-hide="statusDetails">
+		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+			<table class="table table-hover">
+				<thead>
+					<tr>
+						<th>N. </th>
+						<th>Fecha de Egreso</th>
+						<th>Monto Pagado(Bs.)</th>
+						<th>Acreedor</th>
+						<th>C.I. Acreedor</th>
+						<th>Depositante</th>
+						<th>C.I. Depositante</th>
+						<th>Acciones</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="p in payments.data">
+						<td>{{ payments.from + $index }}</td>
+						<td>{{ p.payment_date }}</td>
+						<td>{{ p.amount }}</td>
+						<td>{{ p.creditor }}</td>
+						<td>{{ p.creditor_ci }}</td>
+						<td>{{ p.user.lastname | uppercase }} {{ p.user.firstname | uppercase }}</td>
+						<td>{{ p.user.identity_card }}</td>
+						<td>
+							<button class="btn btn-primary btn-sm" ng-click="showDetails(p)">Más detalles</button>
+							<button class="btn btn-info btn-sm" ng-click="print(p)">
+								<span class="glyphicon glyphicon-print" aria-hidden="true"></span>
+							</button>
+							<button class="btn btn-danger btn-sm" ng-click="deletePayment(p, $index)">
+								<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+							</button>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
+		    <pagination total-items="bigTotalItems" ng-model="bigCurrentPage" max-size="maxSize" class="pagination-sm" ng-change="changePage(bigCurrentPage)" items-per-page="bigPerPage" boundary-links="true"></pagination>
+		</div>
+	</div>
+	<div class="row" ng-show="statusDetails">
+		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+			<button class="btn btn-primary" ng-click="createPaymentItem()">Adicionar Detalles de Egreso</button>		
+		</div>
+	</div>
+	<div class="row" ng-show="statusDetails">
+		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+			<div class="table-responsive">
+				<table class="table table-hover">
+					<thead>
+						<tr>
+							<th>Monto</th>
+							<th>Mes</th>
+							<th>Año</th>
+							<th>Información Adicional</th>
+							<th>Tipo de Egreso</th>
+							<th>Acciones</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-init="paymentItem.update = false" ng-repeat="paymentItem in paymentItems">
+							<td>
+								<span ng-hide="paymentItem.update">
+									{{ paymentItem.amount }}
+								</span>
+								<span ng-show="paymentItem.update">
+									<input type="text" class="form-control" ng-model="paymentItem.amount">
+								</span>
+							</td>
+							<td>
+								<span ng-hide="paymentItem.update">
+									{{ paymentItem.month | month }}
+								</span>
+								<span ng-show="paymentItem.update">
+									<select ng-model="paymentItem.month" class="form-control">
+										<option value="{{ m.month }}" ng-repeat="m in months">{{ m.month | month }}</option>
+									</select>
+								</span>
+							</td>
+							<td>
+								<span ng-hide="paymentItem.update">
+									{{ paymentItem.year }}
+								</span>
+								<span ng-show="paymentItem.update">
+									<select ng-model="paymentItem.year" class="form-control">
+										<option value="{{ y.year }}" ng-repeat="y in years">{{ y.year }}</option>
+									</select>
+								</span>
+							</td>
+							<td>
+								<span ng-hide="paymentItem.update">
+									{{ paymentItem.additional_information }}
+								</span>
+								<span ng-show="paymentItem.update">
+									<input type="text" ng-model="paymentItem.additional_information" class="form-control">
+								</span>
+							</td>
+							<td>
+								<span ng-hide="paymentItem.update">
+									{{ paymentItem.description }}
+								</span>
+								<span ng-show="paymentItem.update">
+									<select ng-model="paymentItem.payment_type_id" class="form-control">
+										<option value="{{ payment_type.id }}" ng-repeat="payment_type in payment_types"> {{ payment_type.description }}</option>
+									</select>
+								</span>
+							</td>
+							<td>
+								<button class="btn btn-success btn-sm" ng-show="paymentItem.update" ng-click="updatePaymentItem(paymentItem)">
+									<span class="glyphicon glyphicon-save" aria-hidden="true"></span>
+								</button>
+								<button class="btn btn-primary btn-sm" ng-click="enablePaymentItem(paymentItem)" ng-hide="paymentItem.update">
+									<span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+								</button>
+								<button class="btn btn-danger btn-sm" ng-click="deletePaymentItem(paymentItem, $index)" ng-hide="paymentItem.update">
+									<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+								</button>
+							</td>
+						</tr>
+						<tr>
+							<td>Total: {{ payment.subtotal }} / {{ payment.amount }} </td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
+			<a href="" ng-click="hideStatus()">
+				<span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>
+				Volver
+			</a>
+		</div>
+	</div>
+
+</dic>
+
+<div id="section-to-print">
+	<style>
+		*{
+			font-family: arial;
+			line-height: .5em;
+		}
+		@page{
+			size: portrait;
+		}
+		.container-print{
+			width: 90%;
+			padding: 1em;
+			margin: 0 auto; 
+			-webkit-box-sizing: border-box;
+			-moz-box-sizing: border-box;
+			-ms-box-sizing: border-box;
+			-o-box-sizing: border-box;
+			box-sizing: border-box;
+			-webkit-border-radius: 5px;
+			-moz-border-radius: 5px;
+			-ms-border-radius: 5px;
+			-o-border-radius: 5px;
+			border-radius: 5px;
+			border: 2px solid gray;
+		}
+		.header-print{
+			text-align: left;
+			font-size: 10px;
+			font-weight: bold;
+			width: 70%;
+			float: left;
+		}
+		.date-print{
+			width: 30%;
+			float: right;
+			text-align: right;			
+		}
+		.date-print > table{
+			border: 2px solid gray;
+			font-size: 10px;
+		}
+		.date-print > table > thead > tr > th, 
+		.date-print > table > tbody > tr > td{
+			text-align: center;
+			padding: .5em .2em;
+			border-collapse: collapse;
+			border: 1px solid gray;
+		}
+
+		.clear{
+			clear: both;
+		}
+		.content-print{
+			float: left;
+			text-align: left;
+			font-size: 12px;
+			font-weight: normal;
+			width: 70%;
+		}
+		.amount-print{
+			float: right;
+			text-align: left;
+			font-size: 24px;
+			font-weight: bold;
+			width: 30%;
+	
+		}
+		.amount-print > span{
+			display: block;
+			margin: 0 auto;
+			width: 140px;
+			padding: .5em .2em;
+			-webkit-box-sizing: border-box;
+			-moz-box-sizing: border-box;
+			-ms-box-sizing: border-box;
+			-o-box-sizing: border-box;
+			box-sizing: border-box;
+			-webkit-border-radius: 5px;
+			-moz-border-radius: 5px;
+			-ms-border-radius: 5px;
+			-o-border-radius: 5px;
+			border-radius: 5px;
+			border-bottom: 2px solid gray; 
+		}
+		.hidden{
+			display: block;
+			position: absolute;
+			right: 10px;
+			bottom: 10px;
+			padding: .5em 1em;
+		}
+		.vertical-space{
+			margin-top: 50px;
+		}
+		.left, .right{
+			width: 50%;
+			font-size: 10px;
+			line-height: .5em;
+			text-align: center;
+		}
+		.left{
+			float: left;
+		}
+		.right{
+			float: right;
+		}
+		.print-list > li{
+			margin-bottom: 1em;
+		}
+		#section-to-print h6{
+			font-weight: bold;
+		}
+		@media print{
+			.hidden{
+				visibility: hidden;
+			}	
+		}
+
+	</style>
+	<div class="container-print">
+		<header class="header-print">
+			<h2>CEALM S.R.L. - <b>DETALLE DE PAGO</b></h2>
+			<h5>CENTRO DE ENSEÑANZA - APRENDIZAJE DE LENGUAS MODERNAS S.R.L.</h5>
+			<p>Dir.: Pagador, Caro y Cochabamba N. 5635</p>
+			<p>Zona: Central Telefono: 52-87676</p>		
+		</header>
+		<div class="date-print">
+			<table>
+				<thead>			
+					<tr>
+						<th>LUGAR</th>
+						<th>DIA</th>
+						<th>MES</th>
+						<th>AÑO</th>
+					</tr>
+				</thead>
+				<tbody>			
+					<tr>
+						<td>Oruro</td>
+						<td>{{ date.day }}</td>
+						<td>{{ date.month }}</td>
+						<td>{{ date.year }}</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<div class="clear"></div>
+		<div class="content-print">	
+			<p><b>Se pago a:</b> {{ payment.creditor | uppercase }}</p>
+			<p><b>Carnet/NIT:</b> {{ payment.creditor_ci }}</p>
+			<p><b>La suma de:</b> {{ payment.literal_amount | uppercase }} {{ payment.decimal_amount }}/100 Bs. </p>
+			<p><b>Por concepto de:</b> 
+				<ul class="print-list">
+					<li ng-repeat="paymentItem in paymentItems">{{ paymentItem.description | uppercase }} {{ paymentItem.month | month | uppercase }} / {{ paymentItem.year }} Bs. {{ paymentItem.amount }}</li>
+				</ul>
+			</p>
+		</div>
+		<div class="amount-print">
+			<span>Bs. {{ payment.amount }}</span>
+		</div>
+		<div class="clear"></div>
+		<div class="vertical-space"></div>
+		<div class="left">
+			<p>{{ payment.creditor | uppercase }}</p>
+			<p><b>PAGUE CONFORME</b></p>
+		</div>
+		<div class="right">
+			<p>{{ user.firstname | uppercase }} {{ user.lastname | uppercase }}</p>
+			<p><b>RECIBI CONFORME</b></p>
+		</div>			
+		<div class="clear"></div>
+	</div>
+</div>

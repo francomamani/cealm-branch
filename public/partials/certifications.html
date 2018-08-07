@@ -1,0 +1,128 @@
+<div ng-include="'partials/components/navbar.html'"></div>
+<div class="content">
+	<div class="row">
+		<div class="col-xs-8 col-sm-offset-2 col-sm-8 col-md-offset-2 col-md-8 col-lg-offset-2 col-lg-8">
+			<form class="form-inline" role="form">
+				<legend>Certificaciones</legend>
+				<div class="form-group">
+					<label class="sr-only" for="">label</label>
+					<angucomplete-alt id="students"
+					              placeholder="Buscar Estudiantes"
+					              pause="100"
+					              selected-object="student"
+					              local-data="students"
+					              search-fields="fullname"
+					              title-field="fullname"
+					              minlength="1"
+					              input-class="form-control form-control-small"/>
+				</div>
+				<div class="form-group" ng-hide="student.title == undefined">
+					<label class="sr-only" for="">label</label>
+					<select class="form-control" ng-model="pensum_record">
+						<option value="{{pensum_record}}" ng-repeat="pensum_record in pensum_records">{{ pensum_record.pensum_name }}</option>
+					</select>
+				</div>
+				<div class="form-group" ng-hide="pensum_record_json.id == undefined">
+					<button class="btn btn-primary btn-sm" ng-click="academicFollow()">Seguimiento Académico</button>
+				</div>
+				<div class="form-group" ng-hide="pensum_record_json.id == undefined " ng-click="academicHistorial()">
+					<button class="btn btn-success btn-sm">Historial Académico</button>
+				</div>										
+			</form>
+		</div>
+	</div>
+	<div class="row" ng-show="level == 1">
+		<div class="col-xs-12 col-sm-offset-2 col-sm-8 col-md-offset-2 col-md-8 col-lg-offset-2 col-lg-8 text-center">
+			<legend>Seguimiento Académico</legend>
+			
+			<div class="row">
+				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-left">
+					<p>
+						<span class="bold">PROGRAMA: </span> {{ pensum_record_json.pensum_name | uppercase }}
+					</p>										
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 text-left">
+					<p>
+						<span class="bold">ESTUDIANTE: </span> {{ student.title | uppercase }} 
+					</p>
+				</div>
+				<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 text-right">
+					<button class="btn btn-primary btn-sm" ng-click="printAcademicFollow()">
+						<span class="glyphicon glyphicon-print" aria-hidden="true"></span>
+					</button>
+				</div>
+			</div>
+
+			<div class="table-responsive">
+				<table class="table table-hover">
+					<thead>
+						<tr>
+							<th>BIMESTRE</th>
+							<th>ASIGNATURA</th>
+							<th>NOTA</th>
+							<th>OBSERVACIONES</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="score in scores">
+							<td>{{ score.bimester }}</td>
+							<td>{{ score.group }}</td>
+							<td>{{ score.final_score }}</td>
+							<td ng-class="score.final_score >= 70 ? 'green' : 'red'">{{ score.obs }}</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+
+		</div>
+	</div>
+	<div class="row" ng-show="level == 2">
+		<div class="col-xs-12 col-sm-offset-2 col-sm-8 col-md-offset-2 col-md-8 col-lg-offset-2 col-lg-8 text-center">
+			<legend>Historial Académico</legend>
+			
+			<div class="row">
+				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-left">
+					<p>
+						<span class="bold">PROGRAMA: </span> {{ pensum_record_json.pensum_name | uppercase }}
+					</p>										
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 text-left">
+					<p>
+						<span class="bold">ESTUDIANTE: </span> {{ student.title | uppercase }} 
+					</p>
+				</div>
+				<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 text-right">
+					<button class="btn btn-primary btn-sm" ng-click="printAcademicHistorial()">
+						<span class="glyphicon glyphicon-print" aria-hidden="true"></span>
+					</button>
+				</div>
+			</div>
+
+			<div class="table-responsive">
+				<table class="table table-hover">
+					<thead>
+						<tr>
+							<th>BIMESTRE</th>
+							<th>ASIGNATURA</th>
+							<th>NOTA</th>
+							<th>OBSERVACIONES</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="score in scores">
+							<td>{{ score.bimester }}</td>
+							<td>{{ score.group }}</td>
+							<td>{{ score.final_score }}</td>
+							<td ng-class="score.final_score >= 70 ? 'green' : 'red'">{{ score.obs }}</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+
+		</div>
+	</div>	
+</div>

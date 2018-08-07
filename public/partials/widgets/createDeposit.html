@@ -1,0 +1,29 @@
+<div class="modal-body">
+	<form ng-submit="save(deposit)" role="form">
+		<legend>Registrar Deposito</legend>
+	
+		<div class="form-group">
+			<label>Cantidad</label>
+			<input type="text" class="form-control" ng-model="deposit.amount" required autofocus>
+		</div>
+		<div class="form-group">
+			<label>Estudiante:</label>
+			<input type="search" class="form-control" value="" required="required" ng-model="value" ng-enter="search(value)">
+			<ul class="list" ng-show="showSearch">
+				<li ng-repeat="s in students" ng-click="selectObject(s)">{{ s.lastname }} {{ s.firstname }}</li>
+			</ul>
+			<ul class="list" ng-show="empty">
+				<li>No se encontraron coincidencias</li>
+			</ul>
+		</div>
+		<div class="form-group">
+			<label>Nombre del cliente</label>
+			<input type="text" class="form-control" ng-model="deposit.client" required>
+		</div>
+		<div class="form-group">
+			<label>Carnet del cliente</label>
+			<input type="text" class="form-control" ng-model="deposit.client_identity_card" required>
+		</div>	
+		<button type="submit" class="btn btn-primary">Registrar Deposito</button>
+	</form>
+</div>

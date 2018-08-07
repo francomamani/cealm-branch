@@ -1,0 +1,114 @@
+<div ng-include="'partials/components/navbar.html'"></div>
+<div class="content">
+	
+<div class="row">
+	<div class="col-xs-12 col-sm-offset-1 col-sm-4 col-md-offset-1 col-md-4 col-lg-offset-1 col-lg-4">
+
+		<form ng-submit="storeLanguage(language)" role="form">
+			<legend>Idiomas</legend>
+			<div class="form-group">
+				<input type="text" ng-model="language.name" placeholder="Registrar Idioma" class="form-control" required autofocus>
+			</div>
+			<div class="form-group">
+				<input type="text" ng-model="language.acronym" placeholder="Acronimo" class="form-control" required autofocus>
+			</div>
+			<div class="form-group">
+				<input type="submit" class="btn btn-primary btn-sm" value="Registrar Nuevo Idioma">						
+			</div>
+		</form>
+		<br><br>		
+		<div class="table-responsive">
+			<table class="table table-hover">
+				<thead>
+					<tr>
+						<th>Idioma</th>
+						<th>Acronimo</th>
+						<th>Acciones</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-init="l.update = false" ng-repeat="l in languages">
+						<td>
+							<span ng-hide="l.update"> <a href="" ng-click="adminCategories(l)">{{ l.name }}</a> </span>
+							<span ng-show="l.update">
+								<input type="text" ng-model="l.name">
+							</span>
+						</td>
+						<td>
+							<span ng-hide="l.update"> {{ l.acronym }} </span>
+							<span ng-show="l.update">
+								<input type="text" ng-model="l.acronym">
+							</span>
+						</td>
+
+						<td>
+							<button type="button" class="btn btn-primary btn-sm" ng-hide="l.update" ng-click="l.update = true">
+								<span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+							</button>
+							<button type="button" class="btn btn-danger btn-sm" ng-hide="l.update" ng-click="deleteLanguage(l, $index)">
+								<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+							</button>
+							<button class="btn btn-primary btn-sm" ng-show="l.update" ng-click="updateLanguage(l)" >
+								<span class="glyphicon glyphicon-save" aria-hidden="true"></span>								
+							</button>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+
+	</div>
+
+	<div class="col-xs-12 col-sm-offset-2 col-sm-4 col-md-offset-2 col-md-4 col-lg-offset-2 col-lg-4" ng-show="showCategory">
+		<form ng-submit="storeCategory()" role="form">
+			<legend>Categorias de {{ selectedLanguage.spanish_name }}</legend>
+			<div class="form-group">
+				<input type="text" class="form-control" placeholder="Registrar Categorias" ng-model="category.description" ng-required autofocus>
+			</div>
+			<div class="form-group">
+				<input type="submit" class="btn btn-primary btn-sm" value="Registrar Nueva Categoria">
+			</div>
+		</form>
+		<br><br>
+		<div class="table-responsive">
+			<table class="table table-hover">
+				<thead>
+					<tr>
+						<th>Categoria</th>
+						<th>Acronimo</th>
+						<th>Acciones</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-init="c.update = false" ng-repeat="c in categories">
+						<td>
+							<span ng-hide="c.update">{{ c.description | uppercase }}</span>
+							<span ng-show="c.update">
+								<input type="text" class="form-control" ng-model="c.description" />
+							</span>
+						</td>
+						<td>
+							<span>{{ c.acronym | uppercase }}</span>
+						</td>
+						<td>
+							<button class="btn btn-primary btn-sm" ng-hide="c.update" ng-click="c.update = true">
+								<span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+							</button>
+							<button class="btn btn-danger btn-sm" ng-hide="c.update" ng-click="deleteCategory(c, $index)">
+								<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+							</button>
+							<button class="btn btn-primary btn-sm" ng-show="c.update" ng-click="updateCategory(c, $index)">
+								<span class="glyphicon glyphicon-save" aria-hidden="true"></span>
+							</button>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+
+	</div>
+
+</div>
+
+</div>
+<!-- end content -->

@@ -1,0 +1,107 @@
+.container, .content, .content-fluid{
+	padding-top: 25px;
+	background-color: #F4F4F4;
+	-webkit-animation-duration: .4s;
+	-moz-animation-duration: .4s;
+	-ms-animation-duration: .4s;
+	-o-animation-duration: .4s;
+	animation-duration: .4s;
+}
+/* .btn-primary{
+	background-color: #2B6FE7;
+	border: 2px solid #56B5FF;
+}
+.btn-primary:hover, .btn-primary:focus{
+	background-color: #0B60EF;
+	border: 2px solid #56B5FF;
+}
+.btn-warning{
+	background-color: #EFEA35;
+	color: #2B6FE7;
+}
+ */
+form{
+/* 	border-top: 4px solid #4D8AD8; */
+	background-color: white;
+	padding: 1em;
+	border-radius: 5px; 
+/*  	box-shadow: 0px 0px 10px #4D8AD8;  */
+/* 	background: -webkit-linear-gradient(180deg, #4D8AD8, white); For Safari 5.1 to 6.0
+background: -o-linear-gradient(180deg, #4D8AD8, white); For Opera 11.1 to 12.0
+background: -moz-linear-gradient(180deg, #4D8AD8, white); For Firefox 3.6 to 15
+background: linear-gradient(180deg, #4D8AD8, white); Standard syntax	 */
+}
+legend{
+	font-family: 'Poiret One', cursive;
+	font-weight: bold;
+	font-size: 1.4em;
+	color: #3255D0;	
+	padding: 1em 0;
+	text-align: center;
+}
+
+label{
+/* 	background-color: #FFFB26; */
+/* 	border-radius: 5px; */
+	color: #1555BA;
+	font-size: .8em;
+	padding: .5em 0em;
+/* 	margin-bottom: .5em; */
+	font-weight: bold; 
+/* 	border: 1px solid #1555BA; */
+}
+.bimester{
+	font-family: 'Poiret One', cursive;
+	font-weight: bold;
+	font-size: 1.4em;
+	color: #3255D0;	
+	padding: 1em 0;
+	position: absolute;
+	right: 20px;
+}
+.title{
+	font-family: 'Poiret One', cursive;
+	font-weight: bold;
+	font-size: 1.4em;
+	color: #3255D0;	
+	padding: 1em 1em;
+	text-align: left;
+}
+.news{
+	margin-top: -25px;	
+	min-height: 400px;
+	background-color: #FFFBBC;
+	padding: 0;
+}
+.news > h1{
+	display: block;
+	font-family: 'Roboto', sans-serif;
+	font-size: 1.4em;
+	color: #3255D0;	
+	padding: 1em;
+	text-align: left;
+	background-color: #FAFB43;
+
+}
+.radio{
+	display: inline-block;
+}
+.btn{
+	-webkit-border-radius: 2px;
+	-moz-border-radius: 2px;
+	-ms-border-radius: 2px;
+	-o-border-radius: 2px;
+	border-radius: 2px;
+/* 	padding: .5em 1em; */
+/* 	font-size: .8em;  */
+}
+.form-control{
+	display: block;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	-ms-border-radius: 3px;
+	-o-border-radius: 3px;
+	border-radius: 3px;
+	padding: .0em 1em;
+	font-size: .8em; 	
+}

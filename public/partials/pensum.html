@@ -1,0 +1,57 @@
+<div ng-include="'partials/components/navbar.html'"></div>
+<div class="content">
+	<div class="row">
+		<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+			<form ng-submit="store(pensum)" role="form">
+				<legend>Creación de Pensums Académicos</legend>
+				<div class="form-group">
+					<label for="">Idioma</label>
+					<select name="" 
+						id="input" 
+						class="form-control"
+						ng-model="pensum.language_id" 
+						required="required" autofocus>
+						<option value={{l.id}} ng-repeat="l in languages">{{ l.spanish_name }}</option>
+					</select>
+				</div>
+				<div class="form-group">
+					<label for="">Gestión</label>
+					<select name="" class="form-control" id="year" ng-model="pensum.year"  required>
+						<option value="{{y.year}}" ng-repeat="y in years">{{ y.year }}</option>
+					</select>
+				</div>
+				<div class="form-group">
+					<label for="">Nombre del Pensum</label>
+					<input type="text" ng-model="pensum.name" class="form-control" required/>
+				</div>
+				<div class="form-group text-right">
+					<button type="submit" class="btn btn-primary">Crear Pensum</button>
+				</div>
+			</form>
+<!-- 			<div class="alert alert-success text-center"><strong>{{ pensum.name }}</strong></div> -->
+		</div>
+		<!-- end col -->
+		<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+			<form ng-submit="render()"role="form">
+				<legend>Generar Materias de Pensum</legend>
+			
+				<div class="form-group">
+					<label class="" for="">Pensum</label>
+					<select class="form-control" name="" id="" ng-model="structure.pensum_id" ng-change="getPensum(structure.pensum_id)">
+						<option value="{{ p.id }}" ng-repeat="p in pensums">{{ p.name }}</option>
+					</select>
+				</div>
+				<div class="form-group">
+					<label class="" for="">Número de Bimestres</label>
+					<input type="number" class="form-control" id="" placeholder="Ej. 15 de Bimestres" ng-model="structure.bimester_quantity" min="5" max="18">
+				</div>
+				<div class="text-right">
+					<button type="submit" class="btn btn-primary">Generar</button>
+				</div>
+							
+			</form>
+		</div>
+	</div>
+	<!-- end row -->
+
+</div>

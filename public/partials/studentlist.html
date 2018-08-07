@@ -1,0 +1,81 @@
+<div ng-include="'partials/components/navbar.html'"></div>
+<div class="content">
+	<div class="row">
+		<div class="col-xs-12 col-sm-12 col-md-offset-3 col-md-6 col-lg-offset-3 col-lg-6">			
+			<form role="form">		
+				<legend>LISTA DE ESTUDIANTES</legend>
+				<div class="row">
+					<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+						<div class="form-group">			
+							<label for="bimester">Bimestre</label>
+							<angucomplete-alt id="search1"
+							              placeholder="Buscar Bimestre"
+							              pause="100"
+							              selected-object="selectedBimester"
+							              local-data="bimesters"
+							              search-fields="name"
+							              title-field="name"
+							              minlength="1"
+							              text-no-results="No encontrado"
+										  text-searching="Buscando..."
+							              input-class="form-control form-control-small"/>
+						</div>
+					</div>
+					<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+						<div class="form-group">			
+							<label for="groups">Grupos</label>
+							<select id="groups"  class="form-control" ng-model="group" ng-change="renderList(group)">
+								<option value="{{g}}" ng-repeat="g in groups">
+									{{ g.name }} - {{g.subject.pensum.name}}
+
+								</option>
+							</select>
+						</div>
+					</div>
+				</div>	
+			</form>
+		</div>
+	</div>
+
+
+	<div class="row" ng-show="selectedGroup">
+		<div class="col-xs-12 col-sm-12 col-md-offset-3 col-md-6 col-lg-offset-3 col-lg-6" ng-hide="empty">
+			<input type="search" class="form-control" ng-model="search" placeholder="Buscar Estudiante"/>
+		</div>
+	</div>
+	<div class="row" ng-show="selectedGroup">
+		<div class="col-xs-12 col-sm-12 col-md-offset-3 col-md-4 col-lg-offset-3 col-lg-4" ng-hide="empty">
+			<label for="">DOCENTE: {{ teacher.lastname | uppercase }} {{ teacher.firstname | uppercase }}</label>
+		</div>
+		<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+			<button class="btn btn-primary btn-xs" ng-click="printList()">Imprimir Lista</button>	
+		</div>
+	</div>
+	<div class="row" ng-show="selectedGroup" >
+		<div class="col-xs-12 col-sm-12 col-md-offset-3 col-md-6 col-lg-offset-3 col-lg-6" ng-hide="empty">
+			<div class="table-responsive">
+				<table class="table table-hover">
+					<thead>
+						<tr>
+							<th>N.</th>
+							<th>NOMBRE COMPLETO</th>
+							<th>CELULAR</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="s in students | filter: search">
+							<td>{{ s.number }}</td>
+							<td>{{ s.info.lastname | uppercase }} {{ s.info.firstname | uppercase }}</td>
+							<td>{{ s.info.cellphone }}</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+	<div class="row" ng-show="selectedGroup">
+		<div class="col-xs-12 col-sm-12 col-md-offset-3 col-md-6 col-lg-offset-3 col-lg-6 text-center" ng-show="empty">
+			<h3><strong>No exiten estudiantes registrados.</strong></h3>			
+		</div>
+	</div>
+</div>

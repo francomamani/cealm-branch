@@ -1,0 +1,14 @@
+<div ng-include="'partials/components/navbar.html'"></div>
+<div class="content">
+	<div class="row">
+		<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+			<a href="">Añadir Calificacion</a>			
+		</div>
+		<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 text-right">
+			<select ng-model="group" class="form-control">
+				<option value={{g.id}} ng-repeat="g in groups"> {{ g.name }}</option>
+			</select>
+		</div>
+	</div>
+
+</div>

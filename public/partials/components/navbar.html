@@ -1,0 +1,329 @@
+<div ng-controller="NavBarCtrl">
+	<nav class="navigation-component" ng-show="isPublic">
+		<ul>
+			<li><a href="">Inglés</a></li>
+			<li><a href="">Portugués</a></li>
+			<li><a href="">Francés</a></li>
+			<li><a href="">Alemán</a></li>
+			<li><a href="">Quechua</a></li>
+		</ul>
+	</nav>
+	<nav class="navigation-component" ng-show="isAdmin">
+		<ul>
+			<li><a href='admin'>Administración</a></li>
+		</ul>
+	</nav>
+	<nav class="navigation-component" ng-show="isAdministrative">
+		<ul>
+			<li><a href='administrative'>Administrativo</a></li>
+		</ul>
+	</nav>
+	<nav class="navigation-component" ng-show="isTeacher">
+		<ul>
+			<li><a href='profesor'>Docente</a></li>
+		</ul>
+	</nav>
+	<nav class="navigation-component" ng-show="isStudent">
+		<ul>
+			<li><a href='estudiante'>Estudiante</a></li>
+		</ul>
+	</nav>
+
+	<nav class="navigation-component" ng-show="isControl">
+		<ul>
+			<li><a href='control'>Control</a></li>
+		</ul>
+	</nav>
+
+	<header class="cealm">
+		<div class="logo"></div>
+		<h1>Centro de Enseñanza-Aprendizaje de Lenguas Modernas "CEALM" S.R.L. </h1>
+		<div class="res">Resolución Ministerial 2507/2017 </div>
+
+	</header>	
+	<nav class="navigation-items-component" ng-show="isPublic">
+		<ul>
+			<li><a href="/">Inicio <span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
+				</a>
+				<ul>
+					<li><a href="/autoridades">Autoridades</a></li>
+					<li><a href="/organigrama">Organigrama</a></li>
+					<!--<li><a href="">Plan de Estudios</a></li>-->
+					<li><a href="/titulacion">Titulación</a></li>
+				</ul>
+			</li>
+			<li><a href="">Institución
+				<span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
+			</a>
+				<ul>
+					<li><a href="/nacimiento-institucion">Historia</a></li>
+					<li><a href="/mision">Misión</a></li>
+					<li><a href="/vision">Vision</a></li>
+					<li><a href="/valores">Valores</a></li>
+					<li><a href="/beneficios">Beneficios de los idiomas</a></li>
+				</ul>
+			</li>
+			<li><a href="">Programas
+				<span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
+			</a>
+				<ul>
+					<li><a href="/carreras">Carrera</a></li>
+					<li><a href="/horarios">Horarios</a></li>
+					<li><a href="/calendario">Calendario</a></li>
+				</ul>
+			</li>
+			<li><a href="">Actividades
+				<span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
+			</a>
+				<ul>
+					<li><a href="/actividades">Speaking Club</a></li>
+<!--					<li><a href="">Galeria</a></li>-->
+				</ul>
+			</li>
+			<li><a href="/planta-docente">Planta Docente</a></li>
+			<li><a href="">Servicios <span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span></a>
+				<ul>
+					<li><a href="/cursos-especiales">Cursos Especiales</a></li>
+					<li><a href="/cursos-de-capacitacion">Cursos de Capacitación</a></li>
+					<li><a href="/traducciones">Traducciones</a></li>
+					<li><a href="/teachers-training">Talleres de Capacitación a Docentes</a></li>
+					<li><a href="/cursos-de-nivelacion">Cursos de Nivelación a Estudiantes de Colegio</a></li>
+				</ul>
+			</li>
+			<li><a href="">Exámenes Internacionales <span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span></a>
+				<ul>
+					<li><a href="que-es-el-mcerl">¿Qué es el MCERL (CEFRL)?</a></li>
+					<li><a href="por-que-el-mcerl">¿Por qué el MCERL (CEFRL)?</a></li>
+					<li><a href="competencias-linguisticas">Competencias linguisticas</a></li>
+					<li><a href="/equivalencias">Equivalencias IELTS & TOEFL</a></li>
+					<li><a href="/examenes-oficiales">Examenes Oficiales</a></li>
+				</ul>
+			</li>
+			<li><a href="/contacto">Contacto</a></li>
+			<li class="access"><a href="login">Acceso</a></li>
+			<div clear="clear"></div>
+		</ul>
+	</nav>
+	<nav class="navigation-items-component" ng-show="isAdmin">
+		<ul>
+			<li><a href="">Página Web
+				<span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
+			</a>
+				<ul>
+					<li><a href="/admin/imagenes-portada">Imágenes de Portada</a></li>
+				</ul>
+			</li>
+			<li><a href="">Estudiantes <span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span></a>
+				<ul>
+					<li><a href='/admin/inscripcion-carrera'>Inscripción a Carrera</a></li>
+					<li><a href='/admin/registro-materias'>Registro de Materias</a></li>
+					<li><a href='/admin/lista-estudiantes'>Lista de Estudiantes</a></li>
+					<li><a href="/admin/certificaciones">Certificaciones</a></li>
+					<li><a href='/admin/estadisticas'>Estadisticas</a></li>					
+				</ul>
+			</li>
+			<li><a href="">Docentes <span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span></a>
+				<ul>
+					<li>
+<!--						<a href="">Calendario</a>-->
+					</li>
+					<li><a href='admin/recepcion-planes'>Recepción de planes bimestrales</a></li>
+				</ul>
+			</li>
+			<li><a href="">Contabilidad <span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span></a>
+				<ul>
+<!-- 					<li><a href='admin/pago-estudiantes'>Pagos de Estudiantes</a></li> -->
+					<li><a href='admin/registro-precios'>Registro de Precios</a></li>
+					<li><a href="admin/tipos-pago-terceros">Tipos de Egresos</a></li>
+					<li><a href="admin/tipos-deposito">Tipos de Ingresos</a></li>
+<!--
+					<li><a href="admin/pagos">Egresos</a></li>
+					<li><a href="admin/depositos">Ingresos</a></li>
+					<li><a href="admin/egresos">Consulta de Egresos</a></li>
+					<li><a href="admin/queries">Consulta de Ingresos</a></li>
+-->
+					<li><a href="admin/libro-de-cuentas">Libro de Cuentas</a></li>
+				</ul>
+			</li>			
+			<li><a href="">Admin. Académica <span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span></a>
+				<ul>
+					<li><a href='admin/recepcion-documentos'>Recepción de Documentos</a></li>
+					<li><a href='admin/registro-idioma'>Registro de Idiomas</a></li>
+					<li><a href='admin/pensum'>Creación de Pensums</a></li>
+					<li><a href='admin/lista-pensums'>Listar Pensums</a></li>
+					<li><a href='admin/registrar-aula'>Registrar Aula</a></li>
+					<li><a href='admin/registrar-bimestre'>Registrar Bimestre</a></li>
+					<li><a href='admin/habilitar-paralelos'>Habilitar Paralelos</a></li>
+				</ul>
+			</li>
+			<li><a href="">Cuentas <span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span></a>
+				<ul>
+					<li><a href='admin/signup'>Registro de Cuentas</a></li>
+					<li><a href='admin/asignar_roles'>Asignación de Roles</a></li>
+					<li><a href='admin/usuarios'>Gestión de Usuarios</a></li>
+				</ul>
+			</li>
+<!--			<li><a href="">Control <span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span></a>
+				<ul>
+					<li><a href='admin/asistencias'>Asistencia</a></li>
+				</ul>
+			</li>-->
+
+			<li class="access"><a href="/admin">Administración <span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span></a>
+				<ul>
+					<li><a href='admin/perfil'>Perfil</a></li>
+					<li><a href='admin/password'>Cambio de Contraseña</a></li>
+					<li><a href='' ng-click="logout()" >Cerrar Sesión</a></li>
+				</ul>
+			</li>
+			<div clear="clear"></div>
+		</ul>
+	</nav>
+	<nav class="navbar navbar-default toggle" role="navigation" ng-show="isAdmin">
+		<!-- Brand and toggle get grouped for better mobile display -->
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand" href="#">Administración</a>
+		</div>
+	
+		<!-- Collect the nav links, forms, and other content for toggling -->
+		<div class="collapse navbar-collapse navbar-ex1-collapse">
+			<ul class="nav navbar-nav navbar-right">
+				<li class="dropdown"><a href="" class="dropdown-toggle" data-toggle="dropdown">Página Web
+					<span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
+				</a>
+					<ul class="dropdown-menu">
+						<li><a href="/admin/imagenes-portada">Imágenes de Portada</a></li>
+					</ul>
+				</li>
+				<li class="dropdown"><a href="" class="dropdown-toggle" data-toggle="dropdown">Estudiantes <span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span></a>
+					<ul class="dropdown-menu">
+						<li><a href='/admin/inscripcion-carrera'>Inscripción a Carrera</a></li>
+						<li><a href='/admin/registro-materias'>Registro de Materias</a></li>
+						<li><a href='/admin/lista-estudiantes'>Lista de Estudiantes</a></li>
+						<li><a href="/admin/certificaciones">Certificaciones</a></li>
+					</ul>
+				</li>
+				<li class="dropdown"><a href="" class="dropdown-toggle" data-toggle="dropdown">Docentes <span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span></a>
+					<ul class="dropdown-menu">
+						<li><a href='admin/recepcion-planes'>Recepción de planes bimestrales</a></li>
+					</ul>
+				</li>
+				<li class="dropdown"><a href="" class="dropdown-toggle" data-toggle="dropdown">Contabilidad <span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span></a>
+					<ul class="dropdown-menu">
+<!-- 						<li><a href='admin/pago-estudiantes'>Pagos</a></li> -->
+						<li><a href='admin/registro-precios'>Registro de Precios</a></li>
+					</ul>
+				</li>			
+				<li class="dropdown"><a href="" class="dropdown-toggle" data-toggle="dropdown">Admin. Académica <span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span></a>
+					<ul class="dropdown-menu">
+						<li><a href='admin/registro-idioma'>Registro de Idiomas</a></li>
+						<li><a href='admin/pensum'>Creación de Pensums</a></li>
+						<li><a href='admin/lista-pensums'>Listar Pensums</a></li>
+						<li><a href='admin/registrar-aula'>Registrar Aula</a></li>
+						<li><a href='admin/registrar-bimestre'>Registrar Bimestre</a></li>
+						<li><a href='admin/habilitar-paralelos'>Habilitar Paralelos</a></li>
+					</ul>
+				</li>
+				<li class="dropdown"><a href="" class="dropdown-toggle" data-toggle="dropdown">Cuentas <span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span></a>
+					<ul class="dropdown-menu">
+						<li><a href='admin/signup'>Registro de Cuentas</a></li>
+						<li><a href='admin/asignar_roles'>Asignación de Roles</a></li>
+						<li><a href='admin/usuarios'>Gestión de Usuarios</a></li>
+					</ul>
+				</li>
+				<li class="dropdown"><a href="" class="dropdown-toggle" data-toggle="dropdown">Administración <span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span></a>
+					<ul class="dropdown-menu">
+						<li><a href='admin/perfil'>Perfil</a></li>
+						<li><a href='admin/password'>Cambio de Contraseña</a></li>
+						<li><a href='' ng-click="logout()" >Cerrar Sesión</a></li>
+					</ul>
+				</li>
+			</ul>
+		</div><!-- /.navbar-collapse -->
+	</nav>
+
+<!--	<nav class="navigation-items-component" ng-show="isControl">
+		<ul>
+			<li class="access"><a href="/control">Control <span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span></a>
+				<ul>
+					<li><a href='' ng-click="logout()" >Cerrar Sesión</a></li>
+				</ul>
+			</li>
+		</ul>
+	</nav>-->
+	<nav class="navigation-items-component" ng-show="isTeacher">
+		<ul>		
+			<li><a href='profesor/envio-planes'>Envio Planes Bimestrales</a></li>
+			<li><a href='profesor/homeworks'>Homeworks</a></li>
+			<li><a href="profesor/ponderaciones">Mis Cursos</a></li>
+<!-- 			<li><a href="profesor/calificaciones">Calificaciones</a></li> -->
+
+			<li class="access"><a href="">Docente <span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span></a></a>
+				<ul>
+					<li><a href='profesor/perfil'>Perfil</a></li>
+					<li><a href='profesor/password'>Cambio de Contraseña</a></li>
+					<li><a href='' ng-click="logout()" >Cerrar Sesión</a></li>
+				</ul>
+			</li>
+		</ul>
+	</nav>
+	<nav class="navigation-items-component" ng-show="isAdministrative">
+		<ul>
+			<li>
+				<a href="">Estudiantes 
+					<span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
+				</a>
+				<ul>
+					<li><a href='/administrativo/registrar-estudiante'>Registrar Estudiantes</a></li>
+					<li><a href='/administrativo/inscripcion-carrera'>Inscripción a Carrera</a></li>
+					<li><a href='/administrativo/registro-materias'>Registro de Materias</a></li>
+					<li><a href='/administrativo/estadisticas'>Estadisticas</a></li>					
+				</ul>
+			</li>
+			<li><a href="">Docentes 
+					<span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
+				</a>
+				<ul>
+					<li><a href="/administrativo/registrar-docente">Registrar Docente</a></li>
+				</ul>
+			</li>
+			<li><a href="">Admin. Académica <span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span></a>
+				<ul>
+					<li><a href='/administrativo/certificaciones'>Certificaciones</a></li>
+					<li><a href='/administrativo/habilitar-paralelos'>Habilitar Paralelos</a></li>
+<!--					<li><a href='/administrativo/notas-bimestrales'>Notas bimestrales</a></li>-->
+				</ul>
+			</li>
+			<li><a href='/administrativo/pago-estudiantes'>Pagos</a></li>
+			<li><a href='/administrativo/registro-precios'>Registro de Precios</a></li>
+
+				<li class="access"><a href="">Administrativo <span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span></a>
+				<ul>
+					<li><a href='administrativo/perfil'>Perfil</a></li>
+					<li><a href='administrativo/password'>Cambio de Contraseña</a></li>
+					<li><a href='' ng-click="logout()" >Cerrar Sesión</a></li>
+				</ul>
+			</li>
+		</ul>
+	</nav>
+	<nav class="navigation-items-component" ng-show="isStudent">
+		<ul>
+			<li><a href=""> <strong>ESTUDIANTE:</strong> {{ user.lastname | uppercase }} {{ user.firstname | uppercase }}</a></li>
+			<li><a href="estudiante">Información Académica</a></li>
+			<li class="access"><a href="">Estudiante <span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span></a>
+				<ul>
+					<li><a href='estudiante/perfil'>Perfil</a></li>
+					<li><a href='estudiante/password'>Cambio de Contraseña</a></li>
+					<li><a href='' ng-click="logout()" >Cerrar Sesión</a></li>
+				</ul>
+			</li>
+		</ul>
+	</nav>
+
+</div>

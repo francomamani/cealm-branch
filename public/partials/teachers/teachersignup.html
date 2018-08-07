@@ -1,0 +1,63 @@
+<div ng-bind-html="template"></div>
+<div class="content">
+	<div class="row">
+		<div class="col-xs-12 col-sm-offset-3 col-sm-6 col-md-offset-3 col-md-6 col-lg-offset-3 col-lg-6">
+			<form role="form">
+				<legend>Registro de Profesores</legend>
+			
+				<div class="form-group">
+					<div class="row">
+						<div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
+							<input 
+								type="search" 
+								id="value" 
+								ng-model="search.value"
+								class="form-control" 
+								required="required"
+								placeholder="Buscar Profesor"  
+								autofocus>	
+						</div>
+						<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+							<button class="btn btn-primary" title="Buscar Profesor" ng-click="searchTeacher()"><span class="glyphicon glyphicon-search"></span></button>
+						</div>
+					</div>
+				</div>
+				<div class="form-group" ng-show="showSearch">
+					<div class="table-responsive">
+						<table class="table table-hover">
+							<thead>
+								<tr>
+									<th>Cuenta</th>
+									<th>Nombres</th>
+									<th>Apellidos</th>
+									<th>Elegir</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr ng-repeat="t in teachers.data">
+									<td>{{ t.username }}</td>
+									<td>{{ t.firstname }}</td>
+									<td>{{ t.lastname }}</td>
+									<td><button class="btn btn-success btn-sm" ng-click="selectTeacher(t)"><span class="glyphicon glyphicon-ok"></span></button></td>
+
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<div class="form-group" ng-show="teacherSelected">
+					<input type="text" ng-model="teacher.username" class="form-control">
+				</div>
+				<div class="form-group" ng-show="teacherSelected">
+					<input type="text" ng-model="teacher.firstname" class="form-control">
+				</div>
+				<div class="form-group" ng-show="teacherSelected">
+					<input type="text" ng-model="teacher.lastname" class="form-control">
+				</div>
+				<div class="form-group text-right">
+<!-- 					<button type="submit" class="btn btn-primary">Registrar Profesor</button> -->
+				</div>			
+			</form>
+		</div>	
+	</div>	
+</div>

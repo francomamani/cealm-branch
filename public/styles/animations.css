@@ -1,0 +1,24 @@
+@-moz-keyframes borderTop{
+	from{ 
+		border-top: 4px solid #FAFB43;
+	}
+	to{
+		border-top: 4px solid #2077C7;		
+	}
+} 
+@-webkit-keyframes borderTop{
+	from{ 
+		border-top: 4px solid #FAFB43;
+	}
+	to{
+		border-top: 4px solid #2077C7;		
+	}
+} 
+@keyframes borderTop{
+	from{ 
+		border-top: 4px solid #FAFB43;
+	}
+	to{
+		border-top: 4px solid #2077C7;		
+	}
+} 

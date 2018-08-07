@@ -1,0 +1,146 @@
+<div ng-include="'partials/components/navbar.html'"></div>
+<div class="content">
+	<div class=" col-xs-12 col-sm-12 col-md-12 col-lg-12 text-right">
+		<h3>Bimestre: {{ bimester.name }}</h3>
+	</div>
+	<div class="row">
+		<div class="col-xs-12 col-sm-offset-2 col-sm-8 col-md-offset-2 col-md-8 col-lg-offset-2 col-lg-8">
+			<form ng-submit="searchStudent(search)" role="form">
+				<legend>Buscar Estudiantes</legend>
+
+				<div class="form-group">
+					<div class="row">
+						<div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
+							<input 
+								type="search" 
+								id="value" 
+								ng-model="search.value"
+								class="form-control" 
+								required="required"
+								placeholder="Buscar Estudiante"  
+								autofocus>	
+						</div>
+						<div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
+							<select  id="pensum" ng-model="search.pensum_id" class="form-control">
+								<option value={{pensum.id}} ng-repeat="pensum in pensums">{{ pensum.name }}</option>
+							</select>
+						</div>
+						<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+							<button type="submit" class="btn btn-primary" title="Buscar Estudiante"><span class="glyphicon glyphicon-search"></span></button>
+						</div>
+					</div>
+				</div>
+			</form>	
+		</div>
+	</div>
+
+
+	<div class="row">
+		<div class="col-xs-12 col-sm-12 col-md-offset-2 col-md-8 col-lg-offset-2 col-lg-8">
+			<div class="form-group" ng-show="showSearch">
+				<div class="table-responsive">
+					<table class="table table-hover">
+						<thead>
+							<tr>
+								<th>Cuenta</th>
+								<th>Nombres</th>
+								<th>Apellidos</th>
+								<th>Carnet</th>
+								<th>Elegir</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr ng-repeat="s in students">
+								<td>{{ s.username }}</td>
+								<td>{{ s.firstname }}</td>
+								<td>{{ s.lastname }}</td>
+								<td>{{ s.identity_card }}</td>
+								<td><button class="btn btn-success btn-sm" ng-click="selectStudent(s)"><span class="glyphicon glyphicon-ok"></span></button></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+			
+		</div>
+	</div>
+	<div class="row" ng-show="studentSelected">
+		<div class="col-xs-12 col-sm-12 col-md-offset-2 col-md-8 col-lg-offset-2 col-lg-8">
+				<div class="table-responsive">
+					<table class="table table-hover">
+						<thead>
+							<tr>
+								<th>Cuenta</th>
+								<th>Nombres</th>
+								<th>Apellidos</th>
+								<th>Carnet</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>{{ student.username }}</td>
+								<td>{{ student.firstname }}</td>
+								<td>{{ student.lastname }}</td>
+								<td>{{ student.identity_card }}</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>			
+		</div>
+	</div>
+	<div class="row" ng-show="studentSelected">
+		<div class="col-xs-12 col-sm-12 col-md-offset-2 col-md-8 col-lg-offset-2 col-lg-8">
+			<div class="table-responsive">
+				<table class="table table-hover">
+					<thead>
+						<tr>
+							<th>Asignaturas Disponible</th>
+							<th>Horario</th>
+							<th>Elegir</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="g in groups">
+							<td>{{ g.name }}</td>
+							<td>{{ g.from }} - {{ g.to }}</td>
+							<td>
+								<button type="button" class="btn btn-success btn-sm" ng-click="selectGroup(g)">
+									<span class="glyphicon glyphicon-check" aria-hidden="true"></span>
+								</button>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+	<div class="row" ng-show="groupSelected">
+		<div class="col-xs-12 col-sm-12 col-md-offset-2 col-md-8 col-lg-offset-2 col-lg-8 text-center">
+			<legend>Materia a Registrar</legend>
+			<div class="table-responsive">
+				<table class="table table-hover">
+					<thead>
+						<tr>
+							<th>Asignaturas</th>
+							<th>Horario Ingreso</th>
+							<th>Horario Salida</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>{{ group.name }}</td>
+							<td>{{ group.from }}</td>
+							<td>{{ group.to }}</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+	<div class="row" ng-show="groupSelected">
+		<div class="col-xs-12 col-sm-12 col-md-offset-2 col-md-8 col-lg-offset-2 col-lg-8 text-center">
+			<button class="btn btn-primary" ng-click="saveRecord()">Registrar</button>
+		</div>
+	</div>
+
+</div>

@@ -1,0 +1,13 @@
+<div class="modal-body">
+	<form ng-submit="save(tuition)"role="form">
+			<legend>{{ title }}</legend>
+		
+			<div class="form-group">
+				<label for="">Monto a pagar</label>
+				<input type="text" class="form-control" placeholder="000.00" ng-model="tuition.price" required>
+			</div>
+			<div class="form-group text-right">
+				<button type="submit" class="btn btn-primary">Registrar Pago</button>
+			</div>
+		</form>	
+</div>

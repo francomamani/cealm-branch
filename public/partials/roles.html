@@ -1,0 +1,22 @@
+<div ng-include="'partials/components/navbar.html'"></div>
+<div class="content-fluid">	
+<div class="row">	
+	<div class="col-xs-12 col-sm-12 col-md-offset-4 col-md-4 col-lg-offset-4 col-lg-4">
+		
+	<form ng-submit="chooseRole(role)" class="login">
+		<fieldset>
+			<legend>Elegir Rol</legend>
+			<div class='form-group'>
+				<label for="">Rol</label>
+				<select ng-model="role.id"class="form-control">
+					<option value={{r.role_id}} ng-repeat="r in roles.data">{{ r.role }}</option>
+				</select>
+			</div>
+			<div class="text-right">
+				<button type="submit" class="btn btn-primary">Elegir Rol</button>
+			</div>
+		</fieldset>
+	</form>
+	</div>
+</div>
+</div>

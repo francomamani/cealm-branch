@@ -1,0 +1,27 @@
+        <div class="modal-header">
+            <h3 class="modal-title">{{ title }}</h3>
+        </div>
+        <div class="modal-body">
+            <form ng-submit="updateProduct(product)" method="POST" role="form">
+            
+                <div class="form-group">
+                    <label for="">Nombre</label>
+                    <input type="text" class="form-control" id="" ng-model="product.name" placeholder="Nombre del Producto" required autofocus>
+                </div>
+                <div class="form-group">
+                    <label for="">Marca</label>
+                    <input type="text" class="form-control" id="" ng-model="product.trademark" placeholder="Marca del Producto" required>
+                </div>
+                <div class="form-group">
+                    <label for="">Precio en Dolares</label>
+                    <input type="text" class="form-control" id="" ng-model="product.price" placeholder="0.00 Dolares" required>
+                </div>
+                <div class="form-group">
+                    <label for="">Descripcion</label>
+                    <textarea name="" id="" cols="30" rows="5" class="form-control" ng-model="product.description" placeholder="Descripcion del Producto" required></textarea>
+                </div>            
+                <div class="text-right">
+                    <button type="submit" class="btn btn-primary">Actualizar Producto</button>
+                </div>            
+            </form>
+        </div>

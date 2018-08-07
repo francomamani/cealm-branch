@@ -1,0 +1,46 @@
+<div ng-include="'partials/components/navbar.html'"></div>
+<div class="content">
+	<div class="row">
+		<div class="col-xs-12 col-sm-offset-3 col-sm-6 col-md-offset-3 col-md-6 col-lg-offset-3 col-lg-6">
+			<form ng-submit="save(price)" role="form">
+				<legend>Registro de Precios</legend>	
+				<div class="form-group">
+					<label for="">Descripción</label>
+					<input type="text" class="form-control" ng-model="price.description"  placeholder="Producto o servicio" required autofocus>
+				</div>
+				<div class="form-group">
+					<label for="">Precios</label>
+					<input type="text" class="form-control" ng-model="price.price" placeholder="0.00" required>
+				</div>
+				<div class="form-group text-right">
+					<button type="submit" class="btn btn-primary">Registrar</button>
+				</div>
+			</form>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-xs-12 col-sm-offset-3 col-sm-6 col-md-offset-3 col-md-6 col-lg-offset-3 col-lg-6">
+			<div class="table-responsive">
+				<table class="table table-hover">
+					<thead>
+						<tr>
+							<th>DESCRIPCIÓN</th>
+							<th>PRECIO</th>
+							<th>ACCIONES</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="price in prices">
+							<td>{{ price.description }}</td>
+							<td>{{ price.price }}</td>
+							<td> 
+								<button class="btn btn-primary btn-sm" ng-click="update(price)"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></button> 
+								<button class="btn btn-danger btn-sm" ng-click="delete(price, $index)"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button> 
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>

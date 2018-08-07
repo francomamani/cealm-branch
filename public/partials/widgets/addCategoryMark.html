@@ -1,0 +1,21 @@
+<div class="modal-body">
+	<form ng-submit="save(category_mark)" role="form">
+		<legend>{{ title }}</legend>
+		<div class="form-group">
+			<label>Descripcion</label>
+			<select class="form-control" ng-model="category_mark.description" required>
+				<option value={{category.description}} ng-repeat="category in categories">{{ category.description }}</option>
+			</select>
+		</div>
+	
+		<div class="form-group">
+			<label>Porcentaje</label>
+			<input type="number" class="form-control" ng-model="category_mark.percentage" required>
+		</div>
+		
+		<div class="form-group text-right">
+			<button type="submit" class="btn btn-primary">Guardar</button>
+		</div>	
+
+	</form>	
+</div>

@@ -1,0 +1,53 @@
+<div ng-include="'partials/components/navbar.html'"></div>
+<div class="content">
+	<div class="row">
+		<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+			<form ng-submit="save(depositType)" role="form">
+				<legend>Tipos de deposito</legend>
+				<div class="form-group">
+					<label for="descripcion">Descripcion</label>
+					<input type="text" class="form-control" id="descripcion" placeholder="Descripcion" ng-model="depositType.description" required autofocus>
+				</div>
+				<button type="submit" class="btn btn-primary">
+					<i class="fa fa-floppy-o"></i>
+				</button>
+			</form>			
+		</div>
+		<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+			<table class="table table-hover">
+				<thead>
+					<tr>
+						<th>N.</th>
+						<th>Descripcion</th>
+						<th>Acciones</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-init="deposit_type.update = false" ng-repeat="deposit_type in deposit_types">
+						<td>{{ $index + 1 }}</td>
+						<td>
+							<span ng-hide="deposit_type.update">
+								{{ deposit_type.description | uppercase }}
+							</span>
+							<span ng-show="deposit_type.update">
+								<input type="text" ng-model="deposit_type.description" class="form-control">
+							</span>
+						</td>
+						<td>
+							<button ng-hide="deposit_type.update" class="btn btn-primary btn-sm" ng-click="deposit_type.update = true">
+								<span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+							</button>
+							<button ng-show="deposit_type.update" class="btn btn-primary btn-sm" ng-click="update(deposit_type)">
+								<span class="glyphicon glyphicon-save" aria-hidden="true"></span>
+							</button>							
+							<button ng-hide="deposit_type.update" class="btn btn-danger btn-sm" ng-click="delete(deposit_type, $index)">
+								<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+							</button>
+
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>

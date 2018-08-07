@@ -1,0 +1,99 @@
+<div ng-include="'partials/components/navbar.html'"></div>
+<div class="content">
+	<div class="row">
+		<div class="col-xs-12 col-sm-offset-3 col-sm-6 col-md-offset-3 col-md-6 col-lg-offset-3 col-lg-6">
+			<form ng-submit="searchStudent(search)" role="form">
+				<legend>Buscar Estudiantes</legend>
+
+				<div class="form-group">
+					<div class="row">
+						<div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
+							<input 
+								type="search" 
+								id="value" 
+								ng-model="search.value"
+								class="form-control" 
+								required="required"
+								placeholder="Buscar Estudiante"  
+								autofocus>	
+						</div>
+						<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+							<button type="submit" class="btn btn-primary" title="Buscar Estudiante"><span class="glyphicon glyphicon-search"></span></button>
+						</div>
+					</div>
+				</div>
+			</form>	
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-xs-12 col-sm-12 col-md-offset-3 col-md-6 col-lg-offset-3 col-lg-6">
+			<div class="form-group" ng-show="showSearch">
+				<div class="table-responsive">
+					<table class="table table-hover">
+						<thead>
+							<tr>
+								<th>Cuenta</th>
+								<th>Nombres</th>
+								<th>Apellidos</th>
+								<th>Carnet</th>
+								<th>Elegir</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr ng-repeat="s in students">
+								<td>{{ s.username }}</td>
+								<td>{{ s.firstname }}</td>
+								<td>{{ s.lastname }}</td>
+								<td>{{ s.identity_card }}</td>
+								<td><button class="btn btn-success btn-sm" ng-click="selectStudent(s)"><span class="glyphicon glyphicon-ok"></span></button></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+			
+		</div>
+	</div>
+	<div class="row" ng-show="studentSelected">
+		<div class="col-xs-12 col-sm-12 col-md-offset-3 col-md-6 col-lg-offset-3 col-lg-6">
+				<div class="table-responsive">
+					<table class="table table-hover">
+						<thead>
+							<tr>
+								<th>Cuenta</th>
+								<th>Nombres</th>
+								<th>Apellidos</th>
+								<th>Carnet</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>{{ student.username }}</td>
+								<td>{{ student.firstname }}</td>
+								<td>{{ student.lastname }}</td>
+								<td>{{ student.identity_card }}</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>			
+		</div>
+	</div>
+	<div class="row" ng-show="studentSelected">
+		<div class="col-xs-12 col-sm-12 col-md-offset-3 col-md-6 col-lg-offset-3 col-lg-6">
+			<form ng-submit="recordPensum(pensum_record)" role="form">
+				<legend>Asignacion de carrera</legend>
+			
+				<div class="form-group">
+					<label> Elija Pensum Academico</label>
+					<select class="form-control" ng-model="pensum_record.pensum_id">
+						<option value="{{p.id}}" ng-repeat="p in pensums">{{ p.name }}</option>
+					</select>
+				</div>
+				<div class="form-group text-right">
+					<button type="submit" class="btn btn-primary">Registrar</button>
+				</div>			
+			</form>
+		</div>
+	</div>
+
+</div>

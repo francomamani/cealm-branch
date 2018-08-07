@@ -1,0 +1,45 @@
+<div ng-include="'partials/components/navbar.html'"></div>
+<div class="content">
+	
+<div class="text-center">
+	<legend>Pago de Cuotas</legend>
+</div>
+<div class="row">
+	<div class="col-xs-8 col-sm-8 col-md-offset-2 col-md-8 col-lg-8">
+		<input type="search" name="" id="input" class="form-control" value="" required="" title="Busca a tu usuario por cualquier campo" placeholder="Buscar Usuario..." ng-model="search" autofocus/>
+	</div>
+</div>
+<br>
+
+<div class="row">
+	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+		<table class="table table-hover">
+			<thead>
+				<tr>
+					<th>Nombres</th>
+					<th>Apellidos</th>					
+					<th>Cuenta</th>
+					<th>Rol</th>
+					<th>Correo</th>
+					<th>Celular</th>
+					<th>Acciones</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="u in users.data | filter: search">
+					<td>{{ u.firstname }}</td>
+					<td>{{ u.lastname }}</td>
+					<td>{{ u.username }}</td>
+					<td>{{ u.role | role }}</td>
+					<td>{{ u.email }}</td>
+					<td>{{ u.cellphone }}</td>
+					<td><a href="" ng-click="open('md', u)"><span class="glyphicon glyphicon-usd"> Cobrar</span></a> </td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>
+<mypagination results="users" select="changePage(new_page)"></mypagination>
+<!--
+-->
+</div>

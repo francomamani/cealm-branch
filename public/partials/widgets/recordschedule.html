@@ -1,0 +1,24 @@
+<div class="modal-body">
+	<form ng-submit="save(schedule_record)" role="form">	
+		<legend>{{title}}</legend>
+		<div class="form-group">
+			<label for="">Curso: </label>
+			<select ng-model="schedule_record.group_id" class="form-control">
+				<option value="{{g.id}}" ng-repeat="g in groups">{{ g.name }}</option>
+			</select>
+		</div>
+		<div class="form-group">
+			<label for="">Aula: </label>
+			<select ng-model="schedule_record.room_id" class="form-control">
+				<option value="{{r.id}}" ng-repeat="r in rooms">{{ r.name }}  | Capacidad: {{r.capacity }}</option>
+			</select>
+		</div>
+		<div class="text-right">
+			<button type="submit" class="btn btn-primary">Registrar <span class="glyphicon glyphicon-save" aria-hidden="true"></span></button>
+		</div>
+	</form>
+</div>
+<!-- <div class="modal-footer">
+	<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+	<button type="button" class="btn btn-primary">Save changes</button>
+</div> -->

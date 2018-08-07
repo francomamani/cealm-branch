@@ -1,0 +1,67 @@
+<div ng-include="'partials/components/navbar.html'"></div>
+<div class="content">
+	<div class="row">
+		<div class="image " ng-hide="showUpload">
+			<div class="row">
+				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+					<form ng-submit="ok()">
+						<legend>Subir Imágenes</legend>
+						<div class="form-group">
+							<label for="">Descripción</label>
+							<textarea  class="form-control" rows="3" ng-model="cover_image.description" required></textarea>
+						</div>
+						<div class="form-group text-center">
+							<button class="btn btn-primary btn-sm">
+								Registrar Descripción
+							</button>
+						</div>					
+					</form>
+				</div>
+			</div>
+
+		</div>
+<!-- 		<div 
+	ngf-drop 
+	ng-model="files" class="drop-box" 
+	ngf-drag-over-class="dragover" 
+	ngf-multiple="true" 
+	ngf-allow-dir="true"
+	ngf-accept="'image/*,application/*'" 
+	title="Arrastra aqui tu imagen">
+    			<img ngf-src="files[0]" ngf-default-src="images/icons/upload.png" ngf-accept="'image/*'" class="preview">
+-->    					
+		<div  
+			ngf-drop 
+			ng-model="files" 
+			ngf-drag-over-class="dragover" 
+			ngf-multiple="true" 
+			ngf-allow-dir="true"
+			ngf-accept="'image/*'" 
+  			class="image upload" 
+  			ng-show="showUpload">
+			<p ng-show="progressPercentage != 0">{{ progressPercentage }} %</p>
+			<span>Arrastra tu imagen aqui.</span>
+			<a href="" ng-click="showUpload = false"><span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span> Registrar otra descripción</a>
+			<img ngf-src="files[0]" ngf-accept="'image/*'" class="preview" ng-show="showUpload">
+		</div>
+
+		<div ngf-no-file-drop ng-show="showUpload">File Drag/Drop is not supported for this browser</div>
+		<div class="image common" ng-init="cover.update = false" ng-repeat="cover in cover_images">
+			<img src={{cover.url}} alt="">
+			<p ng-hide="cover.update">{{cover.description}}</p>
+			<p ng-show="cover.update"><textarea class="form-control" rows="4" ng-model="cover.description"></textarea></p>
+			<button class="btn-image btn-update" ng-click="cover.update = true" ng-hide="cover.update" title="Actualizar">
+				<span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+			</button>
+
+			<button class="btn-image btn-delete" ng-click="deleteCoverImage(cover, $index)" ng-hide="cover.update">
+				<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+			</button>
+			
+			<button class="btn-image btn-update" ng-click="updateCoverImage(cover)" ng-show="cover.update" title="Guardar">
+				<span class="glyphicon glyphicon-save" aria-hidden="true"></span>
+			</button>			
+		</div>
+		<div class="clear"></div>
+	</div>
+</div>

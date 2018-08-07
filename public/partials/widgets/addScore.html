@@ -1,0 +1,62 @@
+<div class="modal-body">
+	<form ng-submit="save()" role="form">
+		<legend>{{title}}</legend>
+	
+		<div class="form-group">
+			<label for="">Título</label>
+			<input type="text" class="form-control" ng-model="informationMark.title" required>
+		</div>
+		<div class="form-group">
+			<label for="">Descripción</label>
+			<textarea cols="30" class="form-control" ng-model="informationMark.description" rows="4"></textarea required>
+		</div>
+		<div class="row">
+			<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+	            <div class="form-group">
+	            	<label for="">Fecha de Inicio: </label>
+	                <div class='input-group date' >
+						<input type='text' class="form-control" id="start_date" ng-model="informationMark.start_date" required/>
+	                    <span class="input-group-addon">
+	                        <span class="glyphicon glyphicon-calendar"></span>
+	                    </span>
+	                </div>
+	            </div>
+			</div>
+			<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+	            <div class="form-group">
+	            	<label for="">Fecha de Entrega: </label>
+	                <div class='input-group date' >
+						<input type='text' class="form-control" id="end_date" ng-model="informationMark.end_date" required/>
+	                    <span class="input-group-addon">
+	                        <span class="glyphicon glyphicon-calendar"></span>
+	                    </span>
+	                </div>
+	            </div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
+				<label for="">Tipo de Examen</label>
+				<select ng-model="informationMark.exam_type_id" class="form-control" required>
+					<option value={{e.id}} ng-repeat="e in exam_types">{{ e.description }}</option>
+				</select>
+			</div>
+			<div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
+				<label for="">Categoria</label>
+				<select ng-model="informationMark.category_mark_id" class="form-control" required>
+					<option value={{c.id}} ng-repeat="c in categoryMarks">{{ c.description }}</option>
+				</select>			
+			</div>
+		</div>
+		<div class="form-group text-right">
+			<button type="submit" class="btn btn-primary">Guardar</button>
+		</div>
+	</form>
+</div>
+<script>
+	$(document).ready(function () {
+		$('#start_date, #end_date').datepicker({
+			format:"yyyy-mm-dd"
+		});
+	});
+</script>

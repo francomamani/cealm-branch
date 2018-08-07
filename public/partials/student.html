@@ -1,0 +1,265 @@
+<div ng-include="'partials/components/navbar.html'"></div>
+<div class="content">
+	<div class="row" ng-show="level == 1">
+		<div class="col-xs-12 col-sm-offset-2 col-sm-8 col-md-offset-2 col-md-8 col-lg-offset-2 col-lg-8">
+			<legend>Mis Carreras</legend>
+			<div class="table-responsive">
+				<table class="table table-hover">
+					<thead>
+						<tr>
+							<th>Pensum Académico</th>
+							<th>Seleccionar</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="pensum in pensums">
+							<td>{{ pensum.name | uppercase }}</td>
+							<td>
+								<button class="btn btn-primary btn-sm" ng-click="showGroup(pensum)">
+									<span class="glyphicon glyphicon-check" aria-hidden="true"></span>
+									Mis Cursos
+								</button>
+								<button class="btn btn-danger btn-sm" ng-click="academicFollow(pensum)">
+									<span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
+									Seguimiento Académico
+								</button>
+								<button class="btn btn-success btn-sm" ng-click="academicHistorial(pensum)">
+									<span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
+									Historial Académico
+								</button>								
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+	<div class="row" ng-show="level == 2">
+		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+			<legend>Mis Cursos</legend>
+			<div class="table-responsive">
+				<table class="table table-hover">
+					<thead>
+						<tr>
+							<th>Curso</th>
+							<th>Docente</th>
+							<th>Horario</th>
+							<th>Aula</th>
+							<th>Acciones</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>{{ group.name }}</td>
+							<td>Lic. {{ group.user.lastname | uppercase }} {{ group.user.firstname | uppercase }} </td>
+							<td>10:00 - 12:00</td>
+							<td>AULA 2</td>
+							<td>
+								<button class="btn btn-primary btn-sm" ng-click="myClassmates(group)">
+									<span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+									Mis compañeros
+								</button>
+								<button class="btn btn-danger btn-sm" ng-click="myDetailedScores(group)">
+									<span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+									Mis Notas
+								</button>
+								<button class="btn btn-success btn-sm" ng-click="myScores(group)">
+									<span class="glyphicon glyphicon-list" aria-hidden="true"></span>
+									Mis Notas Ponderadas
+								</button>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<div class="col-xs-12 col-sm-offset-3 col-sm-6 col-md-offset-3 col-md-6 col-lg-offset-3 col-lg-6 text-center">
+			<a href="" ng-click="level = 1">
+				<span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>
+				Volver 
+			</a>
+		</div>
+	</div>
+	<div class="row" ng-show="level == 3">
+		<div class="col-xs-12 col-sm-offset-3 col-sm-6 col-md-offset-3 col-md-6 col-lg-offset-3 col-lg-6">
+			<legend>Mis Compañeros {{ group.name | uppercase }}</legend>
+			<div class="table-responsive">
+				<table class="table table-hover">
+					<thead>
+						<tr>
+							<th>N. </th>
+							<th>Estudiantes</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="student in students">
+							<td>{{ student. number }}</td>
+							<td>{{ student.info.lastname | uppercase }} {{ student.info.firstname | uppercase }}</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<div class="col-xs-12 col-sm-offset-3 col-sm-6 col-md-offset-3 col-md-6 col-lg-offset-3 col-lg-6 text-center">
+			<a href="" ng-click="level = 2">
+				<span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>
+				Volver
+			</a>
+		</div>
+	</div>	
+	<div class="row" ng-show="level == 4">
+		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+			<legend>Mis Notas Ponderadas</legend>
+			<div class="table-responsive">
+				<table class="table table-hover">
+					<thead>
+						<tr>
+							<th>Tipo de Examen</th>
+							<th>Porcentaje</th>
+							<th>Categoria</th>
+							<th>Porcentaje</th>
+							<th>Num. Examenes</th>
+							<th>Nota Parcial</th>
+							<th>Nota</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="score in scores">
+							<td>{{ score.exam }}</td>
+							<td>{{ score.exam_percentage }}</td>
+							<td>{{ score.category }}</td>
+							<td>{{ score.category_mark_percentage }}</td>
+							<td>{{ score.num_exams }}</td>
+							<td>{{ score.nota_parcial | number: 2 }} / {{ score.category_mark_percentage }}</td>
+							<td>{{ score.nota | number: 2 }} / {{ score.exam_percentage * score.category_mark_percentage/100 }}</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>			
+			<div class="text-left">
+				<h1 class="final_score">Nota Final: {{ scores.final_score | number:2 }}</h1>
+			</div>
+		</div>
+		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
+			<a href="" ng-click="level = 2">
+				<span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>
+				Volver
+			</a>					
+		</div>		
+	</div>
+	<div class="row" ng-show="level == 5">
+		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+			<legend>Mis Notas</legend>
+			<div class="table-responsive">
+				<table class="table table-hover">
+					<thead>
+						<tr>
+							<th>Fecha</th>
+							<th>Tipo de Examen</th>
+							<th>Porcentaje</th>
+							<th>Categoria</th>
+							<th>Porcentaje</th>
+							<th>Titulo </th>
+							<th>Nota</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="score in scores">
+							<td>{{ score.end_date | date: mediumDate | uppercase }}</td>
+							<td>{{ score.exam }}</td>
+							<td>{{ score.exam_percentage }}</td>
+							<td>{{ score.category }}</td>
+							<td>{{ score.category_mark_percentage }}</td>
+							<td>{{ score.title | uppercase }}</td>
+							<td>{{ score.score | number: 2 }}</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>			
+		</div>
+		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
+			<a href="" ng-click="level = 2">
+				<span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>
+				Volver
+			</a>					
+		</div>		
+	</div>	
+	<div class="row" ng-show="level == 6">
+		<div class="col-xs-12 col-sm-offset-3 col-sm-6 col-md-offset-3 col-md-6 col-lg-offset-3 col-lg-6">
+			<legend>Seguimiento Académico</legend>
+			<div class="row">
+				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-right">
+					<button class="btn btn-primary btn-sm" title="Imprimir Seguimiento Académico" ng-click="printAcademicFollow()">
+						<span class="glyphicon glyphicon-print" aria-hidden="true"></span>
+					</button>					
+				</div>
+			</div>
+			<div class="table-responsive">
+				<table class="table table-hover">
+					<thead>
+						<tr>
+							<th>BIMESTRE</th>
+							<th>ASIGNATURA</th>
+							<th>NOTA</th>
+							<th>OBSERVACIONES</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="score in scores">
+							<td>{{ score.bimester }}</td>
+							<td>{{ score.group }}</td>
+							<td>{{ score.final_score }}</td>
+							<td ng-class="score.final_score >= 70 ? 'green' : 'red'">{{ score.obs }}</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<div class="col-xs-12 col-sm-offset-3 col-sm-6 col-md-offset-3 col-md-6 col-lg-offset-3 col-lg-6 text-center">			
+			<a href="" ng-click="level = 1">
+				<span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>
+				Volver
+			</a>
+		</div>		
+	</div>
+
+	<div class="row" ng-show="level == 7">
+		<div class="col-xs-12 col-sm-offset-3 col-sm-6 col-md-offset-3 col-md-6 col-lg-offset-3 col-lg-6">
+			<legend>Historial Académico</legend>
+			<div class="row">
+				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-right">
+					<button class="btn btn-primary btn-sm" title="Imprimir Historial Académico" ng-click="printAcademicHistorial()">
+						<span class="glyphicon glyphicon-print" aria-hidden="true"></span>
+					</button>					
+				</div>
+			</div>
+			<div class="table-responsive">
+				<table class="table table-hover">
+					<thead>
+						<tr>
+							<th>BIMESTRE</th>
+							<th>ASIGNATURA</th>
+							<th>NOTA</th>
+							<th>OBSERVACIONES</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="score in scores">
+							<td>{{ score.bimester }}</td>
+							<td>{{ score.group }}</td>
+							<td>{{ score.final_score }}</td>
+							<td ng-class="score.final_score >= 70 ? 'green' : 'red'">{{ score.obs }}</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<div class="col-xs-12 col-sm-offset-3 col-sm-6 col-md-offset-3 col-md-6 col-lg-offset-3 col-lg-6 text-center">			
+			<a href="" ng-click="level = 1">
+				<span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>
+				Volver
+			</a>
+		</div>		
+	</div>
+
+</div>
