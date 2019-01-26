@@ -1,0 +1,14 @@
+<div class="modal-body">
+	<form ng-submit="cerrarBalance(balance)" method="POST" role="form">
+		<legend>Cierre mensual</legend>
+	
+		<div class="form-group">
+			<label for="cierre_balance">Saldo a favor</label>
+			<input type="text" class="form-control" id="cierre_balance" ng-model="balance.closing_balance" placeholder="0.00" required autofocus>
+		</div>
+		<div class="form-group text-right">
+			<button type="submit" class="btn btn-primary">Cerrar mes</button>
+			<button type="button" class="btn btn-default" ng-click="cancel()">Cancelar</button>
+		</div>
+	</form>	
+</div>

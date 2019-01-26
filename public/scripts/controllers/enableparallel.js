@@ -50,6 +50,7 @@ app.controller('EnableParallelCtrl', [
 		console.log(group);
 		Restangular.all('auth/groups').post($scope.group).then(function (data) {
 			if (data.error) {
+				console.log(data);
 				toastr.error(data.error);
 			} else {
                 toastr.success("Grupo creado exitosamente");

@@ -182,5 +182,16 @@ class GroupCustomController extends BaseController
 		return Response::json($groups);
 	}
 
+	public function groupScores($group_id) {
+        $records = Record::join('students', 'students.id', '=','records.student_id')
+                         ->join('users', 'users.id', '=', 'students.user_id')
+                         ->join('groups', 'groups.id', '=', 'records.group_id')
+                         ->where('group_id', $group_id)
+                         ->orderBy('users.lastname')
+                         ->selectRaw('groups.name, groups.parallel, records.final_score, users.firstname, users.lastname')
+                         ->get();
+	    return Response::json($records, 200);
+    }
+
 }
 ?>

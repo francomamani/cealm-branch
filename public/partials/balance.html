@@ -2,11 +2,16 @@
 <div class="content">
 	<div class="row">
 		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-			<button type="button" class="btn btn-success btn-sm" ng-click="monthlyOpening()">Apertura mensual</button>
-			<!--<button type="button" class="btn btn-danger btn-sm" ng-click="monthlyOpening()">Cierre mensual</button> -->		
+			<button
+                    ng-if="current_balance.status === 'cerrado'"
+					type="button" class="btn btn-success btn-sm" ng-click="monthlyOpening()">Apertura mensual</button>
+
+			<button ng-if="current_balance.status === 'abierto'"
+					type="button" class="btn btn-danger btn-sm" ng-click="cerrarBalance()">Cierre mensual</button>
 		</div>
 		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-right">
 			<span class="label label-info">Apertura: {{ current_balance.month | month }} - {{ current_balance.year }}</span>
+			<span class="label label-success">Saldo de cierre: Bs. {{ current_balance.closing_balance }}</span>
 			<span class="label label-danger">Saldo mes anterior: Bs. {{ current_balance.opening_balance }}</span>
 		</div>
 	</div>
@@ -87,7 +92,7 @@
 										<td>{{ deposit.client | uppercase }}</td>
 										<td>{{ deposit.client_identity_card }}</td>
 										<td>{{ deposit.user.lastname | uppercase }} {{ deposit.user.firstname | uppercase }}</td>
-										<td>
+										<td class="acciones">
 											<button type="button" class="btn btn-primary btn-sm" ng-click="showDepositItems(deposit)"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
 											<button class="btn btn-info btn-sm" ng-click="printDeposit(deposit)">
 												<span class="glyphicon glyphicon-print" aria-hidden="true"></span>

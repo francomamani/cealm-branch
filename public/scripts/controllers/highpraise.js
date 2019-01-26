@@ -14,6 +14,7 @@ app.controller('HighPraiseCtrl', ['$scope',
 		4. LISTA DE ESTUDIANTES
 		5. CALIFICACIONES
 		6. CALIFACION DE ESTUDIANTES
+		7. NOTAS DE ESTUDIANTES (EN LISTADO)
 	*/
 	$scope.pensum = null;
 	$scope.groups = [];
@@ -186,6 +187,11 @@ app.controller('HighPraiseCtrl', ['$scope',
 		$scope.showLevel = 4;
 		$scope.students = Restangular.all('auth/students_by_group/'+group.id).getList().$object;
 		$scope.group = group;
+	}
+	$scope.getGroupScores = function (group) {
+		$scope.showLevel = 7;
+        $scope.group_scores = Restangular.all('auth/group_scores/'+group.id).getList().$object;
+        $scope.group = group;
 	}
 	$scope.showScores = function (group) {
 		$scope.group = group;
@@ -363,6 +369,26 @@ app.controller('HighPraiseCtrl', ['$scope',
 			} 
 		}
 	}
+	$scope.printGroupScores = function () {
+        var pdf = new jsPDF('p','pt','letter');
+        var source = document.getElementById('table-container').innerHTML;
+        console.log(document.getElementById('table-container'));
+        var margins = {
+            top: 25,
+            bottom: 60,
+            left: 20,
+            width: 522
+        };
+        // all coords and widths are in jsPDF instance's declared units
+        // 'inches' in this case
+/*        pdf.text(20, 20, 'Hello world.');*/
+        pdf.fromHTML(source, margins.top, margins.left, {}, function() {
+            pdf.save('test.pdf');
+        });
+	}
+	$scope.calificaciones = function() {
+        toastr.success('Ver carpeta de descargas', 'Descarga exitosa');
+    }
 	$scope.printList = function () {
         $http.get('api/v1/auth/get-pensum/'+$scope.group.id).then(function (pensumData) {
 			var days = Calendar.generatedDays($scope.currentBimester.from, $scope.currentBimester.to);

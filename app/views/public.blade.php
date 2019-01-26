@@ -39,11 +39,15 @@
 	 -->
 	<meta name="viewport" content="width=device-width, initial-scale=1">
     <base href="/" />
+	<script async defer
+			src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDXbMZZIGcIY2jMUA9qIUPrQ7kXC5GucSk">
+	</script>
+
 </head>
 <body ng-app="cealmApp" ng-controller="MainCtrl">
-	<div ng-view></div>	
+	<div ng-view></div>
 
-	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAv82CsWKP1HWroWhctfYv1-JWYdpx3wY8"></script>
+	<!--<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDXbMZZIGcIY2jMUA9qIUPrQ7kXC5GucSk"></script> -->
 	<script src="./bower_components/jquery/dist/jquery.min.js"></script>
 	<script src="./bower_components/jq-timeTo/dist/jquery.timeTo.min.js"></script>
 

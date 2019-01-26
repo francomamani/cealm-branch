@@ -31,12 +31,13 @@ class ItemMarkController extends \BaseController {
 	 */
 	public function store()
 	{
-		$items = ItemMark::where('record_id', Input::get('record_id'))
+	    $record_id = Input::get('record_id');
+		$items = ItemMark::where('record_id', $record_id)
 						->where('information_mark_id', Input::get('information_mark_id'))
 						->count();
 		if ($items == 0) {
 			ItemMark::create(Input::all());
-			return Response::json(array('success' => 'Nota Registrada'));
+//			return Response::json(array('success' => 'Nota Registrada'));
 		}else{
 			$item_mark = ItemMark::where('record_id', Input::get('record_id'))
 							->where('information_mark_id', Input::get('information_mark_id'))
@@ -44,8 +45,20 @@ class ItemMarkController extends \BaseController {
 			$item_mark->observation = Input::get('observation') ;
 			$item_mark->score = Input::get('score') ;
 			$item_mark->save();
-			return Response::json(array('success' => 'Nota Actualizada'));
+//			return Response::json(array('success' => 'Nota Actualizada'));
 		}
+		$record = Record::with('itemMarks.informationMark.categoryMark.examType')->find($record_id);
+        $finalScore = 0;
+		foreach ($record->item_marks as $item_mark) {
+		    $count = $item_mark->information_mark->category_mark->information_marks->count();
+		    $categoryMark = $item_mark->information_mark->category_mark->percentage;
+		    $examType = $item_mark->information_mark->category_mark->exam_type->percentage;
+            $finalScore += ((float)$item_mark->score * (float)$categoryMark/100 * (float)$examType/100) / $count;
+		}
+		$updatedRecord = Record::find($record_id);
+		$updatedRecord->final_score = $finalScore;
+		$updatedRecord->save();
+		return Response::json(['success' => 'Nota registrada', 'final_score' => $finalScore]);
 	}
 
 

@@ -51,6 +51,8 @@ Route::group(array('prefix' => 'api/v1'), function(){
 		Route::get('students_by_group_clean/{group_id}', 'GroupCustomController@studentsByGroupClean');
 		Route::get('students_tuition_by_group/{group_id}', 'GroupCustomController@studentsTuitionByGroup');
 
+		Route::get('group_scores/{group_id}', 'GroupCustomController@groupScores');
+
 		Route::get('paid_tuitions/{group_id}', 'GroupCustomController@paidTuitions');
 		Route::get('unpaid_tuitions/{group_id}', 'GroupCustomController@unpaidTuitions');
 	
@@ -125,11 +127,13 @@ Route::group(array('prefix' => 'api/v1'), function(){
 		Route::resource('cover_images', 'CoverImageController');
 		Route::resource('documents_reception', 'DocumentReceptionController');
 		Route::resource('documents', 'DocumentController');
+
 		Route::resource('balances', 'BalanceController');
 
 		Route::resource('balances.deposits', 'BalanceDepositController');
 		Route::resource('balances.payments', 'BalancePaymentController');
-		
+		Route::post('cerrar_balance/{balance_id}', 'BalanceController@cerrarBalance');
+
 		Route::get('get_documents/{document_reception_id}', 'DocumentController@getDocuments');
 		Route::get('get_document_reception/{student_id}', 'DocumentReceptionController@getDocumentReception');
 

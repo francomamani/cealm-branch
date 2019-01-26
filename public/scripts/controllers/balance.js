@@ -13,7 +13,7 @@ app.controller('BalanceCtrl', ['$scope',
 	$scope.status ="";
 	$scope.showSearch = false;
 	$scope.user = JSON.parse(localStorage.getItem('user'));
-	$scope.current_balance = {};
+	$scope.current_balance = null;
 	$scope.depositTypes = Restangular.all('auth/deposit_types').getList().$object;
 	$scope.tipo_pagos = Restangular.all('auth/payment_types').getList().$object;
 	$scope.balances = Restangular.all('auth/balances').getList().$object;
@@ -133,7 +133,26 @@ app.controller('BalanceCtrl', ['$scope',
 //			$log.info("Confirmación cancelada a las: "+ new Date());
 		});
 	}
-
+	$scope.cerrarBalance = function() {
+        var settings = {
+            animation: true,
+            templateUrl: 'partials/widgets/cierreBalance.html',
+            controller: 'CierreBalanceCtrl',
+            size: 'md',
+            resolve: {
+                balance_id : function () {
+					return $scope.current_balance.id;
+                }
+            }
+        };
+        var confirmInstance = $modal.open(settings);
+        confirmInstance.result.then(function (object) {
+        	console.log(object);
+        	$scope.current_balance = object;
+        }, function () {
+//			$log.info("Confirmación cancelada a las: "+ new Date());
+        });
+    }
 	$scope.saveDeposit = function (deposit) {
 		Restangular.all('auth/deposits').post(deposit).then(function (object) {
 			console.log('depuracion');

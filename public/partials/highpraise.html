@@ -34,6 +34,12 @@
 								<button class="btn btn-success btn-sm" title="Lista de Estudiantes" ng-click="getStudents(group)">
 									<span class="glyphicon glyphicon-user" aria-hidden="true"></span>
 								</button>
+								<button class="btn btn-danger btn-sm" title="Notas de Estudiantes" ng-click="getGroupScores(group)">
+									<span class="glyphicon glyphicon-check" aria-hidden="true"></span>
+								</button>
+								<button class="btn btn-default btn-sm" title="Calificaciones" ng-click="calificaciones()">
+									<span class="glyphicon glyphicon-print" aria-hidden="true"></span>
+								</button>
 							</td>
 						</tr>
 					</tbody>
@@ -258,7 +264,7 @@
 	<div class="row" ng-show="showLevel == 6">
 		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 			<legend>
-				{{ informationMark.exam_type.description | uppercase }} ( {{ informationMark.exam_type.percentage }} % ) > {{ informationMark.category_mark.description | uppercase }} ( {{ informationMark.category_mark.percentage }} %) 
+				<span class="text-black">[ {{ informationMark.title | uppercase }} ]</span> {{ informationMark.exam_type.description | uppercase }} ( {{ informationMark.exam_type.percentage }} % ) > {{ informationMark.category_mark.description | uppercase }} ( {{ informationMark.category_mark.percentage }} %)
 			</legend>
 		</div>
 		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
@@ -289,6 +295,42 @@
 		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
 			<a href="" ng-click="back()"><span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span> Volver</a>
 		</div>
-	</div>	
+	</div>
+	<div class="row" ng-show="showLevel == 7">
+		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+			<legend>NOTAS DE ESTUDIANTES {{ group.name }}</legend>
+			<!--
+			<div class="row">
+				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+					<button type="button" class="btn btn-primary btn-sm" ng-click="printGroupScores()">
+						<span class="glyphicon glyphicon-download" aria-hidden="true"></span> Descargar Lista
+					</button>
+				</div>
+			</div>
+			-->
+			<div class="table-responsive">
+				<table class="table table-hover" id="table-container">
+					<thead>
+					<tr>
+						<th>N.</th>
+						<th>NOMBRE COMPLETO</th>
+						<th>NOTA FINAL</th>
+					</tr>
+					</thead>
+					<tbody>
+					<tr ng-repeat="student in group_scores">
+						<td>{{ $index+1 }}</td>
+						<td>{{ student.lastname }} {{ student.firstname }}</td>
+						<td>{{ student.final_score | number: 2 }}</td>
+					</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
+			<a href="" ng-click="showLevel = 1"><span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span> Volver</a>
+		</div>
+	</div>
+
 </div>
 	

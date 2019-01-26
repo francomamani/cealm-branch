@@ -85,7 +85,7 @@
 	<script src="bower_components/jspdf/plugins/standard_fonts_metrics.js"></script>
 	<script src="bower_components/jspdf/plugins/from_html.js"></script>
 	<script src="bower_components/jspdf/plugins/split_text_to_size.js"></script>
-
+    <script src="bower_components/html2canvas/build/html2canvas.min.js"></script>
 
 	<script src="bower_components/jspdf/plugins/split_text_to_size.js"></script>
 	<script src="bower_components/jspdf/plugins/from_html.js"></script>
@@ -226,6 +226,7 @@
 	<script src="scripts/controllers/widgets/createpayment.js"></script>
 	<script src="scripts/controllers/widgets/createdeposititem.js"></script>
 	<script src="scripts/controllers/widgets/monthlyopening.js"></script>
+	<script src="scripts/controllers/widgets/cierreBalance.js"></script>
 
 	<script src="scripts/controllers/widgets/updateuser.js"></script>
 	

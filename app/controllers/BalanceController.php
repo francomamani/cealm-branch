@@ -83,6 +83,21 @@ class BalanceController extends \BaseController {
 
 	public function currentBalance()
 	{
-		return Response::json(Balance::where('status', 'abierto')->firstOrFail());
+	    $balance = null;
+        $abiertos = Balance::where('status', 'abierto')->count();
+        if($abiertos === 1) {
+            $balance = Balance::where('status', 'abierto')->first();
+        } else {
+            $balance = Balance::orderBy('id', 'desc')->first();
+        }
+		return Response::json($balance);
 	}
+
+	public function cerrarBalance($balance_id) {
+	    $balance = Balance::find($balance_id);
+        $balance->closing_balance = Input::get('closing_balance');
+        $balance->status = 'cerrado';
+	    $balance->save();
+	    return Response::json($balance);
+    }
 }

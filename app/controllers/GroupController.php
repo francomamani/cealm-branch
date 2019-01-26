@@ -21,7 +21,12 @@ class GroupController extends \BaseController {
 	 */
 	public function store()
 	{
-	    $registros = Group::where('teacher_id', Input::get('teacher_id'))
+	    /*
+	     * Restriccion mismo docente misma aula hasta  2 o 3 asignaturas
+	     * Otro docente en una aula ya registrada en el mismo horario no se permite
+	     * */
+
+/*	    $registros = Group::where('teacher_id', Input::get('teacher_id'))
                             ->where('subject_id', Input::get('subject_id'))
                             ->where('bimester_id', Input::get('bimester_id'))
                             ->count();
@@ -30,8 +35,9 @@ class GroupController extends \BaseController {
                             ->where('teacher_id', '<>', Input::get('teacher_id'))
                             ->where('from', Input::get('from'))
                             ->where('to', Input::get('to'))
-                            ->count();
-	    if ($registros == 0 && $restriccion == 0) {
+                            ->count();*/
+
+//	    if ($registros == 0 && $restriccion >= 3) {
             $group = Group::create(Input::all());
             $parallel = Bimester::join('groups', 'groups.bimester_id', '=', 'bimesters.id')
                 ->join('rooms','rooms.id', '=', 'groups.room_id')
@@ -52,9 +58,9 @@ class GroupController extends \BaseController {
                     'rooms.name as room_name'
                 ]);
             return Response::json($parallel);
-        } else {
+  //      } else {
 
-	        if ($registros !== 0 ) {
+	/*        if ($registros !== 0 ) {
                 return Response::json([
                     'error' => 'El grupo ya fue creado con anterioridad'
                 ]);
@@ -65,7 +71,7 @@ class GroupController extends \BaseController {
                 ]);
             }
 
-        }
+        }*/
 
 //		return Response::json(array('success'=>""));
 	}
