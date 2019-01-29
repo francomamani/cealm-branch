@@ -2,42 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9307c4c4-e8c3-4c09-ab50-504d8459e231" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/partials/widgets/cierreBalance.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/scripts/controllers/widgets/cierreBalance.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/config/app.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/config/app.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/controllers/BalanceController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/BalanceController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/controllers/GroupController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/GroupController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/controllers/GroupCustomController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/GroupCustomController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/controllers/ItemMarkController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/ItemMarkController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/routes.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/routes.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/views/home.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/home.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/views/public.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/public.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/organigrama.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/organigrama2.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/partials/activities.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/partials/activities.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/partials/assignroles.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/partials/assignroles.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/partials/autoridades.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/partials/autoridades.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/partials/balance.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/partials/balance.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/partials/calendario.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/partials/calendario.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/partials/carreras.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/partials/carreras.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/partials/contact.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/partials/contact.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/partials/enableparallel.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/partials/enableparallel.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/partials/highpraise.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/partials/highpraise.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/partials/horarios.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/partials/horarios.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/partials/institution.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/partials/institution.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/partials/language_skills.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/partials/language_skills.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/partials/mission.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/partials/mission.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/partials/organigrama.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/partials/organigrama.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/config/database.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/config/database.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/partials/plantadocente.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/partials/plantadocente.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/partials/users.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/partials/users.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/partials/vision.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/partials/vision.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/partials/whats_the_mcerl.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/partials/whats_the_mcerl.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/scripts/controllers/balance.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/scripts/controllers/balance.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/scripts/controllers/contact.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/scripts/controllers/contact.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/scripts/controllers/enableparallel.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/scripts/controllers/enableparallel.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/scripts/controllers/highpraise.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/scripts/controllers/highpraise.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/styles/template.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/styles/template.css" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -105,24 +72,6 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/public/scripts/app.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="208">
-              <caret line="207" column="23" selection-start-line="207" selection-start-column="15" selection-end-line="207" selection-end-column="23" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/public/partials/language_skills.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="379">
-              <caret line="26" column="142" selection-start-line="26" selection-start-column="142" selection-end-line="26" selection-end-column="142" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/public/images/icons/contacto.png">
           <provider selected="true" editor-type-id="images" />
         </entry>
@@ -131,7 +80,7 @@
         <entry file="file://$PROJECT_DIR$/public/partials/contact.html">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="170">
-              <caret line="10" lean-forward="true" selection-start-line="10" selection-end-line="10" />
+              <caret line="10" selection-start-line="10" selection-end-line="10" />
             </state>
           </provider>
         </entry>
@@ -140,16 +89,34 @@
         <entry file="file://$PROJECT_DIR$/public/scripts/controllers/contact.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="136">
-              <caret line="8" lean-forward="true" selection-start-line="8" selection-end-line="8" />
+              <caret line="8" selection-start-line="8" selection-end-line="8" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/views/public.blade.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="323">
+              <caret line="52" selection-start-line="52" selection-end-line="52" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/config/database.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="50">
+              <caret line="57" column="33" selection-start-line="57" selection-start-column="33" selection-end-line="57" selection-end-column="33" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/views/public.blade.php">
+        <entry file="file://$PROJECT_DIR$/public/partials/plantadocente.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="153">
-              <caret line="42" column="100" selection-start-line="42" selection-start-column="100" selection-end-line="42" selection-end-column="100" />
+            <state relative-caret-position="296">
+              <caret line="41" lean-forward="true" selection-start-line="41" selection-end-line="41" />
             </state>
           </provider>
         </entry>
@@ -175,7 +142,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/public/styles/template.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="240">
+            <state relative-caret-position="22661">
               <caret line="1333" column="16" selection-start-line="1333" selection-start-column="16" selection-end-line="1333" selection-end-column="16" />
             </state>
           </provider>
@@ -184,7 +151,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/public/bower_components/angular-file-saver/docs/assets/stylesheets/stylesheet.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="269">
+            <state relative-caret-position="2618">
               <caret line="154" column="15" selection-start-line="154" selection-start-column="14" selection-end-line="154" selection-end-column="15" />
             </state>
           </provider>
@@ -194,8 +161,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>ensumdata</find>
-      <find>jspdf</find>
       <find>print</find>
       <find>habilitar</find>
       <find>save</find>
@@ -224,6 +189,8 @@
       <find>escri</find>
       <find>acc</find>
       <find>api</find>
+      <find>sinthi</find>
+      <find>robert</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -233,7 +200,6 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/bootstrap/start.php" />
-        <option value="$PROJECT_DIR$/app/config/database.php" />
         <option value="$PROJECT_DIR$/../app/config/app.php" />
         <option value="$PROJECT_DIR$/public/partials/widgets/cierreBalance.html" />
         <option value="$PROJECT_DIR$/public/scripts/controllers/widgets/cierreBalance.js" />
@@ -253,7 +219,6 @@
         <option value="$PROJECT_DIR$/public/partials/highpraise.html" />
         <option value="$PROJECT_DIR$/public/scripts/controllers/highpraise.js" />
         <option value="$PROJECT_DIR$/public/partials/organigrama.html" />
-        <option value="$PROJECT_DIR$/public/partials/plantadocente.html" />
         <option value="$PROJECT_DIR$/public/partials/autoridades.html" />
         <option value="$PROJECT_DIR$/public/partials/mission.html" />
         <option value="$PROJECT_DIR$/public/partials/vision.html" />
@@ -268,6 +233,8 @@
         <option value="$PROJECT_DIR$/public/scripts/controllers/contact.js" />
         <option value="$PROJECT_DIR$/public/partials/contact.html" />
         <option value="$PROJECT_DIR$/app/views/public.blade.php" />
+        <option value="$PROJECT_DIR$/app/config/database.php" />
+        <option value="$PROJECT_DIR$/public/partials/plantadocente.html" />
       </list>
     </option>
   </component>
@@ -312,8 +279,8 @@
     </include_path>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="width" value="1540" />
-    <option name="height" value="865" />
+    <option name="width" value="1541" />
+    <option name="height" value="866" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -326,19 +293,8 @@
         <subPane>
           <expand>
             <path>
-              <item name="cealm-branch" type="b2602c69:ProjectViewProjectNode" />
-              <item name="cealm-branch" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="cealm-branch" type="b2602c69:ProjectViewProjectNode" />
-              <item name="cealm-branch" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="cealm-branch" type="b2602c69:ProjectViewProjectNode" />
-              <item name="cealm-branch" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="views" type="462c0819:PsiDirectoryNode" />
+              <item name="cealm" type="b2602c69:ProjectViewProjectNode" />
+              <item name="cealm" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -392,17 +348,18 @@
       <workItem from="1538055946385" duration="33000" />
       <workItem from="1547129443431" duration="3007000" />
       <workItem from="1548509423562" duration="7254000" />
+      <workItem from="1548798856173" duration="3516000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="37554000" />
+    <option name="totallyTimeSpent" value="41070000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
+    <frame x="-7" y="-7" width="1295" height="695" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.4934896" visible="true" weight="0.25113463" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4934896" visible="true" weight="0.25506073" />
       <window_info id="Structure" order="1" sideWeight="0.50651044" side_tool="true" weight="0.2859304" />
       <window_info id="Favorites" order="2" sideWeight="0.5034722" side_tool="true" weight="0.25195312" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -415,7 +372,7 @@
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" />
       <window_info anchor="bottom" id="Database Changes" order="9" />
-      <window_info anchor="bottom" id="Terminal" order="10" weight="0.3289689" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="10" visible="true" weight="0.3285968" />
       <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" />
       <window_info active="true" anchor="bottom" id="Database Console" order="12" visible="true" weight="0.77734375" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -615,13 +572,6 @@
       </provider>
     </entry>
     <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/2e9d6986-318d-47f5-8f00-c3effe37abb5/console.sql" />
-    <entry file="file://$PROJECT_DIR$/app/config/database.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="33">
-          <caret line="56" selection-start-line="56" selection-end-line="56" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/database/seeds/DatabaseSeeder.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="66">
@@ -916,13 +866,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/partials/plantadocente.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="393">
-          <caret line="42" column="18" selection-start-line="42" selection-start-column="18" selection-end-line="42" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/public/partials/autoridades.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="238">
@@ -982,24 +925,34 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/bower_components/angular-file-saver/docs/assets/stylesheets/stylesheet.css">
+    <entry file="file://$PROJECT_DIR$/public/scripts/app.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="269">
-          <caret line="154" column="15" selection-start-line="154" selection-start-column="14" selection-end-line="154" selection-end-column="15" />
+        <state relative-caret-position="3519">
+          <caret line="207" column="23" selection-start-line="207" selection-start-column="15" selection-end-line="207" selection-end-column="23" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/styles/template.css">
+    <entry file="file://$PROJECT_DIR$/public/partials/language_skills.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="1333" column="16" selection-start-line="1333" selection-start-column="16" selection-end-line="1333" selection-end-column="16" />
+        <state relative-caret-position="442">
+          <caret line="26" column="142" selection-start-line="26" selection-start-column="142" selection-end-line="26" selection-end-column="142" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/partials/activities.html">
+    <entry file="file://$PROJECT_DIR$/public/images/icons/contacto.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/partials/contact.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" column="50" selection-start-line="4" selection-start-column="50" selection-end-line="4" selection-end-column="50" />
+        <state relative-caret-position="170">
+          <caret line="10" selection-start-line="10" selection-end-line="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/scripts/controllers/contact.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="8" selection-start-line="8" selection-end-line="8" />
         </state>
       </provider>
     </entry>
@@ -1010,41 +963,45 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/scripts/app.js">
+    <entry file="file://$PROJECT_DIR$/public/partials/activities.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="208">
-          <caret line="207" column="23" selection-start-line="207" selection-start-column="15" selection-end-line="207" selection-end-column="23" />
+        <state relative-caret-position="68">
+          <caret line="4" column="50" selection-start-line="4" selection-start-column="50" selection-end-line="4" selection-end-column="50" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/partials/language_skills.html">
+    <entry file="file://$PROJECT_DIR$/public/styles/template.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="379">
-          <caret line="26" column="142" selection-start-line="26" selection-start-column="142" selection-end-line="26" selection-end-column="142" />
+        <state relative-caret-position="22661">
+          <caret line="1333" column="16" selection-start-line="1333" selection-start-column="16" selection-end-line="1333" selection-end-column="16" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/images/icons/contacto.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/scripts/controllers/contact.js">
+    <entry file="file://$PROJECT_DIR$/public/bower_components/angular-file-saver/docs/assets/stylesheets/stylesheet.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="8" lean-forward="true" selection-start-line="8" selection-end-line="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/partials/contact.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="10" lean-forward="true" selection-start-line="10" selection-end-line="10" />
+        <state relative-caret-position="2618">
+          <caret line="154" column="15" selection-start-line="154" selection-start-column="14" selection-end-line="154" selection-end-column="15" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/views/public.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="42" column="100" selection-start-line="42" selection-start-column="100" selection-end-line="42" selection-end-column="100" />
+        <state relative-caret-position="323">
+          <caret line="52" selection-start-line="52" selection-end-line="52" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/config/database.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="50">
+          <caret line="57" column="33" selection-start-line="57" selection-start-column="33" selection-end-line="57" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/partials/plantadocente.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="296">
+          <caret line="41" lean-forward="true" selection-start-line="41" selection-end-line="41" />
         </state>
       </provider>
     </entry>

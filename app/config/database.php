@@ -55,7 +55,7 @@ return array(
 		'mysql' => array(
 			'driver'    => 'mysql',
 			'host'      => 'localhost',
-			'database'  => 'cealm2',
+			'database'  => 'cealm',
 			'username'  => 'root',
 			'password'  => '',
 			'charset'   => 'utf8',
